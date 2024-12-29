@@ -27,4 +27,4 @@ public:
     virtual void accept(class IConstVisitor* visitor) const = 0;
 };
 
-#endif // ABSTRACTITEM_H
+#endif

@@ -1,4 +1,4 @@
-#include "abstractitem.h"
+#include "AbstractItem.h"
 
 AbstractItem::AbstractItem(unsigned int id, const QString& name, const QString& description)
     : m_id(id), m_name(name), m_description(description)
