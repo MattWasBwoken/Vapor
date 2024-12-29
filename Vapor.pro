@@ -9,12 +9,18 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    model/Soundtrack.cpp \
+    model/DLC.cpp \
+    model/Videogame.cpp \
     main.cpp \
     model/AbstractItem.cpp \
     model/Software.cpp \
     view/MainWindow.cpp
 
 HEADERS += \    #controllare spesso che ci siano tutti
+    model/Soundtrack.h \
+    model/DLC.h \
+    model/Videogame.h \
     model/AbstractItem.h \
     model/IConstVisitor.h \
     model/IVisitor.h \
