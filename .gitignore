@@ -1,0 +1,8 @@
+#vscode
+.vscode/
+#relazione
+Relazione/*
+!Relazione/*.tex
+!Relazione/*.pdf
+#compilazione
+build/

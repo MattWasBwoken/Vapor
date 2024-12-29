@@ -1,0 +1,1 @@
+Il software Vapor fornisce una libreria digitale di videogiochi e software.
