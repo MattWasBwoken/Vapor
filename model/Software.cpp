@@ -1,26 +1,27 @@
 #include "Software.h"
 #include "IVisitor.h"
+#include "IConstVisitor.h"
 
 Software::Software(unsigned int id, const QString& name, const QString& description, const QString& currentVersion, bool winCompatibility, const QString& imagePath)
-    : AbstractItem(id, name, description), m_currentVersion(currentVersion), m_winCompatibility(winCompatibility)
+    : AbstractItem(id, name, description), currentVersion(currentVersion), winCompatibility(winCompatibility)
 {
     setImage(imagePath);
 }
 
 QString Software::getCurrentVersion() const {
-    return m_currentVersion;
+    return this->currentVersion;
 }
 
 void Software::setCurrentVersion(const QString& currentVersion) {
-    m_currentVersion = currentVersion;
+    this->currentVersion = currentVersion;
 }
 
 bool Software::getWinCompatibility() const {
-    return m_winCompatibility;
+    return this->winCompatibility;
 }
 
 void Software::setWinCompatibility(bool winCompatibility) {
-    m_winCompatibility = winCompatibility;
+    this->winCompatibility = winCompatibility;
 }
 
 void Software::accept(IVisitor* visitor) {

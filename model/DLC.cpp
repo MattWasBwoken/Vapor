@@ -1,26 +1,27 @@
 #include "DLC.h"
 #include "IVisitor.h"
+#include "IConstVisitor.h"
 
 DLC::DLC(unsigned int id, const QString& name, const QString& description, const QString& developer, const QString& genre, unsigned int releaseDate, const QString& dlcType, bool standalone, const QString& imagePath)
-    : Videogame(id, name, description, developer, genre, releaseDate, imagePath), m_dlcType(dlcType), m_standalone(standalone)
+    : Videogame(id, name, description, developer, genre, releaseDate, imagePath), dlcType(dlcType), standalone(standalone)
 {
     setImage(imagePath);
 }
 
 QString DLC::getDlcType() const {
-    return m_dlcType;
+    return this->dlcType;
 }
 
 void DLC::setDlcType(const QString& dlcType) {
-    m_dlcType = dlcType;
+    this->dlcType = dlcType;
 }
 
 bool DLC::getStandalone() const {
-    return m_standalone;
+    return this->standalone;
 }
 
 void DLC::setStandalone(bool standalone) {
-    m_standalone = standalone;
+    this->standalone = standalone;
 }
 
 void DLC::accept(IVisitor* visitor) {

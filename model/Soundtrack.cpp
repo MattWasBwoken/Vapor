@@ -1,26 +1,27 @@
 #include "Soundtrack.h"
 #include "IVisitor.h"
+#include "IConstVisitor.h"
 
 Soundtrack::Soundtrack(unsigned int id, const QString& name, const QString& description, const QString& developer, const QString& genre, unsigned int releaseDate, const QString& composer, unsigned int tracksNumber, const QString& imagePath)
-    : Videogame(id, name, description, developer, genre, releaseDate, imagePath), m_composer(composer), m_tracksNumber(tracksNumber)
+    : Videogame(id, name, description, developer, genre, releaseDate, imagePath), this->composer(composer), this->tracksNumber(tracksNumber)
 {
     setImage(imagePath);
 }
 
 QString Soundtrack::getComposer() const {
-    return m_composer;
+    return this->composer;
 }
 
 void Soundtrack::setComposer(const QString& composer) {
-    m_composer = composer;
+    this->composer = composer;
 }
 
 unsigned int Soundtrack::getTracksNumber() const {
-    return m_tracksNumber;
+    return this->tracksNumber;
 }
 
 void Soundtrack::setTracksNumber(unsigned int tracksNumber) {
-    m_tracksNumber = tracksNumber;
+    this->tracksNumber = tracksNumber;
 }
 
 void Soundtrack::accept(IVisitor* visitor) {

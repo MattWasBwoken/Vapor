@@ -5,10 +5,10 @@
 
 class AbstractItem {
 private:
-    unsigned int m_id;
-    QString m_name;
-    QString m_description;
-    QString m_imagePath;
+    unsigned int id;
+    QString name;
+    QString description;
+    QString imagePath;
 
 public:
     AbstractItem(unsigned int id, const QString& name, const QString& description);

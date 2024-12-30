@@ -6,8 +6,8 @@
 
 class Software : public AbstractItem {
 private:
-    QString m_currentVersion;
-    bool m_winCompatibility;
+    QString currentVersion;
+    bool winCompatibility;
 public:
     Software(unsigned int id, const QString& name, const QString& description, const QString& currentVersion, bool winCompatibility, const QString& imagePath = "");
     ~Software() override = default;

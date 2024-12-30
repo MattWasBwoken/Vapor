@@ -6,8 +6,8 @@
 
 class DLC : public Videogame {
 private:
-    QString m_dlcType;
-    bool m_standalone;
+    QString dlcType;
+    bool standalone;
 public:
     DLC(unsigned int id, const QString& name, const QString& description, const QString& developer, const QString& genre, unsigned int releaseDate, const QString& dlcType, bool standalone, const QString& imagePath = "");
     ~DLC() override = default;

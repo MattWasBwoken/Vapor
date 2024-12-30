@@ -6,9 +6,9 @@
 
 class Videogame : public AbstractItem {
 private:
-    QString m_developer;
-    QString m_genre;
-    unsigned int m_releaseDate;
+    QString developer;
+    QString genre;
+    unsigned int releaseDate;
 public:
     Videogame(unsigned int id, const QString& name, const QString& description, const QString& developer, const QString& genre, unsigned int releaseDate, const QString& imagePath = "");
     ~Videogame() override = default;
