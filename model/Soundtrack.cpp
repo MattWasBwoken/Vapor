@@ -3,7 +3,7 @@
 #include "IConstVisitor.h"
 
 Soundtrack::Soundtrack(unsigned int id, const QString& name, const QString& description, const QString& developer, const QString& genre, unsigned int releaseDate, const QString& composer, unsigned int tracksNumber, const QString& imagePath)
-    : Videogame(id, name, description, developer, genre, releaseDate, imagePath), this->composer(composer), this->tracksNumber(tracksNumber)
+    : Videogame(id, name, description, developer, genre, releaseDate, imagePath), composer(composer), tracksNumber(tracksNumber)
 {
     setImage(imagePath);
 }
