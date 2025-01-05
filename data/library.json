@@ -1,13 +1,14 @@
 {
     "items": [
         {
-            "type": "Software",
+            "type": "Videogame",
             "id": 1,
-            "name": "PhotoEditor",
-            "description": "PhotoEditor is a versatile and powerful photo editing software, designed for professionals and hobbyists alike. It offers a range of tools for detailed image adjustments, retouching, and creative enhancements, with support for multiple layers and plugins. Its intuitive interface makes complex editing tasks accessible to everyone, ensuring stunning results every time.",
-            "currentVersion": "2.1.4",
-            "winCompatibility": true,
-            "imagePath": "../assets/photoeditor.png"
+            "name": "Overwatch",
+            "description": "Overwatch is a vibrant team-based multiplayer shooter with a diverse cast of heroes, each with unique abilities. Players work together to secure objectives and outmaneuver opponents in visually stunning maps. Its emphasis on teamwork, strategic depth, and engaging lore has redefined the genre.",
+            "developer": "Blizzard Entertainment",
+            "genre": "Shooter",
+            "releaseDate": 2016,
+            "imagePath": "../assets/overwatch.png"
         },
         {
             "type": "Videogame",
@@ -17,7 +18,7 @@
             "developer": "Nintendo",
             "genre": "Action-Adventure",
             "releaseDate": 2017,
-            "imagePath": "../assets/breathofthewild.jpg"
+            "imagePath": "../assets/botw.png"
         },
         {
             "type": "DLC",
@@ -41,7 +42,7 @@
             "releaseDate": 2017,
             "composer": "Manaka Kataoka",
             "tracksNumber": 211,
-            "imagePath": "../assets/botw_ost.jpg"
+            "imagePath": "../assets/botw_ost.png"
         },
         {
             "type": "Videogame",
@@ -61,7 +62,7 @@
             "developer": "CD Projekt Red",
             "genre": "RPG",
             "releaseDate": 2015,
-            "imagePath": "../assets/witcher3.jpg"
+            "imagePath": "../assets/witcher3.png"
         },
         {
             "type": "DLC",
@@ -73,7 +74,7 @@
             "releaseDate": 2015,
             "dlcType": "Expansion",
             "standalone": false,
-            "imagePath": "../assets/witcher3_heartsofstone.jpg"
+            "imagePath": "../assets/witcher3_hos.jpg"
         },
         {
             "type": "DLC",
@@ -85,7 +86,7 @@
             "releaseDate": 2016,
             "dlcType": "Expansion",
             "standalone": false,
-            "imagePath": "../assets/witcher3_bloodandwine.jpg"
+            "imagePath": "../assets/witcher3_baw.jpg"
         },
         {
             "type": "Videogame",
@@ -176,7 +177,7 @@
             "developer": "Nintendo",
             "genre": "Platformer",
             "releaseDate": 2017,
-            "imagePath": "../assets/supermarioodyssey.jpg"
+            "imagePath": "../assets/marioodyssey.png"
         },
         {
             "type": "Videogame",
@@ -196,21 +197,11 @@
             "developer": "FromSoftware",
             "genre": "Action RPG",
             "releaseDate": 2016,
-            "imagePath": "../assets/darksouls3.jpg"
+            "imagePath": "../assets/ds3.jpg"
         },
         {
             "type": "Videogame",
             "id": 20,
-            "name": "Overwatch",
-            "description": "Overwatch is a vibrant team-based multiplayer shooter with a diverse cast of heroes, each with unique abilities. Players work together to secure objectives and outmaneuver opponents in visually stunning maps. Its emphasis on teamwork, strategic depth, and engaging lore has redefined the genre.",
-            "developer": "Blizzard Entertainment",
-            "genre": "Shooter",
-            "releaseDate": 2016,
-            "imagePath": "../assets/overwatch.jpg"
-        },
-        {
-            "type": "Videogame",
-            "id": 21,
             "name": "Portal 2",
             "description": "Portal 2 is a first-person puzzle-platform game that challenges players to think creatively using a portal gun. Set in the mysterious Aperture Science facility, players solve ingenious puzzles while unraveling a humorous and darkly intriguing storyline. Its brilliant level design and witty dialogue make it a classic.",
             "developer": "Valve",
@@ -220,7 +211,7 @@
         },
         {
             "type": "DLC",
-            "id": 22,
+            "id": 21,
             "name": "Portal Stories: Mel",
             "description": "Portal Stories: Mel is a standalone mod for Portal 2, offering a new narrative and a fresh set of challenging puzzles. Players take on the role of Mel, a test subject navigating a pre-Portal 2 Aperture Science. With its high-quality design and compelling story, it’s a must-play for Portal fans.",
             "developer": "Prism Studios",
@@ -228,7 +219,25 @@
             "releaseDate": 2015,
             "dlcType": "Expansion",
             "standalone": true,
-            "imagePath": "../assets/portal_stories_mel.jpg"
+            "imagePath": "../assets/portal2mel.jpg"
+        },
+        {
+            "type": "Software",
+            "id": 22,
+            "name": "3DMark",
+            "description": "3DMark is a computer benchmarking tool created to determine the performance of a computer's 3D graphic rendering and CPU workload processing capabilities. Running 3DMark produces a 3DMark score, with higher numbers indicating better performance. The 3DMark measurement unit is intended to give a normalized means for comparing different PC hardware configurations (mostly graphics processing units and central processing units), which proponents such as gamers and overclocking enthusiasts assert is indicative of end-user performance capabilities.",
+            "currentVersion": "2024",
+            "winCompatibility": true,
+            "imagePath": "../assets/3dmark.png"
+        },
+        {
+            "type": "Software",
+            "id": 23,
+            "name": "Final Cut Pro",
+            "description": "With optimizations for Apple silicon and the power of its Metal engine, Final Cut Pro allows you to edit more complex projects and work with larger frame sizes, higher frame rates, and more effects — all at incredible speeds. And it’s built to harness the extreme power of Mac Pro, Mac Studio or MacBook Pro for next-level performance. Tap into superfast unified memory shared across the CPU, the GPU, and the Apple Neural Engine to play back more high-resolution video streams and render your movie in record time.",
+            "currentVersion": "10.7.1",
+            "winCompatibility": false,
+            "imagePath": "../assets/finalcut.jpg"
         }
     ]
 }
