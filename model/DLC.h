@@ -16,7 +16,7 @@ public:
     bool getStandalone() const;
     void setStandalone(bool standalone);
 
-    // Implementazione metodi accept per il Visitor
+    // Visitor Pattern
     void accept(class IVisitor* visitor) override;
     void accept(class IConstVisitor* visitor) const override;
 };

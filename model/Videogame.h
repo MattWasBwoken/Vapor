@@ -19,7 +19,7 @@ public:
     unsigned int getReleaseDate() const;
     void setReleaseDate(unsigned int releaseDate);
 
-    // Implementazione metodi accept per il Visitor
+    // Visitor Pattern
     void accept(class IVisitor* visitor) override;
     void accept(class IConstVisitor* visitor) const override;
 };

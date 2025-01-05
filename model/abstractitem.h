@@ -22,7 +22,7 @@ public:
     virtual QString getImage() const;
     virtual void setImage(const QString& imagePath);
 
-    // Metodi per il Visitor
+    // Visitor Pattern
     virtual void accept(class IVisitor* visitor) = 0;
     virtual void accept(class IConstVisitor* visitor) const = 0;
 };

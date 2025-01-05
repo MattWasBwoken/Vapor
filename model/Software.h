@@ -16,7 +16,7 @@ public:
     bool getWinCompatibility() const;
     void setWinCompatibility(bool winCompatibility);
 
-    // Implementazione metodi accept per il Visitor
+    // Visitor Pattern
     void accept(class IVisitor* visitor) override;
     void accept(class IConstVisitor* visitor) const override;
 };

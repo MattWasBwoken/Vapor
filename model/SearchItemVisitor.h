@@ -11,7 +11,7 @@ private:
     QString typeFilter;
     QString genreFilter;
     bool winCompatibilityFilter;
-    QVector<const AbstractItem*> results; // salva i risultati della ricerca
+    QVector<const AbstractItem*> results; // save search results
 public:
     SearchItemVisitor(const QString& searchString, const QString& typeFilter = "", const QString& genreFilter = "", bool winCompatibilityFilter = false);
     ~SearchItemVisitor() override = default;
@@ -19,7 +19,7 @@ public:
     void visit(const Videogame* item) override;
     void visit(const DLC* item) override;
     void visit(const Soundtrack* item) override;
-    const QVector<const AbstractItem*>& getResults() const; // recupera i risultati
+    const QVector<const AbstractItem*>& getResults() const; // fetch results
     void clearResults();
 };
 
