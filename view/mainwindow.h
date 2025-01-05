@@ -13,6 +13,7 @@
 #include <QString>
 #include <QVector>
 #include "../model/AbstractItem.h"
+#include "ViewRenderer.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -29,6 +30,7 @@ private:
     QComboBox *filterComboBox;
 
     QVector<AbstractItem*> items; // The collection of items
+    ViewRenderer* viewRenderer;
 
     void setupMenus();
     void setupToolBar();

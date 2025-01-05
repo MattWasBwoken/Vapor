@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "../data/JsonItemLoader.h"
 #include "../model/ItemFactory.h"
+#include "../model/SearchItemVisitor.h"
 #include <QAction>
 #include <QVBoxLayout>
 #include <QMessageBox>
@@ -14,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     setupCentralWidget();
     setupStatusBar();
     populateItems();
+
+    resize(900, 600);
 
     connect(this, &MainWindow::itemAdded, this, [this](AbstractItem *item) {
         items.append(item);
@@ -48,9 +51,19 @@ void MainWindow::setupMenus() {
     itemMenu->addAction(tr("Modify"), this, []() { /* TODO: Add modify item dialog */ });
     itemMenu->addAction(tr("Delete"), this, []() { /* TODO: Add delete item dialog */ });
 
-    QMenu *viewMenu = menuBar->addMenu(tr("View"));
-    viewMenu->addAction(tr("Grid View"), this, []() { /* TODO: Add grid view functionality */ });
-    viewMenu->addAction(tr("List View"), this, []() { /* TODO: Add list view functionality */ });
+    QMenu* viewMenu = menuBar->addMenu(tr("View"));
+    QAction* gridViewAction = viewMenu->addAction(tr("Grid View"));
+    QAction* listViewAction = viewMenu->addAction(tr("List View"));
+
+    connect(gridViewAction, &QAction::triggered, this, [this]() {
+        viewRenderer->setViewType(true); // Set grid view
+        viewRenderer->render(items);    // Re-render
+    });
+
+    connect(listViewAction, &QAction::triggered, this, [this]() {
+        viewRenderer->setViewType(false); // Set list view
+        viewRenderer->render(items);     // Re-render
+    });
 
     setMenuBar(menuBar);
 }
@@ -73,8 +86,8 @@ void MainWindow::setupToolBar() {
 }
 
 void MainWindow::setupCentralWidget() {
-    centralWidget = new QStackedWidget(this);
-    setCentralWidget(centralWidget);
+    viewRenderer = new ViewRenderer(this); // Initialize ViewRenderer
+    setCentralWidget(viewRenderer);       // Set it as the central widget
 }
 
 void MainWindow::setupStatusBar() {
@@ -86,12 +99,29 @@ void MainWindow::populateItems() {
     QString filePath = QDir(QCoreApplication::applicationDirPath() + "/../../../data/library.json").absolutePath(); // da rivedere ??
     items = JsonItemLoader::loadItemsFromJson(filePath);
     updateStatus(tr("Loaded %1 items from file").arg(items.size()));
+    viewRenderer->render(items);
 }
 
 void MainWindow::handleSearch() {
     const QString searchText = searchBar->text();
     const QString filter = filterComboBox->currentText();
-    emit searchRequested(searchText, filter);
+
+    // Filter items using the SearchItemVisitor
+    SearchItemVisitor visitor(searchText, filter);
+    for (const auto& item : items) {
+        item->accept(&visitor);
+    }
+
+    // Convert QVector<const AbstractItem*> to QVector<AbstractItem*>
+    QVector<const AbstractItem*> constResults = visitor.getResults();
+    QVector<AbstractItem*> filteredItems;
+    for (const AbstractItem* constItem : constResults) {
+        filteredItems.append(const_cast<AbstractItem*>(constItem));
+    }
+
+    // Call render with the converted QVector<AbstractItem*>
+    viewRenderer->render(filteredItems);
+
     updateStatus(tr("Search performed with filter: %1").arg(filter));
 }
 
@@ -100,6 +130,7 @@ void MainWindow::handleAddItem() {
     if (newItem) {
         items.append(newItem);
         emit itemAdded(newItem);
+        viewRenderer->render(items);
         updateStatus(tr("Added new item: %1").arg(newItem->getName()));
     } else {
         updateStatus(tr("Item creation canceled"));
@@ -109,12 +140,24 @@ void MainWindow::handleAddItem() {
 void MainWindow::handleModifyItem(AbstractItem *item) {
     // Placeholder for item modification logic
     emit itemModified(item);
+    viewRenderer->render(items);
+    updateStatus(tr("Modified item: %1").arg(item->getName()));
 }
 
 void MainWindow::handleDeleteItem(unsigned int id) {
-    emit itemDeleted(id);
-}
+    auto it = std::find_if(items.begin(), items.end(), [id](AbstractItem* item) {
+        return item->getId() == id;
+    });
+    if (it != items.end()) {
+        QString name = (*it)->getName();
+        items.erase(it);
 
+        // Call render to update the view
+        viewRenderer->render(items);
+        emit itemDeleted(id);
+        updateStatus(tr("Deleted item: %1").arg(name));
+    }
+}
 void MainWindow::updateStatus(const QString &message) {
     statusBar->showMessage(message, 5000);
 }
