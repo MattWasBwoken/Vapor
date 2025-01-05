@@ -7,7 +7,7 @@
             "description": "PhotoEditor is a versatile and powerful photo editing software, designed for professionals and hobbyists alike. It offers a range of tools for detailed image adjustments, retouching, and creative enhancements, with support for multiple layers and plugins. Its intuitive interface makes complex editing tasks accessible to everyone, ensuring stunning results every time.",
             "currentVersion": "2.1.4",
             "winCompatibility": true,
-            "imagePath": "assets/photoeditor.png"
+            "imagePath": "../assets/photoeditor.png"
         },
         {
             "type": "Videogame",
@@ -17,7 +17,7 @@
             "developer": "Nintendo",
             "genre": "Action-Adventure",
             "releaseDate": 2017,
-            "imagePath": "assets/breathofthewild.jpg"
+            "imagePath": "../assets/breathofthewild.jpg"
         },
         {
             "type": "DLC",
@@ -29,7 +29,7 @@
             "releaseDate": 2017,
             "dlcType": "Expansion",
             "standalone": false,
-            "imagePath": "assets/botw_expansion.jpg"
+            "imagePath": "../assets/botw_expansion.jpg"
         },
         {
             "type": "Soundtrack",
@@ -41,7 +41,7 @@
             "releaseDate": 2017,
             "composer": "Manaka Kataoka",
             "tracksNumber": 211,
-            "imagePath": "assets/botw_ost.jpg"
+            "imagePath": "../assets/botw_ost.jpg"
         },
         {
             "type": "Videogame",
@@ -51,7 +51,7 @@
             "developer": "Mojang Studios",
             "genre": "Sandbox",
             "releaseDate": 2011,
-            "imagePath": "assets/minecraft.jpg"
+            "imagePath": "../assets/minecraft.jpg"
         },
         {
             "type": "Videogame",
@@ -61,7 +61,7 @@
             "developer": "CD Projekt Red",
             "genre": "RPG",
             "releaseDate": 2015,
-            "imagePath": "assets/witcher3.jpg"
+            "imagePath": "../assets/witcher3.jpg"
         },
         {
             "type": "DLC",
@@ -73,7 +73,7 @@
             "releaseDate": 2015,
             "dlcType": "Expansion",
             "standalone": false,
-            "imagePath": "assets/witcher3_heartsofstone.jpg"
+            "imagePath": "../assets/witcher3_heartsofstone.jpg"
         },
         {
             "type": "DLC",
@@ -85,7 +85,7 @@
             "releaseDate": 2016,
             "dlcType": "Expansion",
             "standalone": false,
-            "imagePath": "assets/witcher3_bloodandwine.jpg"
+            "imagePath": "../assets/witcher3_bloodandwine.jpg"
         },
         {
             "type": "Videogame",
@@ -95,7 +95,7 @@
             "developer": "Rockstar Games",
             "genre": "Action-Adventure",
             "releaseDate": 2018,
-            "imagePath": "assets/rdr2.png"
+            "imagePath": "../assets/rdr2.png"
         },
         {
             "type": "Videogame",
@@ -105,7 +105,7 @@
             "developer": "CD Projekt Red",
             "genre": "RPG",
             "releaseDate": 2020,
-            "imagePath": "assets/cyberpunk2077.jpg"
+            "imagePath": "../assets/cyberpunk2077.jpg"
         },
         {
             "type": "Software",
@@ -114,7 +114,7 @@
             "description": "Adobe Photoshop is the industry standard for photo editing and graphic design, used by professionals worldwide. It offers a vast array of tools for photo manipulation, digital painting, and 3D design. With features like layers, smart objects, and advanced brushes, Photoshop enables creators to achieve stunning visuals, from detailed photo retouching to intricate digital artwork.",
             "currentVersion": "2024.1",
             "winCompatibility": true,
-            "imagePath": "assets/photoshop.png"
+            "imagePath": "../assets/photoshop.png"
         },
         {
             "type": "Videogame",
@@ -124,7 +124,7 @@
             "developer": "Rockstar Games",
             "genre": "Action-Adventure",
             "releaseDate": 2013,
-            "imagePath": "assets/gtav.jpg"
+            "imagePath": "../assets/gtav.jpg"
         },
         {
             "type": "Soundtrack",
@@ -136,7 +136,7 @@
             "releaseDate": 2013,
             "composer": "Various Artists",
             "tracksNumber": 59,
-            "imagePath": "assets/gtav_ost.jpg"
+            "imagePath": "../assets/gtav_ost.jpg"
         },
         {
             "type": "Videogame",
@@ -146,7 +146,7 @@
             "developer": "Team Cherry",
             "genre": "Action-Adventure",
             "releaseDate": 2017,
-            "imagePath": "assets/hollowknight.jpg"
+            "imagePath": "../assets/hollowknight.jpg"
         },
         {
             "type": "Videogame",
@@ -156,7 +156,7 @@
             "developer": "ConcernedApe",
             "genre": "Simulation",
             "releaseDate": 2016,
-            "imagePath": "assets/stardewvalley.jpg"
+            "imagePath": "../assets/stardewvalley.jpg"
         },
         {
             "type": "Videogame",
@@ -166,7 +166,7 @@
             "developer": "Innersloth",
             "genre": "Party",
             "releaseDate": 2018,
-            "imagePath": "assets/amongus.jpg"
+            "imagePath": "../assets/amongus.jpg"
         },
         {
             "type": "Videogame",
@@ -176,7 +176,7 @@
             "developer": "Nintendo",
             "genre": "Platformer",
             "releaseDate": 2017,
-            "imagePath": "assets/supermarioodyssey.jpg"
+            "imagePath": "../assets/supermarioodyssey.jpg"
         },
         {
             "type": "Videogame",
@@ -186,7 +186,7 @@
             "developer": "Maddy Makes Games",
             "genre": "Platformer",
             "releaseDate": 2018,
-            "imagePath": "assets/celeste.jpg"
+            "imagePath": "../assets/celeste.jpg"
         },
         {
             "type": "Videogame",
@@ -196,7 +196,7 @@
             "developer": "FromSoftware",
             "genre": "Action RPG",
             "releaseDate": 2016,
-            "imagePath": "assets/darksouls3.jpg"
+            "imagePath": "../assets/darksouls3.jpg"
         },
         {
             "type": "Videogame",
@@ -206,7 +206,7 @@
             "developer": "Blizzard Entertainment",
             "genre": "Shooter",
             "releaseDate": 2016,
-            "imagePath": "assets/overwatch.jpg"
+            "imagePath": "../assets/overwatch.jpg"
         },
         {
             "type": "Videogame",
@@ -216,7 +216,7 @@
             "developer": "Valve",
             "genre": "Puzzle",
             "releaseDate": 2011,
-            "imagePath": "assets/portal2.jpg"
+            "imagePath": "../assets/portal2.jpg"
         },
         {
             "type": "DLC",
@@ -228,7 +228,7 @@
             "releaseDate": 2015,
             "dlcType": "Expansion",
             "standalone": true,
-            "imagePath": "assets/portal_stories_mel.jpg"
+            "imagePath": "../assets/portal_stories_mel.jpg"
         }
     ]
 }

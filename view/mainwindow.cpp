@@ -1,7 +1,11 @@
 #include "MainWindow.h"
+#include "../data/JsonItemLoader.h"
+#include "../model/ItemFactory.h"
 #include <QAction>
 #include <QVBoxLayout>
 #include <QMessageBox>
+#include <QCoreApplication>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
@@ -79,8 +83,9 @@ void MainWindow::setupStatusBar() {
 }
 
 void MainWindow::populateItems() {
-    // Example population; replace with dynamic loading if necessary
-    items.append(new AbstractItem(1, "Example Item", "Description"));
+    QString filePath = QDir(QCoreApplication::applicationDirPath() + "/../../../data/library.json").absolutePath(); // da rivedere ??
+    items = JsonItemLoader::loadItemsFromJson(filePath);
+    updateStatus(tr("Loaded %1 items from file").arg(items.size()));
 }
 
 void MainWindow::handleSearch() {
@@ -91,9 +96,14 @@ void MainWindow::handleSearch() {
 }
 
 void MainWindow::handleAddItem() {
-    // Example implementation
-    AbstractItem *newItem = new AbstractItem(999, "New Item", "Description");
-    emit itemAdded(newItem);
+    AbstractItem *newItem = ItemFactory::createItem(this);
+    if (newItem) {
+        items.append(newItem);
+        emit itemAdded(newItem);
+        updateStatus(tr("Added new item: %1").arg(newItem->getName()));
+    } else {
+        updateStatus(tr("Item creation canceled"));
+    }
 }
 
 void MainWindow::handleModifyItem(AbstractItem *item) {
