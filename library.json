@@ -1,0 +1,234 @@
+{
+    "items": [
+        {
+            "type": "Software",
+            "id": 1,
+            "name": "PhotoEditor",
+            "description": "PhotoEditor is a versatile and powerful photo editing software, designed for professionals and hobbyists alike. It offers a range of tools for detailed image adjustments, retouching, and creative enhancements, with support for multiple layers and plugins. Its intuitive interface makes complex editing tasks accessible to everyone, ensuring stunning results every time.",
+            "currentVersion": "2.1.4",
+            "winCompatibility": true,
+            "imagePath": "assets/photoeditor.png"
+        },
+        {
+            "type": "Videogame",
+            "id": 2,
+            "name": "The Legend of Zelda: Breath of the Wild",
+            "description": "The Legend of Zelda: Breath of the Wild is a groundbreaking open-world action-adventure game that redefines exploration and freedom. Set in a vast, visually stunning Hyrule, players uncover secrets, battle fierce enemies, and solve intricate puzzles. Its innovative mechanics and captivating narrative make it a masterpiece of gaming.",
+            "developer": "Nintendo",
+            "genre": "Action-Adventure",
+            "releaseDate": 2017,
+            "imagePath": "assets/breathofthewild.jpg"
+        },
+        {
+            "type": "DLC",
+            "id": 3,
+            "name": "The Legend of Zelda: Breath of the Wild - Expansion Pass",
+            "description": "The Expansion Pass for Breath of the Wild adds two major content packs, featuring new storylines, challenges, and equipment. Delve into The Master Trials and The Champions' Ballad, each offering hours of gameplay and enriching the core experience with fresh adventures and lore.",
+            "developer": "Nintendo",
+            "genre": "Action-Adventure",
+            "releaseDate": 2017,
+            "dlcType": "Expansion",
+            "standalone": false,
+            "imagePath": "assets/botw_expansion.jpg"
+        },
+        {
+            "type": "Soundtrack",
+            "id": 4,
+            "name": "The Legend of Zelda: Breath of the Wild OST",
+            "description": "The Breath of the Wild Original Soundtrack captures the serene and epic atmosphere of Hyrule with a blend of ambient melodies and powerful orchestral compositions. Composed by Manaka Kataoka and team, the 211 tracks transport listeners into the game's rich, immersive world.",
+            "developer": "Nintendo",
+            "genre": "Music",
+            "releaseDate": 2017,
+            "composer": "Manaka Kataoka",
+            "tracksNumber": 211,
+            "imagePath": "assets/botw_ost.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 5,
+            "name": "Minecraft",
+            "description": "Minecraft is a sandbox game that allows players to unleash their creativity by building and exploring infinite worlds. Whether crafting tools, battling mobs, or designing intricate redstone contraptions, the game offers endless possibilities. Its simple yet deep mechanics make it suitable for all ages.",
+            "developer": "Mojang Studios",
+            "genre": "Sandbox",
+            "releaseDate": 2011,
+            "imagePath": "assets/minecraft.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 6,
+            "name": "The Witcher 3: Wild Hunt",
+            "description": "The Witcher 3: Wild Hunt is an open-world RPG that follows Geralt of Rivia, a monster hunter, in a quest to find his adopted daughter. With deep narrative choices, rich characters, and a vast, breathtaking world, it has become a gold standard for role-playing games.",
+            "developer": "CD Projekt Red",
+            "genre": "RPG",
+            "releaseDate": 2015,
+            "imagePath": "assets/witcher3.jpg"
+        },
+        {
+            "type": "DLC",
+            "id": 7,
+            "name": "The Witcher 3: Hearts of Stone",
+            "description": "Hearts of Stone, the first expansion for The Witcher 3, introduces an enthralling narrative centered on a mysterious contract. With new characters, weapons, and challenges, it offers a rich, standalone story that seamlessly integrates into the main game.",
+            "developer": "CD Projekt Red",
+            "genre": "RPG",
+            "releaseDate": 2015,
+            "dlcType": "Expansion",
+            "standalone": false,
+            "imagePath": "assets/witcher3_heartsofstone.jpg"
+        },
+        {
+            "type": "DLC",
+            "id": 8,
+            "name": "The Witcher 3: Blood and Wine",
+            "description": "Blood and Wine, the second expansion for The Witcher 3, takes players to the vibrant yet deadly region of Toussaint. With an extensive storyline, new monsters, and an entirely fresh area to explore, it stands as one of the finest expansions in gaming history.",
+            "developer": "CD Projekt Red",
+            "genre": "RPG",
+            "releaseDate": 2016,
+            "dlcType": "Expansion",
+            "standalone": false,
+            "imagePath": "assets/witcher3_bloodandwine.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 9,
+            "name": "Red Dead Redemption 2",
+            "description": "Red Dead Redemption 2 is a cinematic open-world game that immerses players in the life of an outlaw in the dying Wild West. With unparalleled attention to detail, a gripping narrative, and dynamic characters, it sets a new benchmark for storytelling in gaming.",
+            "developer": "Rockstar Games",
+            "genre": "Action-Adventure",
+            "releaseDate": 2018,
+            "imagePath": "assets/rdr2.png"
+        },
+        {
+            "type": "Videogame",
+            "id": 10,
+            "name": "Cyberpunk 2077",
+            "description": "Cyberpunk 2077 is a futuristic RPG set in the bustling metropolis of Night City. Players take on the role of V, a mercenary with cybernetic enhancements, navigating a world filled with intrigue, technology, and moral dilemmas. The game offers unparalleled freedom and immersive storytelling.",
+            "developer": "CD Projekt Red",
+            "genre": "RPG",
+            "releaseDate": 2020,
+            "imagePath": "assets/cyberpunk2077.jpg"
+        },
+        {
+            "type": "Software",
+            "id": 11,
+            "name": "Adobe Photoshop",
+            "description": "Adobe Photoshop is the industry standard for photo editing and graphic design, used by professionals worldwide. It offers a vast array of tools for photo manipulation, digital painting, and 3D design. With features like layers, smart objects, and advanced brushes, Photoshop enables creators to achieve stunning visuals, from detailed photo retouching to intricate digital artwork.",
+            "currentVersion": "2024.1",
+            "winCompatibility": true,
+            "imagePath": "assets/photoshop.png"
+        },
+        {
+            "type": "Videogame",
+            "id": 12,
+            "name": "Grand Theft Auto V",
+            "description": "Grand Theft Auto V is a sprawling open-world action-adventure game set in Los Santos, a city teeming with life and danger. Players follow three interconnected protagonists in a gripping story of crime, betrayal, and redemption. With its expansive map, dynamic missions, and engaging online multiplayer mode, GTA V delivers an unparalleled gaming experience.",
+            "developer": "Rockstar Games",
+            "genre": "Action-Adventure",
+            "releaseDate": 2013,
+            "imagePath": "assets/gtav.jpg"
+        },
+        {
+            "type": "Soundtrack",
+            "id": 13,
+            "name": "Grand Theft Auto V OST",
+            "description": "The official soundtrack of Grand Theft Auto V features an eclectic mix of music, blending radio station hits with original compositions. Tracks range from high-energy electronic beats to atmospheric scores, perfectly capturing the game’s diverse settings and intense action. A true celebration of music and storytelling in gaming.",
+            "developer": "Rockstar Games",
+            "genre": "Music",
+            "releaseDate": 2013,
+            "composer": "Various Artists",
+            "tracksNumber": 59,
+            "imagePath": "assets/gtav_ost.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 14,
+            "name": "Hollow Knight",
+            "description": "Hollow Knight is a beautifully crafted action-adventure game set in the hauntingly atmospheric kingdom of Hallownest. Players explore vast interconnected areas, uncovering secrets, battling challenging foes, and discovering the tragic stories of its insect-like inhabitants. Its hand-drawn visuals, rich lore, and mesmerizing soundtrack make it a modern classic.",
+            "developer": "Team Cherry",
+            "genre": "Action-Adventure",
+            "releaseDate": 2017,
+            "imagePath": "assets/hollowknight.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 15,
+            "name": "Stardew Valley",
+            "description": "Stardew Valley is a charming farming simulation game where players escape the hustle of city life to restore a dilapidated farm. Grow crops, raise animals, mine resources, and form relationships with townsfolk in this heartwarming and relaxing experience. Its blend of simplicity and depth makes it beloved by players of all ages.",
+            "developer": "ConcernedApe",
+            "genre": "Simulation",
+            "releaseDate": 2016,
+            "imagePath": "assets/stardewvalley.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 16,
+            "name": "Among Us",
+            "description": "Among Us is a multiplayer social deduction game set aboard a spaceship. Players work together to complete tasks while identifying the Impostors among them. Its simple mechanics and tense, unpredictable gameplay have made it a phenomenon, fostering hilarious moments and heated debates in every session.",
+            "developer": "Innersloth",
+            "genre": "Party",
+            "releaseDate": 2018,
+            "imagePath": "assets/amongus.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 17,
+            "name": "Super Mario Odyssey",
+            "description": "Super Mario Odyssey is a delightful 3D platformer that takes Mario on a globe-trotting adventure to rescue Princess Peach. With the help of his magical companion Cappy, players explore diverse kingdoms, solve puzzles, and defeat enemies. Its creative gameplay and vibrant worlds make it one of Mario's greatest adventures.",
+            "developer": "Nintendo",
+            "genre": "Platformer",
+            "releaseDate": 2017,
+            "imagePath": "assets/supermarioodyssey.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 18,
+            "name": "Celeste",
+            "description": "Celeste is a critically acclaimed platformer about climbing a mountain and confronting personal struggles. With precise controls and challenging levels, players guide Madeline through emotional and physical obstacles. Its heartfelt narrative, stunning pixel art, and memorable soundtrack have earned it widespread praise.",
+            "developer": "Maddy Makes Games",
+            "genre": "Platformer",
+            "releaseDate": 2018,
+            "imagePath": "assets/celeste.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 19,
+            "name": "Dark Souls III",
+            "description": "Dark Souls III is a challenging action RPG set in a dark, interconnected world filled with peril and mystery. Players face relentless enemies, navigate intricate environments, and unravel a lore-rich story. Known for its punishing difficulty and rewarding combat, it’s a masterpiece of atmospheric storytelling and design.",
+            "developer": "FromSoftware",
+            "genre": "Action RPG",
+            "releaseDate": 2016,
+            "imagePath": "assets/darksouls3.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 20,
+            "name": "Overwatch",
+            "description": "Overwatch is a vibrant team-based multiplayer shooter with a diverse cast of heroes, each with unique abilities. Players work together to secure objectives and outmaneuver opponents in visually stunning maps. Its emphasis on teamwork, strategic depth, and engaging lore has redefined the genre.",
+            "developer": "Blizzard Entertainment",
+            "genre": "Shooter",
+            "releaseDate": 2016,
+            "imagePath": "assets/overwatch.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 21,
+            "name": "Portal 2",
+            "description": "Portal 2 is a first-person puzzle-platform game that challenges players to think creatively using a portal gun. Set in the mysterious Aperture Science facility, players solve ingenious puzzles while unraveling a humorous and darkly intriguing storyline. Its brilliant level design and witty dialogue make it a classic.",
+            "developer": "Valve",
+            "genre": "Puzzle",
+            "releaseDate": 2011,
+            "imagePath": "assets/portal2.jpg"
+        },
+        {
+            "type": "DLC",
+            "id": 22,
+            "name": "Portal Stories: Mel",
+            "description": "Portal Stories: Mel is a standalone mod for Portal 2, offering a new narrative and a fresh set of challenging puzzles. Players take on the role of Mel, a test subject navigating a pre-Portal 2 Aperture Science. With its high-quality design and compelling story, it’s a must-play for Portal fans.",
+            "developer": "Prism Studios",
+            "genre": "Puzzle",
+            "releaseDate": 2015,
+            "dlcType": "Expansion",
+            "standalone": true,
+            "imagePath": "assets/portal_stories_mel.jpg"
+        }
+    ]
+}

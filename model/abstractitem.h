@@ -25,6 +25,9 @@ public:
     // Visitor Pattern
     virtual void accept(class IVisitor* visitor) = 0;
     virtual void accept(class IConstVisitor* visitor) const = 0;
+
+signals:
+    void attributeChanged();
 };
 
 #endif
