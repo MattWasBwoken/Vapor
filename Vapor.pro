@@ -18,6 +18,7 @@ SOURCES += \
     main.cpp \
     model/AbstractItem.cpp \
     model/Software.cpp \
+    view/DefaultImageVisitor.cpp \
     view/ItemRenderer.cpp \
     view/MainWindow.cpp \
     view/ViewRenderer.cpp
@@ -33,6 +34,7 @@ HEADERS += \    #controllare spesso che ci siano tutti
     model/IConstVisitor.h \
     model/IVisitor.h \
     model/Software.h \
+    view/DefaultImageVisitor.h \
     view/ItemRenderer.h \
     view/MainWindow.h \
     view/ViewRenderer.h
@@ -41,3 +43,6 @@ HEADERS += \    #controllare spesso che ci siano tutti
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

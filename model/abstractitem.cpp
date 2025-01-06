@@ -1,4 +1,6 @@
 #include "AbstractItem.h"
+#include <QFile>
+#include "view/DefaultImageVisitor.h"
 
 AbstractItem::AbstractItem(unsigned int id, const QString& name, const QString& description)
     : id(id), name(name), description(description)
@@ -33,5 +35,13 @@ QString AbstractItem::getImage() const {
 }
 
 void AbstractItem::setImage(const QString& imagePath) {
-    this->imagePath = imagePath;
+    QFile file(imagePath);
+    if (file.exists()) {
+        this->imagePath = imagePath;
+    } else {
+        // Use the DefaultImageVisitor to determine the default image
+        DefaultImageVisitor defaultVisitor;
+        this->accept(&defaultVisitor);
+        this->imagePath = defaultVisitor.getDefaultImagePath();
+    }
 }

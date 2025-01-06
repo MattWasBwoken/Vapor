@@ -1,0 +1,32 @@
+<RCC>
+    <qresource>
+        <file>assets/3dmark.png</file>
+        <file>assets/amongus.jpg</file>
+        <file>assets/botw.png</file>
+        <file>assets/botw_expansion.jpg</file>
+        <file>assets/botw_ost.png</file>
+        <file>assets/celeste.jpg</file>
+        <file>assets/cyberpunk2077.jpg</file>
+        <file>assets/default_software.png</file>
+        <file>assets/default_soundtrack.png</file>
+        <file>assets/default_videogame.png</file>
+        <file>assets/ds3.jpg</file>
+        <file>assets/finalcut.jpg</file>
+        <file>assets/gtav.jpg</file>
+        <file>assets/gtav_ost.jpg</file>
+        <file>assets/hollowknight.jpg</file>
+        <file>assets/marioodyssey.png</file>
+        <file>assets/minecraft.jpg</file>
+        <file>assets/overwatch.png</file>
+        <file>assets/photoshop.png</file>
+        <file>assets/portal2.jpg</file>
+        <file>assets/portal2mel.jpg</file>
+        <file>assets/rdr2.png</file>
+        <file>assets/stardewvalley.jpg</file>
+        <file>assets/witcher3.png</file>
+        <file>assets/witcher3_baw.jpg</file>
+        <file>assets/witcher3_hos.jpg</file>
+        <file>assets/default_dlc.png</file>
+        <file>assets/default_unknown.png</file>
+    </qresource>
+</RCC>

@@ -8,7 +8,7 @@
             "developer": "Blizzard Entertainment",
             "genre": "Shooter",
             "releaseDate": 2016,
-            "imagePath": "../assets/overwatch.png"
+            "imagePath": ":/assets/overwatch.png"
         },
         {
             "type": "Videogame",
@@ -18,7 +18,7 @@
             "developer": "Nintendo",
             "genre": "Action-Adventure",
             "releaseDate": 2017,
-            "imagePath": "../assets/botw.png"
+            "imagePath": ":/assets/botw.png"
         },
         {
             "type": "DLC",
@@ -30,7 +30,7 @@
             "releaseDate": 2017,
             "dlcType": "Expansion",
             "standalone": false,
-            "imagePath": "../assets/botw_expansion.jpg"
+            "imagePath": ":/assets/botw_expansion.jpg"
         },
         {
             "type": "Soundtrack",
@@ -42,7 +42,7 @@
             "releaseDate": 2017,
             "composer": "Manaka Kataoka",
             "tracksNumber": 211,
-            "imagePath": "../assets/botw_ost.png"
+            "imagePath": ":/assets/botw_ost.png"
         },
         {
             "type": "Videogame",
@@ -52,7 +52,7 @@
             "developer": "Mojang Studios",
             "genre": "Sandbox",
             "releaseDate": 2011,
-            "imagePath": "../assets/minecraft.jpg"
+            "imagePath": ":/assets/minecraft.jpg"
         },
         {
             "type": "Videogame",
@@ -62,7 +62,7 @@
             "developer": "CD Projekt Red",
             "genre": "RPG",
             "releaseDate": 2015,
-            "imagePath": "../assets/witcher3.png"
+            "imagePath": ":/assets/witcher3.png"
         },
         {
             "type": "DLC",
@@ -74,7 +74,7 @@
             "releaseDate": 2015,
             "dlcType": "Expansion",
             "standalone": false,
-            "imagePath": "../assets/witcher3_hos.jpg"
+            "imagePath": ":/assets/witcher3_hos.jpg"
         },
         {
             "type": "DLC",
@@ -86,7 +86,7 @@
             "releaseDate": 2016,
             "dlcType": "Expansion",
             "standalone": false,
-            "imagePath": "../assets/witcher3_baw.jpg"
+            "imagePath": ":/assets/witcher3_baw.jpg"
         },
         {
             "type": "Videogame",
@@ -96,7 +96,7 @@
             "developer": "Rockstar Games",
             "genre": "Action-Adventure",
             "releaseDate": 2018,
-            "imagePath": "../assets/rdr2.png"
+            "imagePath": ":/assets/rdr2.png"
         },
         {
             "type": "Videogame",
@@ -106,7 +106,7 @@
             "developer": "CD Projekt Red",
             "genre": "RPG",
             "releaseDate": 2020,
-            "imagePath": "../assets/cyberpunk2077.jpg"
+            "imagePath": ":/assets/cyberpunk2077.jpg"
         },
         {
             "type": "Software",
@@ -115,7 +115,7 @@
             "description": "Adobe Photoshop is the industry standard for photo editing and graphic design, used by professionals worldwide. It offers a vast array of tools for photo manipulation, digital painting, and 3D design. With features like layers, smart objects, and advanced brushes, Photoshop enables creators to achieve stunning visuals, from detailed photo retouching to intricate digital artwork.",
             "currentVersion": "2024.1",
             "winCompatibility": true,
-            "imagePath": "../assets/photoshop.png"
+            "imagePath": ":/assets/photoshop.png"
         },
         {
             "type": "Videogame",
@@ -125,7 +125,7 @@
             "developer": "Rockstar Games",
             "genre": "Action-Adventure",
             "releaseDate": 2013,
-            "imagePath": "../assets/gtav.jpg"
+            "imagePath": ":/assets/gtav.jpg"
         },
         {
             "type": "Soundtrack",
@@ -137,7 +137,7 @@
             "releaseDate": 2013,
             "composer": "Various Artists",
             "tracksNumber": 59,
-            "imagePath": "../assets/gtav_ost.jpg"
+            "imagePath": ":/assets/gtav_ost.jpg"
         },
         {
             "type": "Videogame",
@@ -147,7 +147,7 @@
             "developer": "Team Cherry",
             "genre": "Action-Adventure",
             "releaseDate": 2017,
-            "imagePath": "../assets/hollowknight.jpg"
+            "imagePath": ":/assets/hollowknight.jpg"
         },
         {
             "type": "Videogame",
@@ -157,7 +157,7 @@
             "developer": "ConcernedApe",
             "genre": "Simulation",
             "releaseDate": 2016,
-            "imagePath": "../assets/stardewvalley.jpg"
+            "imagePath": ":/assets/stardewvalley.jpg"
         },
         {
             "type": "Videogame",
@@ -167,7 +167,7 @@
             "developer": "Innersloth",
             "genre": "Party",
             "releaseDate": 2018,
-            "imagePath": "../assets/amongus.jpg"
+            "imagePath": ":/assets/amongus.jpg"
         },
         {
             "type": "Videogame",
@@ -177,7 +177,7 @@
             "developer": "Nintendo",
             "genre": "Platformer",
             "releaseDate": 2017,
-            "imagePath": "../assets/marioodyssey.png"
+            "imagePath": ":/assets/marioodyssey.png"
         },
         {
             "type": "Videogame",
@@ -187,7 +187,7 @@
             "developer": "Maddy Makes Games",
             "genre": "Platformer",
             "releaseDate": 2018,
-            "imagePath": "../assets/celeste.jpg"
+            "imagePath": ":/assets/celeste.jpg"
         },
         {
             "type": "Videogame",
@@ -197,7 +197,7 @@
             "developer": "FromSoftware",
             "genre": "Action RPG",
             "releaseDate": 2016,
-            "imagePath": "../assets/ds3.jpg"
+            "imagePath": ":/assets/ds3.jpg"
         },
         {
             "type": "Videogame",
@@ -207,7 +207,7 @@
             "developer": "Valve",
             "genre": "Puzzle",
             "releaseDate": 2011,
-            "imagePath": "../assets/portal2.jpg"
+            "imagePath": ":/assets/portal2.jpg"
         },
         {
             "type": "DLC",
@@ -219,7 +219,7 @@
             "releaseDate": 2015,
             "dlcType": "Expansion",
             "standalone": true,
-            "imagePath": "../assets/portal2mel.jpg"
+            "imagePath": ":/assets/portal2mel.jpg"
         },
         {
             "type": "Software",
@@ -228,7 +228,7 @@
             "description": "3DMark is a computer benchmarking tool created to determine the performance of a computer's 3D graphic rendering and CPU workload processing capabilities. Running 3DMark produces a 3DMark score, with higher numbers indicating better performance. The 3DMark measurement unit is intended to give a normalized means for comparing different PC hardware configurations (mostly graphics processing units and central processing units), which proponents such as gamers and overclocking enthusiasts assert is indicative of end-user performance capabilities.",
             "currentVersion": "2024",
             "winCompatibility": true,
-            "imagePath": "../assets/3dmark.png"
+            "imagePath": ":/assets/3dmark.png"
         },
         {
             "type": "Software",
@@ -237,7 +237,7 @@
             "description": "With optimizations for Apple silicon and the power of its Metal engine, Final Cut Pro allows you to edit more complex projects and work with larger frame sizes, higher frame rates, and more effects — all at incredible speeds. And it’s built to harness the extreme power of Mac Pro, Mac Studio or MacBook Pro for next-level performance. Tap into superfast unified memory shared across the CPU, the GPU, and the Apple Neural Engine to play back more high-resolution video streams and render your movie in record time.",
             "currentVersion": "10.7.1",
             "winCompatibility": false,
-            "imagePath": "../assets/finalcut.jpg"
+            "imagePath": ":/assets/finalcut.jpg"
         }
     ]
 }
