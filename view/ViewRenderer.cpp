@@ -5,7 +5,7 @@
 #include <QScrollArea>
 #include <QResizeEvent>
 
-ViewRenderer::ViewRenderer(QWidget* parent) : QWidget(parent), currentView(ListView) {}
+ViewRenderer::ViewRenderer(QWidget* parent) : QWidget(parent), currentView(GridView) {}
 
 void ViewRenderer::setViewType(bool isGridView) {
     currentView = isGridView ? GridView : ListView;
@@ -48,10 +48,12 @@ QWidget* ViewRenderer::createListView(const QVector<AbstractItem*>& items) {
 }
 
 QWidget* ViewRenderer::createGridView(const QVector<AbstractItem*>& items) {
-    // Calculate the number of columns dynamically
-    const int itemWidth = 150; // Approximate width of an item in pixels
+    const int itemWidth = 250; // Approximate width of an item in pixels
     int containerWidth = this->width(); // The width of the current ViewRenderer widget
-    int columns = qMax(1, containerWidth / itemWidth); // Ensure at least 1 column
+    if (containerWidth < itemWidth) {
+        containerWidth = 1100; // Fallback to a reasonable default width
+    }
+    int columns = qMax(1, containerWidth / itemWidth); // Calculate the number of columns dynamically
 
     QWidget* container = new QWidget(this);
     QGridLayout* layout = new QGridLayout(container);
@@ -68,10 +70,4 @@ QWidget* ViewRenderer::createGridView(const QVector<AbstractItem*>& items) {
     return container;
 }
 
-void ViewRenderer::resizeEvent(QResizeEvent* event) {
-    // Re-render on resize to adjust the grid dynamically
-    if (currentView == GridView) {
-        emit renderRequested(); // Custom signal to request a re-render
-    }
-    QWidget::resizeEvent(event);
-}
+

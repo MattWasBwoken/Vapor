@@ -17,8 +17,7 @@ private:
     QWidget* createListView(const QVector<AbstractItem*>& items);
     QWidget* createGridView(const QVector<AbstractItem*>& items);
 
-protected:
-    void resizeEvent(QResizeEvent* event) override; // Handle resize events
+
 
 public:
     explicit ViewRenderer(QWidget* parent = nullptr);
@@ -26,8 +25,6 @@ public:
     void setViewType(bool isGridView);
     void render(const QVector<AbstractItem*>& items);
 
-signals:
-    void renderRequested(); // Signal to request rendering on resize
 };
 
 #endif

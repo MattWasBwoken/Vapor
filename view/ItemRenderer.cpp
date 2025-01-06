@@ -28,7 +28,7 @@ void ItemRenderer::visit(const Software* item) {
 
     QLabel* imageLabel = new QLabel(widget);
     QPixmap pixmap(item->getImage());
-    imageLabel->setPixmap(pixmap.scaled(300, 140, Qt::KeepAspectRatio));
+    imageLabel->setPixmap(pixmap.scaled(200, 200, Qt::KeepAspectRatio));
     layout->addWidget(imageLabel);
 
     QLabel* nameLabel = new QLabel(item->getName(), widget);

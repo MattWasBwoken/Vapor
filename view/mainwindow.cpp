@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QCoreApplication>
 #include <QDir>
+#include <QScrollArea>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
@@ -16,7 +17,8 @@ MainWindow::MainWindow(QWidget *parent)
     setupStatusBar();
     populateItems();
 
-    resize(900, 600);
+    resize(1100, 800);
+    setMinimumSize(400, 400);
 
     connect(this, &MainWindow::itemAdded, this, [this](AbstractItem *item) {
         items.append(item);
@@ -86,8 +88,19 @@ void MainWindow::setupToolBar() {
 }
 
 void MainWindow::setupCentralWidget() {
-    viewRenderer = new ViewRenderer(this); // Initialize ViewRenderer
-    setCentralWidget(viewRenderer);       // Set it as the central widget
+    QScrollArea *scrollArea = new QScrollArea(this);
+    viewRenderer = new ViewRenderer(scrollArea); // Attach ViewRenderer to scrollArea
+
+    // Configure the scroll area for vertical scrolling only
+    scrollArea->setWidget(viewRenderer);
+    scrollArea->setWidgetResizable(true); // Resize content dynamically
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); // Disable horizontal scrolling
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);   // Enable vertical scrolling
+
+    // Ensure the ViewRenderer widget expands to the full width of the scroll area
+    viewRenderer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    setCentralWidget(scrollArea); // Set scrollArea as the central widget
 }
 
 void MainWindow::setupStatusBar() {
