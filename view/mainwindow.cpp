@@ -96,9 +96,17 @@ void MainWindow::setupStatusBar() {
 }
 
 void MainWindow::populateItems() {
-    QString filePath = QDir(QCoreApplication::applicationDirPath() + "/../../../data/library.json").absolutePath(); // da rivedere ??
+    QString filePath = ":/data/library.json";
+
+    QFile file(filePath);
+    if (!file.exists()) {
+        qWarning() << "File does not exist in resources:" << filePath;
+        updateStatus(tr("Failed to load items: File not found in resources"));
+        return;
+    }
+
     items = JsonItemLoader::loadItemsFromJson(filePath);
-    updateStatus(tr("Loaded %1 items from file").arg(items.size()));
+    updateStatus(tr("Loaded %1 items from resources").arg(items.size()));
     viewRenderer->render(items);
 }
 

@@ -1,5 +1,5 @@
 <RCC>
-    <qresource>
+    <qresource prefix="/">
         <file>assets/3dmark.png</file>
         <file>assets/amongus.jpg</file>
         <file>assets/botw.png</file>
@@ -28,5 +28,6 @@
         <file>assets/witcher3_hos.jpg</file>
         <file>assets/default_dlc.png</file>
         <file>assets/default_unknown.png</file>
+        <file>data/library.json</file>
     </qresource>
 </RCC>
