@@ -33,41 +33,49 @@ void ViewRenderer::render(const QVector<AbstractItem*>& items) {
     }
 }
 
-QWidget* ViewRenderer::createListView(const QVector<AbstractItem*>& items) {
-    // Create a vertical list view
-    QWidget* container = new QWidget(this);
-    QVBoxLayout* layout = new QVBoxLayout(container);
-
-    for (AbstractItem* item : items) {
-        ItemRenderer* itemRenderer = new ItemRenderer(container);
-        layout->addWidget(itemRenderer->render(item));
-    }
-
-    container->setLayout(layout);
-    return container;
-}
-
 QWidget* ViewRenderer::createGridView(const QVector<AbstractItem*>& items) {
-    const int itemWidth = 250; // Approximate width of an item in pixels
-    int containerWidth = this->width(); // The width of the current ViewRenderer widget
+    const int itemWidth = 250;
+    int containerWidth = this->width();
     if (containerWidth < itemWidth) {
-        containerWidth = 1100; // Fallback to a reasonable default width
+        containerWidth = 1100;
     }
-    int columns = qMax(1, containerWidth / itemWidth); // Calculate the number of columns dynamically
+    int columns = qMax(1, containerWidth / itemWidth);
 
     QWidget* container = new QWidget(this);
     QGridLayout* layout = new QGridLayout(container);
 
     for (int i = 0; i < items.size(); ++i) {
+        AbstractItem* item = items[i];
         int row = i / columns;
         int col = i % columns;
 
         ItemRenderer* itemRenderer = new ItemRenderer(container);
-        layout->addWidget(itemRenderer->render(items[i]), row, col);
+        layout->addWidget(itemRenderer->render(item, ItemRenderer::ViewType::Grid), row, col);
     }
 
     container->setLayout(layout);
     return container;
 }
+
+QWidget* ViewRenderer::createListView(const QVector<AbstractItem*>& items) {
+    QWidget* container = new QWidget(this);
+    QVBoxLayout* layout = new QVBoxLayout(container);
+
+    for (AbstractItem* item : items) {
+        ItemRenderer* itemRenderer = new ItemRenderer(container);
+        layout->addWidget(itemRenderer->render(item, ItemRenderer::ViewType::List));
+
+        QFrame* separator = new QFrame(container);
+        separator->setFrameShape(QFrame::HLine);
+        separator->setFrameShadow(QFrame::Sunken);
+        layout->addWidget(separator);
+    }
+
+    container->setLayout(layout);
+    return container;
+}
+
+
+
 
 
