@@ -5,10 +5,10 @@
 #include <QScrollArea>
 #include <QResizeEvent>
 
-ViewRenderer::ViewRenderer(QWidget* parent) : QWidget(parent), currentView(GridView) {}
+ViewRenderer::ViewRenderer(QWidget* parent) : QWidget(parent), currentView(ViewType::Grid) {}
 
-void ViewRenderer::setViewType(bool isGridView) {
-    currentView = isGridView ? GridView : ListView;
+void ViewRenderer::setViewType(ViewType viewType) {
+    currentView = viewType;
 }
 
 void ViewRenderer::render(const QVector<AbstractItem*>& items) {
@@ -24,7 +24,7 @@ void ViewRenderer::render(const QVector<AbstractItem*>& items) {
     }
 
     // Render items based on the current view type
-    if (currentView == ListView) {
+    if (currentView == ViewType::List) {
         this->setLayout(new QVBoxLayout);
         this->layout()->addWidget(createListView(items));
     } else {

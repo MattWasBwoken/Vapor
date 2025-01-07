@@ -34,6 +34,7 @@ private:
     ViewType currentViewType;
 
     void setRenderedWidget(QWidget* widget);
+    QWidget* createGenericWidget(const QString& imagePath, const QString& name, const QString& description, const QString& attribute, ViewType viewType, int imageWidth, int imageHeight);
 };
 
 #endif

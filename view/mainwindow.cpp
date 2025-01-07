@@ -2,6 +2,7 @@
 #include "../data/JsonItemLoader.h"
 #include "../model/ItemFactory.h"
 #include "../model/SearchItemVisitor.h"
+#include "ViewRenderer.h"
 #include <QAction>
 #include <QVBoxLayout>
 #include <QMessageBox>
@@ -58,13 +59,13 @@ void MainWindow::setupMenus() {
     QAction* listViewAction = viewMenu->addAction(tr("List View"));
 
     connect(gridViewAction, &QAction::triggered, this, [this]() {
-        viewRenderer->setViewType(true); // Set grid view
-        viewRenderer->render(items);    // Re-render
+        viewRenderer->setViewType(ViewRenderer::ViewType::Grid); // Use enum
+        viewRenderer->render(items);
     });
 
     connect(listViewAction, &QAction::triggered, this, [this]() {
-        viewRenderer->setViewType(false); // Set list view
-        viewRenderer->render(items);     // Re-render
+        viewRenderer->setViewType(ViewRenderer::ViewType::List); // Use enum
+        viewRenderer->render(items);
     });
 
     setMenuBar(menuBar);
