@@ -30,5 +30,6 @@
         <file>assets/default_unknown.png</file>
         <file>data/library.json</file>
         <file>assets/vapor_logo.png</file>
+        <file>assets/dlc_icon.png</file>
     </qresource>
 </RCC>

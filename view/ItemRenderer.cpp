@@ -7,6 +7,8 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QPixmap>
+#include <QPainter>
+#include <QPainterPath>
 
 ItemRenderer::ItemRenderer(QWidget* parent) : QWidget(parent), renderedWidget(nullptr) {}
 
@@ -76,17 +78,92 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 
 // Visitor implementations using the helper function
 void ItemRenderer::visit(const Software* item) {
-    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Version: " + item->getCurrentVersion(), currentViewType, 200, 300));
+    int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 200;
+    int imageHeight = (currentViewType == ViewType::Grid) ? 300 : 100;
+    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Version: " + item->getCurrentVersion(), currentViewType, imageWidth, imageHeight));
 }
 
 void ItemRenderer::visit(const Videogame* item) {
-    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Developer: " + item->getDeveloper(), currentViewType, 200, 300));
+    int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 100;
+    int imageHeight = (currentViewType == ViewType::Grid) ? 300 : 150;
+    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Developer: " + item->getDeveloper(), currentViewType, imageWidth, imageHeight));
 }
 
 void ItemRenderer::visit(const DLC* item) {
-    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "DLC Type: " + item->getDlcType(), currentViewType, 200, 300));
+    // Determine sizes based on currentViewType
+    int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 100;
+    int imageHeight = (currentViewType == ViewType::Grid) ? 300 : 150;
+
+    QWidget* widget = createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "DLC Type: " + item->getDlcType(), currentViewType, imageWidth, imageHeight);
+
+    QLabel* imageLabel = widget->findChild<QLabel*>();
+    if (imageLabel) {
+        QPixmap pixmap(item->getImage());
+        pixmap = pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        QPixmap overlayedPixmap = pixmap;
+        QPainter painter(&overlayedPixmap);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        // Load the arrow icon
+        QPixmap arrowPixmap(":/assets/dlc_icon.png");
+        arrowPixmap = arrowPixmap.scaled(imageWidth / 4, imageHeight / 4, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        // Calculate position for overlay (bottom-right corner)
+        int overlayX = overlayedPixmap.width() - arrowPixmap.width() - 10; // 10px margin
+        int overlayY = overlayedPixmap.height() - arrowPixmap.height() - 10;
+
+        // Draw the arrow icon on top of the DLC image
+        painter.drawPixmap(overlayX, overlayY, arrowPixmap);
+        painter.end();
+
+        imageLabel->setPixmap(overlayedPixmap);
+    }
+
+    setRenderedWidget(widget);
 }
 
 void ItemRenderer::visit(const Soundtrack* item) {
-    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Composer: " + item->getComposer(), currentViewType, 200, 300));
+    // Determine sizes based on currentViewType
+    int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 100;
+    int imageHeight = (currentViewType == ViewType::Grid) ? 200 : 100;
+
+    QWidget* widget = createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Composer: " + item->getComposer(), currentViewType, imageWidth, imageHeight);
+
+    QLabel* imageLabel = widget->findChild<QLabel*>();
+    if (imageLabel) {
+        QPixmap pixmap(item->getImage());
+        pixmap = pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        QPixmap circularPixmap(pixmap.size());
+        circularPixmap.fill(Qt::transparent);
+
+        QPainter painter(&circularPixmap);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        // Create circular mask
+        QPainterPath outerCircle;
+        outerCircle.addEllipse(0, 0, pixmap.width(), pixmap.height());
+
+        QPainterPath innerCircle;
+        const int holeDiameter = pixmap.width() / 5; // Diameter of the hole
+        const int holeX = (pixmap.width() - holeDiameter) / 2; // Centering the hole
+        const int holeY = (pixmap.height() - holeDiameter) / 2;
+        innerCircle.addEllipse(holeX, holeY, holeDiameter, holeDiameter);
+        QPainterPath ringShape = outerCircle.subtracted(innerCircle);
+
+        // Apply mask
+        painter.setClipPath(ringShape);
+        painter.drawPixmap(0, 0, pixmap);
+
+        painter.end();
+        imageLabel->setPixmap(circularPixmap);
+    }
+
+    setRenderedWidget(widget);
 }
+
+
+
+
+
