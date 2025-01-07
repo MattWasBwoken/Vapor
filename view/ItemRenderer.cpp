@@ -29,19 +29,26 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 
     if (viewType == ViewType::Grid) {
         QVBoxLayout* layout = new QVBoxLayout(widget);
+
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
-        imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio));
-        layout->addWidget(imageLabel);
+        imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        imageLabel->setAlignment(Qt::AlignCenter);
+        imageLabel->setFixedSize(imageWidth, imageHeight);
+        layout->addWidget(imageLabel, 0, Qt::AlignCenter);
 
         QLabel* nameLabel = new QLabel("<b>"+name+"</b>", widget);
+        nameLabel->setWordWrap(true);
+        nameLabel->setAlignment(Qt::AlignCenter);
         layout->addWidget(nameLabel);
+
         widget->setLayout(layout);
     } else { // List
         QHBoxLayout* layout = new QHBoxLayout(widget);
+
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
-        imageLabel->setPixmap(pixmap.scaled(imageWidth / 2, imageHeight / 2, Qt::KeepAspectRatio));
+        imageLabel->setPixmap(pixmap.scaled(imageWidth / 2, imageHeight / 2, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         layout->addWidget(imageLabel, 0);
         layout->addSpacing(10);
 
@@ -52,7 +59,8 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         nameLabel->setFont(nameFont);
         textLayout->addWidget(nameLabel);
 
-        QLabel* descriptionLabel = new QLabel(description.left(150) + "...", widget);
+        QLabel* descriptionLabel = new QLabel(description.left(250) + "...", widget);
+        descriptionLabel->setWordWrap(true);
         textLayout->addWidget(descriptionLabel);
 
         QLabel* attributeLabel = new QLabel(attribute, widget);
@@ -68,7 +76,7 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 
 // Visitor implementations using the helper function
 void ItemRenderer::visit(const Software* item) {
-    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Version: " + item->getCurrentVersion(), currentViewType, 200, 200));
+    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Version: " + item->getCurrentVersion(), currentViewType, 200, 300));
 }
 
 void ItemRenderer::visit(const Videogame* item) {
@@ -80,5 +88,5 @@ void ItemRenderer::visit(const DLC* item) {
 }
 
 void ItemRenderer::visit(const Soundtrack* item) {
-    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Composer: " + item->getComposer(), currentViewType, 200, 200));
+    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Composer: " + item->getComposer(), currentViewType, 200, 300));
 }
