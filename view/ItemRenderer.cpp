@@ -34,7 +34,7 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio));
         layout->addWidget(imageLabel);
 
-        QLabel* nameLabel = new QLabel(name, widget);
+        QLabel* nameLabel = new QLabel("<b>"+name+"</b>", widget);
         layout->addWidget(nameLabel);
         widget->setLayout(layout);
     } else { // List
@@ -42,19 +42,23 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
         imageLabel->setPixmap(pixmap.scaled(imageWidth / 2, imageHeight / 2, Qt::KeepAspectRatio));
-        layout->addWidget(imageLabel);
+        layout->addWidget(imageLabel, 0);
+        layout->addSpacing(10);
 
         QVBoxLayout* textLayout = new QVBoxLayout();
-        QLabel* nameLabel = new QLabel(name, widget);
+        QLabel* nameLabel = new QLabel("<b>"+name+"</b>", widget);
+        QFont nameFont = nameLabel->font();
+        nameFont.setPointSize(12);
+        nameLabel->setFont(nameFont);
         textLayout->addWidget(nameLabel);
 
-        QLabel* descriptionLabel = new QLabel(description.left(75) + "...", widget);
+        QLabel* descriptionLabel = new QLabel(description.left(150) + "...", widget);
         textLayout->addWidget(descriptionLabel);
 
         QLabel* attributeLabel = new QLabel(attribute, widget);
         textLayout->addWidget(attributeLabel);
 
-        layout->addLayout(textLayout);
+        layout->addLayout(textLayout, 1);
         widget->setLayout(layout);
     }
 
