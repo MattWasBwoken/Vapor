@@ -50,7 +50,7 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
-        imageLabel->setPixmap(pixmap.scaled(imageWidth / 2, imageHeight / 2, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         layout->addWidget(imageLabel, 0);
         layout->addSpacing(10);
 
@@ -107,11 +107,11 @@ void ItemRenderer::visit(const DLC* item) {
 
         // Load the arrow icon
         QPixmap arrowPixmap(":/assets/dlc_icon.png");
-        arrowPixmap = arrowPixmap.scaled(imageWidth / 4, imageHeight / 4, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        arrowPixmap = arrowPixmap.scaled(imageWidth/4, imageHeight/4, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         // Calculate position for overlay (bottom-right corner)
-        int overlayX = overlayedPixmap.width() - arrowPixmap.width() - 10; // 10px margin
-        int overlayY = overlayedPixmap.height() - arrowPixmap.height() - 10;
+        int overlayX = overlayedPixmap.width()-arrowPixmap.width()-1;
+        int overlayY = overlayedPixmap.height()-arrowPixmap.height()-1;
 
         // Draw the arrow icon on top of the DLC image
         painter.drawPixmap(overlayX, overlayY, arrowPixmap);
@@ -126,7 +126,7 @@ void ItemRenderer::visit(const DLC* item) {
 void ItemRenderer::visit(const Soundtrack* item) {
     // Determine sizes based on currentViewType
     int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 100;
-    int imageHeight = (currentViewType == ViewType::Grid) ? 200 : 100;
+    int imageHeight = (currentViewType == ViewType::Grid) ? 300 : 100;
 
     QWidget* widget = createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Composer: " + item->getComposer(), currentViewType, imageWidth, imageHeight);
 
