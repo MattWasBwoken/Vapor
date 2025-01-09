@@ -13,7 +13,7 @@
         {
             "type": "Videogame",
             "id": 2,
-            "name": "The Legend of Zelda: Breath of the Wild",
+            "name": "Zelda: Breath of the Wild",
             "description": "The Legend of Zelda: Breath of the Wild is a groundbreaking open-world action-adventure game that redefines exploration and freedom. Set in a vast, visually stunning Hyrule, players uncover secrets, battle fierce enemies, and solve intricate puzzles. Its innovative mechanics and captivating narrative make it a masterpiece of gaming.",
             "developer": "Nintendo",
             "genre": "Action-Adventure",
@@ -23,7 +23,7 @@
         {
             "type": "DLC",
             "id": 3,
-            "name": "The Legend of Zelda: Breath of the Wild - Expansion Pass",
+            "name": "Zelda: BotW - Expansion Pass",
             "description": "The Expansion Pass for Breath of the Wild adds two major content packs, featuring new storylines, challenges, and equipment. Delve into The Master Trials and The Champions' Ballad, each offering hours of gameplay and enriching the core experience with fresh adventures and lore.",
             "developer": "Nintendo",
             "genre": "Action-Adventure",
@@ -35,7 +35,7 @@
         {
             "type": "Soundtrack",
             "id": 4,
-            "name": "The Legend of Zelda: Breath of the Wild OST",
+            "name": "TZelda: Breath of the Wild OST",
             "description": "The Breath of the Wild Original Soundtrack captures the serene and epic atmosphere of Hyrule with a blend of ambient melodies and powerful orchestral compositions. Composed by Manaka Kataoka and team, the 211 tracks transport listeners into the game's rich, immersive world.",
             "composer": "Manaka Kataoka",
             "tracksNumber": 211,
