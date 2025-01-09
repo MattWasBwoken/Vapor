@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     setupStatusBar();
     populateItems();
 
-    resize(1100, 800);
+    resize(1200, 800);
     setMinimumSize(400, 400);
 
     connect(this, &MainWindow::itemAdded, this, [this](AbstractItem *item) {

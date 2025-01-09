@@ -34,12 +34,12 @@ void ViewRenderer::render(const QVector<AbstractItem*>& items) {
 }
 
 QWidget* ViewRenderer::createGridView(const QVector<AbstractItem*>& items) {
-    const int itemWidth = 250;
+    const int itemWidth = 200;
     int containerWidth = this->width();
     if (containerWidth < itemWidth) {
-        containerWidth = 1100;
+        containerWidth = 1200;
     }
-    int columns = qMax(1, containerWidth / itemWidth);
+    int columns = qMax(1, containerWidth / (itemWidth+20));
 
     QWidget* container = new QWidget(this);
     QGridLayout* layout = new QGridLayout(container);

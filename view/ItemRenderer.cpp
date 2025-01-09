@@ -32,6 +32,9 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
     if (viewType == ViewType::Grid) {
         QVBoxLayout* layout = new QVBoxLayout(widget);
 
+        QSpacerItem* spacer = new QSpacerItem(200, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        layout->addSpacerItem(spacer);
+
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
         imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation));
