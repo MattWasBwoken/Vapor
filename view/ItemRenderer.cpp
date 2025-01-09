@@ -140,8 +140,8 @@ void ItemRenderer::visit(const Videogame* item) {
     int imageWidth = 200;
     int imageHeight = 300;
     if (currentViewType == ViewType::List) {
-        imageWidth = 100;
-        imageHeight = 150;
+        imageWidth /= 2;
+        imageHeight /= 2;
     }
     QVBoxLayout* attributeLayout = new QVBoxLayout();
     QLabel* developerLabel = new QLabel("Developer: " + item->getDeveloper());
@@ -159,8 +159,8 @@ void ItemRenderer::visit(const DLC* item) {
     int imageWidth = 200;
     int imageHeight = 300;
     if (currentViewType == ViewType::List) {
-        imageWidth = 100;
-        imageHeight = 150;
+        imageWidth /= 2;
+        imageHeight /= 2;
     }
 
     QVBoxLayout* attributeLayout = new QVBoxLayout();
