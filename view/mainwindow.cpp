@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(viewRenderer, &ViewRenderer::itemSelected, this, &MainWindow::showItemDetails);
+    connect(viewRenderer, &ViewRenderer::backToGridRequested, this, &MainWindow::handleBackToGrid);
 }
 
 void MainWindow::setupMenus() {
@@ -193,4 +194,11 @@ void MainWindow::showItemDetails(AbstractItem* item){
     selectedItem.push_back(item);
     viewRenderer->render(selectedItem);
     updateStatus(tr("Opening details of item: %1").arg(item->getName()));
+}
+
+void MainWindow::handleBackToGrid() {
+    viewRenderer->setViewType(ViewRenderer::ViewType::Grid);
+    viewRenderer->render(items);
+    updateStatus(tr("Back to Grid View"));
+
 }

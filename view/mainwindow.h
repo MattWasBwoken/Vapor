@@ -52,6 +52,7 @@ private slots:
     void handleDeleteItem(unsigned int id);
     void updateStatus(const QString &message);
     void showItemDetails(AbstractItem* item);
+    void handleBackToGrid();
 };
 
 #endif

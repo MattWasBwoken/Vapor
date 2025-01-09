@@ -24,12 +24,13 @@ public:
 
 signals:
     void itemSelected(AbstractItem *item);
+    void backToGridRequested();
 
 private:
     ViewType currentView;
     QWidget* createListView(const QVector<AbstractItem*> &items);
     QWidget* createGridView(const QVector<AbstractItem*> &items);
-    QWidget* createDetailsView(AbstractItem* item); // Nuovo metodo
+    QWidget* createDetailsView(AbstractItem* item);
 };
 
 #endif

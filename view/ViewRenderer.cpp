@@ -3,7 +3,6 @@
 #include <QLayout>
 #include <QPushButton>
 #include <QFrame>
-#include <QDebug>
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <QScrollArea>
@@ -34,9 +33,9 @@ void ViewRenderer::render(const QVector<AbstractItem*>& items) {
     } else if (currentView == ViewType::List) {
         this->setLayout(new QVBoxLayout);
         this->layout()->addWidget(createListView(items));
-    } else if (currentView == ViewType::Details && items.size() == 1) { //mostra i dettagli solo se c'è un singolo elemento selezionato
+    } else if (currentView == ViewType::Details && items.size() == 1) {
         this->setLayout(new QVBoxLayout);
-        this->layout()->addWidget(createDetailsView(items.first())); // Passa l'oggetto selezionato
+        this->layout()->addWidget(createDetailsView(items.first())); // pass selected object
     }
 }
 
@@ -109,14 +108,11 @@ QWidget* ViewRenderer::createDetailsView(AbstractItem* item) {
     ItemRenderer* itemRenderer = new ItemRenderer(container);
     layout->addWidget(itemRenderer->render(item, ItemRenderer::ViewType::Details));
 
-    // Aggiungi un pulsante "Back"
+    // back button
     QPushButton* backButton = new QPushButton("Back to grid", container);
     layout->addWidget(backButton);
 
-    connect(backButton, &QPushButton::clicked, [this]() {
-        currentView = ViewType::Grid;
-        //render(items); // Torna alla vista lista
-    });
+    connect(backButton, &QPushButton::clicked, this, &ViewRenderer::backToGridRequested); // emit signal
     container->setLayout(layout);
     return container;
 }
