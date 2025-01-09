@@ -82,7 +82,7 @@ QWidget* ViewRenderer::createListView(const QVector<AbstractItem*>& items) {
         QWidget* renderedItem = itemRenderer->render(item, ItemRenderer::ViewType::List);
         QPushButton* button = new QPushButton(container);
         button->setLayout(renderedItem->layout());
-        button->setFixedSize(this->width(),150);
+        button->setFixedSize(this->width(),170);
 
         connect(button, &QPushButton::clicked, [this, item]() {
             emit itemSelected(item); // Emit signal on click
