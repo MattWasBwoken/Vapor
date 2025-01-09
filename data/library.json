@@ -37,9 +37,6 @@
             "id": 4,
             "name": "The Legend of Zelda: Breath of the Wild OST",
             "description": "The Breath of the Wild Original Soundtrack captures the serene and epic atmosphere of Hyrule with a blend of ambient melodies and powerful orchestral compositions. Composed by Manaka Kataoka and team, the 211 tracks transport listeners into the game's rich, immersive world.",
-            "developer": "Nintendo",
-            "genre": "Music",
-            "releaseDate": 2017,
             "composer": "Manaka Kataoka",
             "tracksNumber": 211,
             "imagePath": ":/assets/botw_ost.png"
@@ -132,9 +129,6 @@
             "id": 13,
             "name": "Grand Theft Auto V OST",
             "description": "The official soundtrack of Grand Theft Auto V features an eclectic mix of music, blending radio station hits with original compositions. Tracks range from high-energy electronic beats to atmospheric scores, perfectly capturing the game’s diverse settings and intense action. A true celebration of music and storytelling in gaming.",
-            "developer": "Rockstar Games",
-            "genre": "Music",
-            "releaseDate": 2013,
             "composer": "Various Artists",
             "tracksNumber": 59,
             "imagePath": ":/assets/gtav_ost.jpg"
@@ -238,6 +232,27 @@
             "currentVersion": "10.7.1",
             "winCompatibility": false,
             "imagePath": ":/assets/finalcut.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 24,
+            "name": "Videogioco di prova generico",
+            "description": "Descrizione corta generica.",
+            "developer": "Prova",
+            "genre": "Test",
+            "releaseDate": 2024,
+            "imagePath": ":/assets/prova.jpg"
+        },
+        {
+            "type": "Soundtrack",
+            "id": 25,
+            "name": "Soundtrack di prova generica",
+            "description": "Descrizione corta generica.",
+            "developer": "Prova",
+            "releaseDate": 2024,
+            "composer": "Tizio",
+            "tracksNumber": 12,
+            "imagePath": ":/assets/prova.jpg"
         }
     ]
 }

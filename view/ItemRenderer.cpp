@@ -34,7 +34,7 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
-        imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation));
         imageLabel->setAlignment(Qt::AlignCenter);
         imageLabel->setFixedSize(imageWidth, imageHeight);
         layout->addWidget(imageLabel, 0, Qt::AlignCenter);
@@ -50,7 +50,7 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
-        imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation));
         layout->addWidget(imageLabel, 0);
         layout->addSpacing(10);
 
@@ -78,8 +78,8 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 
 // Visitor implementations using the helper function
 void ItemRenderer::visit(const Software* item) {
-    int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 200;
-    int imageHeight = (currentViewType == ViewType::Grid) ? 300 : 100;
+    int imageWidth = 200;
+    int imageHeight = 94;
     setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Version: " + item->getCurrentVersion(), currentViewType, imageWidth, imageHeight));
 }
 
@@ -99,7 +99,7 @@ void ItemRenderer::visit(const DLC* item) {
     QLabel* imageLabel = widget->findChild<QLabel*>();
     if (imageLabel) {
         QPixmap pixmap(item->getImage());
-        pixmap = pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        pixmap = pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation);
 
         QPixmap overlayedPixmap = pixmap;
         QPainter painter(&overlayedPixmap);
@@ -107,7 +107,7 @@ void ItemRenderer::visit(const DLC* item) {
 
         // Load the arrow icon
         QPixmap arrowPixmap(":/assets/dlc_icon.png");
-        arrowPixmap = arrowPixmap.scaled(imageWidth/4, imageHeight/4, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        arrowPixmap = arrowPixmap.scaled(imageWidth/4, imageHeight/4, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation);
 
         // Calculate position for overlay (bottom-right corner)
         int overlayX = overlayedPixmap.width()-arrowPixmap.width()-1;
@@ -126,14 +126,14 @@ void ItemRenderer::visit(const DLC* item) {
 void ItemRenderer::visit(const Soundtrack* item) {
     // Determine sizes based on currentViewType
     int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 100;
-    int imageHeight = (currentViewType == ViewType::Grid) ? 300 : 100;
+    int imageHeight = (currentViewType == ViewType::Grid) ? 200 : 100;
 
     QWidget* widget = createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Composer: " + item->getComposer(), currentViewType, imageWidth, imageHeight);
 
     QLabel* imageLabel = widget->findChild<QLabel*>();
     if (imageLabel) {
         QPixmap pixmap(item->getImage());
-        pixmap = pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        pixmap = pixmap.scaled(imageWidth, imageHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
         QPixmap circularPixmap(pixmap.size());
         circularPixmap.fill(Qt::transparent);
