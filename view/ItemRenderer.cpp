@@ -27,7 +27,7 @@ QWidget* ItemRenderer::render(AbstractItem* item, ViewType viewType) {
 }
 
 
-QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QString& name, const QString& description, const QString& attribute, ViewType viewType, int imageWidth, int imageHeight) {
+QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QString& name, const QString& description, QLayout* attributeLayout, ViewType viewType, int imageWidth, int imageHeight) {
     QWidget* widget = new QWidget(this);
 
     if (viewType == ViewType::Grid) {
@@ -69,8 +69,16 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         descriptionLabel->setWordWrap(true);
         textLayout->addWidget(descriptionLabel);
 
-        QLabel* attributeLabel = new QLabel(attribute, widget);
-        textLayout->addWidget(attributeLabel);
+        if(attributeLayout && attributeLayout->count() > 0){
+            QLayoutItem* firstItem = attributeLayout->itemAt(0);
+            if(firstItem){
+                QLabel* firstLabel = dynamic_cast<QLabel*>(firstItem->widget());
+                if (firstLabel) {
+                    textLayout->addWidget(firstLabel);
+                }
+            }
+
+        }
 
         layout->addLayout(textLayout, 1);
         widget->setLayout(layout);
@@ -80,7 +88,7 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         // Add item image
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
-        imageLabel->setPixmap(pixmap.scaled(imageWidth*2, imageHeight*2, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
+        imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
         imageLabel->setAlignment(Qt::AlignCenter);
         layout->addWidget(imageLabel);
 
@@ -95,20 +103,16 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         descriptionLabel->setAlignment(Qt::AlignLeft);
         layout->addWidget(descriptionLabel);
 
-        // Add specific attributes (visited-specific attributes)
-        QLabel* attributeLabel = new QLabel(attribute, widget);
-        attributeLabel->setWordWrap(true);
-        layout->addWidget(attributeLabel);
+        if (attributeLayout) {
+            layout->addLayout(attributeLayout);
+        }
 
-        // Additional buttons (Edit/Delete) could be added here if needed
         QPushButton* editButton = new QPushButton("Edit", widget);
         QPushButton* deleteButton = new QPushButton("Delete", widget);
         QHBoxLayout* buttonLayout = new QHBoxLayout;
         buttonLayout->addWidget(editButton);
         buttonLayout->addWidget(deleteButton);
         layout->addLayout(buttonLayout);
-
-        // Configure layout
         widget->setLayout(layout);
     }
 
@@ -120,90 +124,119 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 void ItemRenderer::visit(const Software* item) {
     int imageWidth = 200;
     int imageHeight = 94;
-    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Version: " + item->getCurrentVersion(), currentViewType, imageWidth, imageHeight));
+    if(currentViewType == ViewType::Details) {
+    imageWidth *=2;
+    imageHeight *=2;
+    }
+    QVBoxLayout* attributeLayout = new QVBoxLayout();
+    QLabel* versionLabel = new QLabel("Version: " + item->getCurrentVersion());
+    attributeLayout->addWidget(versionLabel);
+    QLabel* compatibilityLabel = new QLabel("Windows Compatible: " + QString(item->getWinCompatibility() ? "Yes" : "No"));
+    attributeLayout->addWidget(compatibilityLabel);
+    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), attributeLayout, currentViewType, imageWidth, imageHeight));
 }
 
 void ItemRenderer::visit(const Videogame* item) {
-    int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 100;
-    int imageHeight = (currentViewType == ViewType::Grid) ? 300 : 150;
-    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Developer: " + item->getDeveloper(), currentViewType, imageWidth, imageHeight));
+    int imageWidth = 200;
+    int imageHeight = 300;
+    if (currentViewType == ViewType::List) {
+        imageWidth = 100;
+        imageHeight = 150;
+    }
+    QVBoxLayout* attributeLayout = new QVBoxLayout();
+    QLabel* developerLabel = new QLabel("Developer: " + item->getDeveloper());
+    attributeLayout->addWidget(developerLabel);
+    QLabel* genreLabel = new QLabel("Genre: " + item->getGenre());
+    attributeLayout->addWidget(genreLabel);
+    QLabel* releaseDateLabel = new QLabel("Release Date: " + QString::number(item->getReleaseDate()));
+    attributeLayout->addWidget(releaseDateLabel);
+
+    setRenderedWidget(createGenericWidget(item->getImage(), item->getName(), item->getDescription(), attributeLayout, currentViewType, imageWidth, imageHeight));
 }
 
 void ItemRenderer::visit(const DLC* item) {
     // Determine sizes based on currentViewType
-    int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 100;
-    int imageHeight = (currentViewType == ViewType::Grid) ? 300 : 150;
+    int imageWidth = 200;
+    int imageHeight = 300;
+    if (currentViewType == ViewType::List) {
+        imageWidth = 100;
+        imageHeight = 150;
+    }
 
-    QWidget* widget = createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "DLC Type: " + item->getDlcType(), currentViewType, imageWidth, imageHeight);
-
+    QVBoxLayout* attributeLayout = new QVBoxLayout();
+    QLabel* dlcTypeLabel = new QLabel("DLC Type: " + item->getDlcType());
+    attributeLayout->addWidget(dlcTypeLabel);
+    QLabel* developerLabel = new QLabel("Developer: " + item->getDeveloper());
+    attributeLayout->addWidget(developerLabel);
+    QLabel* genreLabel = new QLabel("Genre: " + item->getGenre());
+    attributeLayout->addWidget(genreLabel);
+    QLabel* releaseDateLabel = new QLabel("Release Date: " + QString::number(item->getReleaseDate()));
+    attributeLayout->addWidget(releaseDateLabel);
+    QLabel* standaloneLabel = new QLabel("Standalone: " + QString(item->getStandalone() ? "Yes" : "No"));
+    attributeLayout->addWidget(standaloneLabel);
+    QWidget* widget = createGenericWidget(item->getImage(), item->getName(), item->getDescription(), attributeLayout, currentViewType, imageWidth, imageHeight);
     QLabel* imageLabel = widget->findChild<QLabel*>();
     if (imageLabel) {
         QPixmap pixmap(item->getImage());
         pixmap = pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation);
-
         QPixmap overlayedPixmap = pixmap;
         QPainter painter(&overlayedPixmap);
         painter.setRenderHint(QPainter::Antialiasing);
-
-        // Load the arrow icon
         QPixmap arrowPixmap(":/assets/dlc_icon.png");
         arrowPixmap = arrowPixmap.scaled(imageWidth/4, imageHeight/4, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation);
-
-        // Calculate position for overlay (bottom-right corner)
         int overlayX = overlayedPixmap.width()-arrowPixmap.width()-1;
         int overlayY = overlayedPixmap.height()-arrowPixmap.height()-1;
-
-        // Draw the arrow icon on top of the DLC image
         painter.drawPixmap(overlayX, overlayY, arrowPixmap);
         painter.end();
-
         imageLabel->setPixmap(overlayedPixmap);
     }
-
     setRenderedWidget(widget);
 }
 
 void ItemRenderer::visit(const Soundtrack* item) {
     // Determine sizes based on currentViewType
-    int imageWidth = (currentViewType == ViewType::Grid) ? 200 : 100;
-    int imageHeight = (currentViewType == ViewType::Grid) ? 200 : 100;
+    int imageWidth = 200;
+    int imageHeight = 200;
+    if (currentViewType == ViewType::List) {
+        imageWidth = 100;
+        imageHeight = 100;
+    }
 
-    QWidget* widget = createGenericWidget(item->getImage(), item->getName(), item->getDescription(), "Composer: " + item->getComposer(), currentViewType, imageWidth, imageHeight);
+    QVBoxLayout* attributeLayout = new QVBoxLayout();
+    QLabel* composerLabel = new QLabel("Composer: " + item->getComposer());
+    attributeLayout->addWidget(composerLabel);
+    QLabel* developerLabel = new QLabel("Developer: " + item->getDeveloper());
+    attributeLayout->addWidget(developerLabel);
+    QLabel* genreLabel = new QLabel("Genre: " + item->getGenre());
+    attributeLayout->addWidget(genreLabel);
+    QLabel* releaseDateLabel = new QLabel("Release Date: " + QString::number(item->getReleaseDate()));
+    attributeLayout->addWidget(releaseDateLabel);
+    QLabel* tracksNumberLabel = new QLabel("Tracks Number: " + QString::number(item->getTracksNumber()));
+    attributeLayout->addWidget(tracksNumberLabel);
 
+    QWidget* widget = createGenericWidget(item->getImage(), item->getName(), item->getDescription(), attributeLayout, currentViewType, imageWidth, imageHeight);
     QLabel* imageLabel = widget->findChild<QLabel*>();
     if (imageLabel) {
         QPixmap pixmap(item->getImage());
         pixmap = pixmap.scaled(imageWidth, imageHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-
         QPixmap circularPixmap(pixmap.size());
         circularPixmap.fill(Qt::transparent);
-
         QPainter painter(&circularPixmap);
         painter.setRenderHint(QPainter::Antialiasing);
-
-        // Create circular mask
         QPainterPath outerCircle;
         outerCircle.addEllipse(0, 0, pixmap.width(), pixmap.height());
-
         QPainterPath innerCircle;
-        const int holeDiameter = pixmap.width() / 5; // Diameter of the hole
-        const int holeX = (pixmap.width() - holeDiameter) / 2; // Centering the hole
+        const int holeDiameter = pixmap.width() / 5;
+        const int holeX = (pixmap.width() - holeDiameter) / 2;
         const int holeY = (pixmap.height() - holeDiameter) / 2;
         innerCircle.addEllipse(holeX, holeY, holeDiameter, holeDiameter);
         QPainterPath ringShape = outerCircle.subtracted(innerCircle);
-
-        // Apply mask
         painter.setClipPath(ringShape);
         painter.drawPixmap(0, 0, pixmap);
-
         painter.end();
         imageLabel->setPixmap(circularPixmap);
     }
-
     setRenderedWidget(widget);
 }
-
-
-
 
 

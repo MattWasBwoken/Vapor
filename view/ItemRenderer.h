@@ -2,7 +2,6 @@
 #define ITEMRENDERER_H
 
 #include <QWidget>
-#include <QVBoxLayout>
 #include <QLabel>
 #include "../model/IConstVisitor.h"
 #include "../model/AbstractItem.h"
@@ -34,7 +33,7 @@ private:
     ViewType currentViewType;
 
     void setRenderedWidget(QWidget* widget);
-    QWidget* createGenericWidget(const QString& imagePath, const QString& name, const QString& description, const QString& attribute, ViewType viewType, int imageWidth, int imageHeight);
+    QWidget* createGenericWidget(const QString& imagePath, const QString& name, const QString& description, QLayout* attributeLayout, ViewType viewType, int imageWidth, int imageHeight);
 };
 
 #endif
