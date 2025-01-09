@@ -14,19 +14,22 @@ public:
     // Make the enum public for external access
     enum class ViewType {
         Grid,
-        List
+        List,
+        Details
     };
 
     explicit ViewRenderer(QWidget* parent = nullptr);
-
     void setViewType(ViewType viewType);
-    void render(const QVector<AbstractItem*>& items);
+    void render(const QVector<AbstractItem*> &items);
+
+signals:
+    void itemSelected(AbstractItem *item);
 
 private:
     ViewType currentView;
-
-    QWidget* createListView(const QVector<AbstractItem*>& items);
-    QWidget* createGridView(const QVector<AbstractItem*>& items);
+    QWidget* createListView(const QVector<AbstractItem*> &items);
+    QWidget* createGridView(const QVector<AbstractItem*> &items);
+    QWidget* createDetailsView(AbstractItem* item); // Nuovo metodo
 };
 
 #endif

@@ -9,6 +9,7 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QPainterPath>
+#include <QPushButton>
 
 ItemRenderer::ItemRenderer(QWidget* parent) : QWidget(parent), renderedWidget(nullptr) {}
 
@@ -48,7 +49,7 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         layout->addWidget(nameLabel);
 
         widget->setLayout(layout);
-    } else { // List
+    } else if (viewType == ViewType::List){
         QHBoxLayout* layout = new QHBoxLayout(widget);
 
         QLabel* imageLabel = new QLabel(widget);
@@ -72,6 +73,42 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         textLayout->addWidget(attributeLabel);
 
         layout->addLayout(textLayout, 1);
+        widget->setLayout(layout);
+    } else if (viewType == ViewType::Details){
+        QVBoxLayout* layout = new QVBoxLayout(widget);
+
+        // Add item image
+        QLabel* imageLabel = new QLabel(widget);
+        QPixmap pixmap(imagePath);
+        imageLabel->setPixmap(pixmap.scaled(imageWidth*2, imageHeight*2, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
+        imageLabel->setAlignment(Qt::AlignCenter);
+        layout->addWidget(imageLabel);
+
+        // Add item name
+        QLabel* nameLabel = new QLabel("<h2>" + name + "</h2>", widget);
+        nameLabel->setAlignment(Qt::AlignCenter);
+        layout->addWidget(nameLabel);
+
+        // Add description
+        QLabel* descriptionLabel = new QLabel(description, widget);
+        descriptionLabel->setWordWrap(true);
+        descriptionLabel->setAlignment(Qt::AlignLeft);
+        layout->addWidget(descriptionLabel);
+
+        // Add specific attributes (visited-specific attributes)
+        QLabel* attributeLabel = new QLabel(attribute, widget);
+        attributeLabel->setWordWrap(true);
+        layout->addWidget(attributeLabel);
+
+        // Additional buttons (Edit/Delete) could be added here if needed
+        QPushButton* editButton = new QPushButton("Edit", widget);
+        QPushButton* deleteButton = new QPushButton("Delete", widget);
+        QHBoxLayout* buttonLayout = new QHBoxLayout;
+        buttonLayout->addWidget(editButton);
+        buttonLayout->addWidget(deleteButton);
+        layout->addLayout(buttonLayout);
+
+        // Configure layout
         widget->setLayout(layout);
     }
 

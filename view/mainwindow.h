@@ -43,6 +43,7 @@ signals:
     void itemModified(AbstractItem *item);
     void itemDeleted(unsigned int id);
     void searchRequested(const QString &searchText, const QString &filter);
+    void itemSelected(AbstractItem *item);
 
 private slots:
     void handleSearch();
@@ -50,6 +51,7 @@ private slots:
     void handleModifyItem(AbstractItem *item);
     void handleDeleteItem(unsigned int id);
     void updateStatus(const QString &message);
+    void showItemDetails(AbstractItem* item);
 };
 
 #endif

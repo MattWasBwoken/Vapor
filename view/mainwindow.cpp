@@ -40,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
             updateStatus(tr("Item deleted: %1").arg(name));
         }
     });
+
+    connect(viewRenderer, &ViewRenderer::itemSelected, this, &MainWindow::showItemDetails);
 }
 
 void MainWindow::setupMenus() {
@@ -180,6 +182,15 @@ void MainWindow::handleDeleteItem(unsigned int id) {
         updateStatus(tr("Deleted item: %1").arg(name));
     }
 }
+
 void MainWindow::updateStatus(const QString &message) {
     statusBar->showMessage(message, 5000);
+}
+
+void MainWindow::showItemDetails(AbstractItem* item){
+    viewRenderer->setViewType(ViewRenderer::ViewType::Details);
+    QVector<AbstractItem*> selectedItem;
+    selectedItem.push_back(item);
+    viewRenderer->render(selectedItem);
+    updateStatus(tr("Opening details of item: %1").arg(item->getName()));
 }

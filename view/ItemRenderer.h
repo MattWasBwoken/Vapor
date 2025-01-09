@@ -16,8 +16,8 @@ public:
 
     enum class ViewType {
         Grid,
-        List
-        // enum more futureproof than bool method
+        List,
+        Details
     };
 
     // Render methods
