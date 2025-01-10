@@ -16,6 +16,7 @@ class AddItemView : public QWidget {
 
 public:
     explicit AddItemView(QWidget* parent = nullptr);
+    void resetFields();
 
 signals:
     void itemAdded(AbstractItem* item);

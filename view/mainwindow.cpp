@@ -162,10 +162,10 @@ void MainWindow::handleSearch() {
 }
 
 void MainWindow::handleAddItem() {
+    addItemView->resetFields();
     centralWidget->setCurrentWidget(addItemView);
     updateStatus(tr("Adding new item"));
 }
-
 void MainWindow::handleModifyItem(AbstractItem *item) {
     // Placeholder for item modification logic
     emit itemModified(item);

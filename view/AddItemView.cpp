@@ -11,6 +11,23 @@
 #include <QPixmap>
 #include <QImage>
 
+void AddItemView::resetFields() {
+    typeComboBox->setCurrentIndex(0);
+    nameEdit->clear();
+    descriptionEdit->clear();
+    versionEdit->clear();
+    winCompatibilityCheck->setChecked(false);
+    developerEdit->clear();
+    genreEdit->clear();
+    releaseDateEdit->clear();
+    dlcTypeEdit->clear();
+    standaloneCheck->setChecked(false);
+    composerEdit->clear();
+    tracksNumberEdit->clear();
+    imagePreviewLabel->clear();
+    selectedImagePath.clear();
+    updateFieldsVisibility(0);
+}
 
 AddItemView::AddItemView(QWidget *parent) : QWidget(parent) {
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
@@ -76,7 +93,7 @@ AddItemView::AddItemView(QWidget *parent) : QWidget(parent) {
     // DLC specific fields
     QVBoxLayout* dlcLayout = new QVBoxLayout(dlcFields);
     dlcTypeEdit = new QLineEdit(this);
-    dlcTypeEdit->setPlaceholderText(tr("DLC Type"));
+    dlcTypeEdit->setPlaceholderText(tr("(Expansion, Mod, Skin, etc.)"));
     dlcLayout->addWidget(new QLabel("DLC Type:"));
     dlcLayout->addWidget(dlcTypeEdit);
     standaloneCheck = new QCheckBox(tr("Standalone"), this);
