@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "../data/JsonItemLoader.h"
+#include "../data/JsonItemSaver.h"
 #include "AddItemView.h"
 #include "../model/SearchItemVisitor.h"
 #include "ViewRenderer.h"
@@ -11,6 +12,17 @@
 #include <QScrollArea>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QFile>
+#include <QTextStream>
+
+/* #include "../model/Software.h"
+#include "../model/Videogame.h"
+#include "../model/DLC.h"
+#include "../model/Soundtrack.h"
+#include <algorithm> */
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
@@ -51,8 +63,8 @@ void MainWindow::setupMenus() {
     menuBar = new QMenuBar(this);
     QMenu *fileMenu = menuBar->addMenu(tr("File"));
     fileMenu->addAction(tr("Open"), this, &MainWindow::handleOpenFile);
-    fileMenu->addAction(tr("Save"), this, []() { /* TODO: Add save functionality */ });
-    fileMenu->addAction(tr("Save As"), this, []() { /* TODO: Add save-as functionality */ });
+    fileMenu->addAction(tr("Save"), this, &MainWindow::handleSave);
+    fileMenu->addAction(tr("Save As"), this, &MainWindow::handleSaveAs);
 
     QMenu *itemMenu = menuBar->addMenu(tr("Item"));
     itemMenu->addAction(tr("Add"), this, &MainWindow::handleAddItem);
@@ -139,7 +151,6 @@ void MainWindow::handleSearch() {
     const QString searchText = searchBar->text();
     const QString filter = filterComboBox->currentText();
 
-
     if (viewRenderer->getViewType() == ViewType::Details) {
         viewRenderer->setViewType(ViewType::Grid);
     }
@@ -166,6 +177,7 @@ void MainWindow::handleSearch() {
 void MainWindow::handleOpenFile() {
     QString filePath = QFileDialog::getOpenFileName(this, tr("Open JSON File"), "", tr("JSON Files (*.json)"));
     if (!filePath.isEmpty()) {
+        currentFilePath = filePath; // keep json path for saving
         QVector<AbstractItem*> loadedItems = JsonItemLoader::loadItemsFromJson(filePath);
         if (!loadedItems.isEmpty()) {
             // Clear existing items
@@ -180,6 +192,32 @@ void MainWindow::handleOpenFile() {
         } else {
             updateStatus(tr("Failed to load items from file: %1").arg(filePath));
             QMessageBox::warning(this, tr("Error"), tr("Failed to load items from the selected file."));
+        }
+    }
+}
+
+void MainWindow::handleSave() {
+    if (currentFilePath.isEmpty()) {
+        handleSaveAs(); // if no file is open, handleSaveAs
+    } else {
+        if (JsonItemSaver::saveItemsToJson(items, currentFilePath)) {
+            updateStatus(tr("Saved items to file: %1").arg(currentFilePath));
+        } else {
+            updateStatus(tr("Failed to save items to file: %1").arg(currentFilePath));
+            QMessageBox::warning(this, tr("Error"), tr("Failed to save items to the selected file."));
+        }
+    }
+}
+
+void MainWindow::handleSaveAs() {
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Save JSON File"), "", tr("JSON Files (*.json)"));
+    if (!filePath.isEmpty()) {
+        if (JsonItemSaver::saveItemsToJson(items, filePath)) {
+            currentFilePath = filePath; // update currentFilePath
+            updateStatus(tr("Saved items to file: %1").arg(filePath));
+        } else {
+            updateStatus(tr("Failed to save items to file: %1").arg(filePath));
+            QMessageBox::warning(this, tr("Error"), tr("Failed to save items to the selected file."));
         }
     }
 }

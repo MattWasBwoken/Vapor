@@ -12,6 +12,8 @@
 #include <QTableWidget>
 #include <QString>
 #include <QVector>
+#include <QFileDialog>
+#include <QMessageBox>
 #include "../model/AbstractItem.h"
 #include "ViewRenderer.h"
 #include "AddItemView.h"
@@ -33,6 +35,7 @@ private:
     QVector<AbstractItem*> items; // The collection of items
     ViewRenderer* viewRenderer;
     AddItemView *addItemView;
+    QString currentFilePath;
 
     void setupMenus();
     void setupToolBar();
@@ -56,6 +59,8 @@ private slots:
     void showItemDetails(AbstractItem* item);
     void handleBackToGrid();
     void handleOpenFile();
+    void handleSave();
+    void handleSaveAs();
 };
 
 #endif
