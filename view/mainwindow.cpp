@@ -62,12 +62,12 @@ void MainWindow::setupMenus() {
     QAction* listViewAction = viewMenu->addAction(tr("List View"));
 
     connect(gridViewAction, &QAction::triggered, this, [this]() {
-        viewRenderer->setViewType(ViewRenderer::ViewType::Grid); // Use enum
+        viewRenderer->setViewType(ViewType::Grid); // Use enum
         viewRenderer->render(items);
     });
 
     connect(listViewAction, &QAction::triggered, this, [this]() {
-        viewRenderer->setViewType(ViewRenderer::ViewType::List); // Use enum
+        viewRenderer->setViewType(ViewType::List); // Use enum
         viewRenderer->render(items);
     });
 
@@ -133,8 +133,8 @@ void MainWindow::handleSearch() {
     const QString filter = filterComboBox->currentText();
 
 
-    if (viewRenderer->getViewType() == ViewRenderer::ViewType::Details) {
-        viewRenderer->setViewType(ViewRenderer::ViewType::Grid);
+    if (viewRenderer->getViewType() == ViewType::Details) {
+        viewRenderer->setViewType(ViewType::Grid);
     }
 
     // Filter items using the SearchItemVisitor
@@ -195,7 +195,7 @@ void MainWindow::updateStatus(const QString &message) {
 }
 
 void MainWindow::showItemDetails(AbstractItem* item){
-    viewRenderer->setViewType(ViewRenderer::ViewType::Details);
+    viewRenderer->setViewType(ViewType::Details);
     QVector<AbstractItem*> selectedItem;
     selectedItem.push_back(item);
     viewRenderer->render(selectedItem);
@@ -203,7 +203,7 @@ void MainWindow::showItemDetails(AbstractItem* item){
 }
 
 void MainWindow::handleBackToGrid() {
-    viewRenderer->setViewType(ViewRenderer::ViewType::Grid);
+    viewRenderer->setViewType(ViewType::Grid);
     viewRenderer->render(items);
     updateStatus(tr("Back to Grid View"));
 

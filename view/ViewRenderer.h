@@ -4,20 +4,13 @@
 #include <QWidget>
 #include <QVector>
 #include "../model/AbstractItem.h"
-
+#include "ViewType.h"
 class ItemRenderer;
 
 class ViewRenderer : public QWidget {
     Q_OBJECT
 
 public:
-    // Make the enum public for external access
-    enum class ViewType {
-        Grid,
-        List,
-        Details
-    };
-
     explicit ViewRenderer(QWidget* parent = nullptr);
     void setViewType(ViewType viewType);
     ViewType getViewType() const;

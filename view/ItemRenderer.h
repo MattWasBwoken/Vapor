@@ -2,9 +2,9 @@
 #define ITEMRENDERER_H
 
 #include <QWidget>
-#include <QLabel>
 #include "../model/IConstVisitor.h"
 #include "../model/AbstractItem.h"
+#include "ViewType.h"
 
 
 class ItemRenderer : public QWidget, public IConstVisitor {
@@ -12,12 +12,6 @@ class ItemRenderer : public QWidget, public IConstVisitor {
 
 public:
     explicit ItemRenderer(QWidget* parent = nullptr);
-
-    enum class ViewType {
-        Grid,
-        List,
-        Details
-    };
 
     // Render methods
     QWidget* render(AbstractItem* item, ViewType viewType);

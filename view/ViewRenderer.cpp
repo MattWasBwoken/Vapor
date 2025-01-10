@@ -14,7 +14,7 @@ void ViewRenderer::setViewType(ViewType viewType) {
     currentView = viewType;
 }
 
-ViewRenderer::ViewType ViewRenderer::getViewType() const {
+ViewType ViewRenderer::getViewType() const {
     return currentView;
 }
 
@@ -61,7 +61,7 @@ QWidget* ViewRenderer::createGridView(const QVector<AbstractItem*>& items) {
         int col = i % columns;
 
         ItemRenderer* itemRenderer = new ItemRenderer(container);
-        QWidget* renderedItem = itemRenderer->render(item, ItemRenderer::ViewType::Grid);
+        QWidget* renderedItem = itemRenderer->render(item, ViewType::Grid);
         QPushButton* button = new QPushButton(container);
         button->setLayout(renderedItem->layout()); // Use the rendered item's layout
         button->setFixedSize(220,350);
@@ -83,7 +83,7 @@ QWidget* ViewRenderer::createListView(const QVector<AbstractItem*>& items) {
     for (AbstractItem* item : items) {
         ItemRenderer* itemRenderer = new ItemRenderer(container);
 
-        QWidget* renderedItem = itemRenderer->render(item, ItemRenderer::ViewType::List);
+        QWidget* renderedItem = itemRenderer->render(item, ViewType::List);
         QPushButton* button = new QPushButton(container);
         button->setLayout(renderedItem->layout());
         button->setFixedSize(this->width(),170);
@@ -110,7 +110,7 @@ QWidget* ViewRenderer::createDetailsView(AbstractItem* item) {
     QVBoxLayout* layout = new QVBoxLayout(container);
 
     ItemRenderer* itemRenderer = new ItemRenderer(container);
-    layout->addWidget(itemRenderer->render(item, ItemRenderer::ViewType::Details));
+    layout->addWidget(itemRenderer->render(item, ViewType::Details));
 
     // back button
     QPushButton* backButton = new QPushButton("Back to grid", container);

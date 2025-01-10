@@ -37,7 +37,8 @@ HEADERS += \    #controllare spesso che ci siano tutti
     view/DefaultImageVisitor.h \
     view/ItemRenderer.h \
     view/MainWindow.h \
-    view/ViewRenderer.h
+    view/ViewRenderer.h \
+    view/ViewType.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
