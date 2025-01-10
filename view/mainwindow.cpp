@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 #include "../data/JsonItemLoader.h"
-#include "../model/ItemFactory.h"
+#include "AddItemView.h"
 #include "../model/SearchItemVisitor.h"
 #include "ViewRenderer.h"
 #include <QAction>
@@ -93,6 +93,7 @@ void MainWindow::setupToolBar() {
 }
 
 void MainWindow::setupCentralWidget() {
+    centralWidget = new QStackedWidget(this);
     QScrollArea *scrollArea = new QScrollArea(this);
     viewRenderer = new ViewRenderer(scrollArea); // Attach ViewRenderer to scrollArea
 
@@ -105,7 +106,11 @@ void MainWindow::setupCentralWidget() {
     // Ensure the ViewRenderer widget expands to the full width of the scroll area
     viewRenderer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    setCentralWidget(scrollArea); // Set scrollArea as the central widget
+    centralWidget->addWidget(scrollArea);
+    setCentralWidget(centralWidget);
+    addItemView = new AddItemView(this);
+    centralWidget->addWidget(addItemView);
+    connect(addItemView, &AddItemView::backToGridRequested, this, &MainWindow::handleBackToGrid);
 }
 
 void MainWindow::setupStatusBar() {
@@ -157,15 +162,8 @@ void MainWindow::handleSearch() {
 }
 
 void MainWindow::handleAddItem() {
-    AbstractItem *newItem = ItemFactory::createItem(this);
-    if (newItem) {
-        items.append(newItem);
-        emit itemAdded(newItem);
-        viewRenderer->render(items);
-        updateStatus(tr("Added new item: %1").arg(newItem->getName()));
-    } else {
-        updateStatus(tr("Item creation canceled"));
-    }
+    centralWidget->setCurrentWidget(addItemView);
+    updateStatus(tr("Adding new item"));
 }
 
 void MainWindow::handleModifyItem(AbstractItem *item) {
@@ -203,8 +201,8 @@ void MainWindow::showItemDetails(AbstractItem* item){
 }
 
 void MainWindow::handleBackToGrid() {
+    centralWidget->setCurrentWidget(centralWidget->widget(0));
     viewRenderer->setViewType(ViewType::Grid);
     viewRenderer->render(items);
     updateStatus(tr("Back to Grid View"));
-
 }

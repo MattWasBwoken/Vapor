@@ -10,7 +10,6 @@ CONFIG += c++17
 
 SOURCES += \
     data/JsonItemLoader.cpp \
-    model/ItemFactory.cpp \
     model/SearchItemVisitor.cpp \
     model/Soundtrack.cpp \
     model/DLC.cpp \
@@ -18,6 +17,7 @@ SOURCES += \
     main.cpp \
     model/AbstractItem.cpp \
     model/Software.cpp \
+    view/AddItemView.cpp \
     view/DefaultImageVisitor.cpp \
     view/ItemRenderer.cpp \
     view/MainWindow.cpp \
@@ -25,7 +25,6 @@ SOURCES += \
 
 HEADERS += \    #controllare spesso che ci siano tutti
     data/JsonItemLoader.h \
-    model/ItemFactory.h \
     model/SearchItemVisitor.h \
     model/Soundtrack.h \
     model/DLC.h \
@@ -34,6 +33,7 @@ HEADERS += \    #controllare spesso che ci siano tutti
     model/IConstVisitor.h \
     model/IVisitor.h \
     model/Software.h \
+    view/AddItemView.h \
     view/DefaultImageVisitor.h \
     view/ItemRenderer.h \
     view/MainWindow.h \

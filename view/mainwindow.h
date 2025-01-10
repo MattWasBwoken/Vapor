@@ -14,6 +14,7 @@
 #include <QVector>
 #include "../model/AbstractItem.h"
 #include "ViewRenderer.h"
+#include "AddItemView.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -31,6 +32,7 @@ private:
 
     QVector<AbstractItem*> items; // The collection of items
     ViewRenderer* viewRenderer;
+    AddItemView *addItemView;
 
     void setupMenus();
     void setupToolBar();

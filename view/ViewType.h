@@ -4,7 +4,8 @@
 enum class ViewType {
     Grid,
     List,
-    Details
+    Details,
+    AddItem
 };
 
 #endif
