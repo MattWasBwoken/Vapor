@@ -55,6 +55,7 @@ private slots:
     void updateStatus(const QString &message);
     void showItemDetails(AbstractItem* item);
     void handleBackToGrid();
+    void handleOpenFile();
 };
 
 #endif

@@ -9,6 +9,8 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QScrollArea>
+#include <QFileDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
@@ -48,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::setupMenus() {
     menuBar = new QMenuBar(this);
     QMenu *fileMenu = menuBar->addMenu(tr("File"));
-    fileMenu->addAction(tr("Open"), this, []() { /* TODO: Add open functionality */ });
+    fileMenu->addAction(tr("Open"), this, &MainWindow::handleOpenFile);
     fileMenu->addAction(tr("Save"), this, []() { /* TODO: Add save functionality */ });
     fileMenu->addAction(tr("Save As"), this, []() { /* TODO: Add save-as functionality */ });
 
@@ -159,6 +161,27 @@ void MainWindow::handleSearch() {
     viewRenderer->render(filteredItems);
 
     updateStatus(tr("Search performed with filter: %1").arg(filter));
+}
+
+void MainWindow::handleOpenFile() {
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Open JSON File"), "", tr("JSON Files (*.json)"));
+    if (!filePath.isEmpty()) {
+        QVector<AbstractItem*> loadedItems = JsonItemLoader::loadItemsFromJson(filePath);
+        if (!loadedItems.isEmpty()) {
+            // Clear existing items
+            for (AbstractItem* item : items) {
+                delete item;
+            }
+            items.clear();
+            //assign loaded items
+            items = loadedItems;
+            viewRenderer->render(items);
+            updateStatus(tr("Loaded %1 items from file: %2").arg(items.size()).arg(filePath));
+        } else {
+            updateStatus(tr("Failed to load items from file: %1").arg(filePath));
+            QMessageBox::warning(this, tr("Error"), tr("Failed to load items from the selected file."));
+        }
+    }
 }
 
 void MainWindow::handleAddItem() {
