@@ -6,6 +6,10 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QPushButton>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QPixmap>
+#include <QImage>
 
 
 AddItemView::AddItemView(QWidget *parent) : QWidget(parent) {
@@ -22,11 +26,18 @@ AddItemView::AddItemView(QWidget *parent) : QWidget(parent) {
     nameEdit->setPlaceholderText(tr("Name"));
     mainLayout->addWidget(new QLabel("Name:"));
     mainLayout->addWidget(nameEdit);
-
     descriptionEdit = new QTextEdit(this);
     descriptionEdit->setPlaceholderText(tr("Description"));
     mainLayout->addWidget(new QLabel("Description:"));
     mainLayout->addWidget(descriptionEdit);
+
+    selectImageButton = new QPushButton(tr("Select Image"), this);
+    connect(selectImageButton, &QPushButton::clicked, this, &AddItemView::selectImage);
+    mainLayout->addWidget(selectImageButton);
+    imagePreviewLabel = new QLabel(this);
+    imagePreviewLabel->setFixedSize(100, 100);
+    imagePreviewLabel->setScaledContents(true);
+    mainLayout->addWidget(imagePreviewLabel);
 
     // Specific fields containers
     softwareFields = new QWidget(this);
@@ -120,6 +131,21 @@ AddItemView::AddItemView(QWidget *parent) : QWidget(parent) {
 
 }
 
+void AddItemView::selectImage() {
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Select Image"), "", tr("Images (*.png *.jpg *.jpeg)"));
+    if (!filePath.isEmpty()) {
+        selectedImagePath = filePath;
+        QPixmap image(selectedImagePath);
+        if(!image.isNull()){
+            imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
+        else{
+            QMessageBox::warning(this, tr("Error"), tr("Can't load the chosen image."));
+            selectedImagePath.clear();
+            imagePreviewLabel->clear();
+        }
+    }
+}
 
 void AddItemView::updateFieldsVisibility(int index) {
     softwareFields->setVisible(false);
@@ -143,25 +169,29 @@ void AddItemView::addItem() {
     unsigned int id = 0; // da decidere come generare l'id, omettiamo per ora
     QString name = nameEdit->text();
     QString description = descriptionEdit->toPlainText();
+
     AbstractItem *newItem = nullptr;
 
     if (type == "Software") {
-        newItem = new Software(id, name, description, versionEdit->text(), winCompatibilityCheck->isChecked());
-    } else if (type == "Videogame") {
+        newItem = new Software(id, name, description, versionEdit->text(), winCompatibilityCheck->isChecked(), selectedImagePath);
+    }
+    else if (type == "Videogame") {
         bool ok;
         unsigned int releaseDate = releaseDateEdit->text().toUInt(&ok);
         if(!ok){
             releaseDate=0;
         }
-        newItem = new Videogame(id, name, description, developerEdit->text(), genreEdit->text(),releaseDate );
-    } else if (type == "DLC") {
+        newItem = new Videogame(id, name, description, developerEdit->text(), genreEdit->text(),releaseDate, selectedImagePath);
+    }
+    else if (type == "DLC") {
         bool ok;
         unsigned int releaseDate = releaseDateEdit->text().toUInt(&ok);
         if(!ok){
             releaseDate=0;
         }
-        newItem = new DLC(id, name, description, developerEdit->text(), genreEdit->text(),releaseDate, dlcTypeEdit->text(), standaloneCheck->isChecked());
-    } else if (type == "Soundtrack") {
+        newItem = new DLC(id, name, description, developerEdit->text(), genreEdit->text(),releaseDate, dlcTypeEdit->text(), standaloneCheck->isChecked(), selectedImagePath);
+    }
+    else if (type == "Soundtrack") {
         bool ok;
         unsigned int releaseDate = releaseDateEdit->text().toUInt(&ok);
         if(!ok){
@@ -172,11 +202,13 @@ void AddItemView::addItem() {
         if(!ok2){
             tracksNumber = 0;
         }
-        newItem = new Soundtrack(id, name, description, developerEdit->text(), genreEdit->text(), releaseDate, composerEdit->text(), tracksNumber);
+        newItem = new Soundtrack(id, name, description, developerEdit->text(), genreEdit->text(), releaseDate, composerEdit->text(), tracksNumber, selectedImagePath);
     }
+
     if(newItem){
         emit itemAdded(newItem);
     }
+
     emit backToGridRequested();
 }
 

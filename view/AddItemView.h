@@ -7,6 +7,9 @@
 #include <QLineEdit>
 #include <QTextEdit>
 #include <QCheckBox>
+#include <QPushButton>
+#include <QLabel>
+#include <QString>
 
 class AddItemView : public QWidget {
     Q_OBJECT
@@ -22,6 +25,7 @@ private slots:
     void addItem();
     void handleCancel();
     void updateFieldsVisibility(int index);
+    void selectImage();
 
 private:
     QComboBox *typeComboBox;
@@ -36,6 +40,10 @@ private:
     QCheckBox *standaloneCheck;
     QLineEdit *composerEdit;
     QLineEdit *tracksNumberEdit;
+
+    QPushButton *selectImageButton;
+    QLabel *imagePreviewLabel;
+    QString selectedImagePath;
 
     // **Dichiarazione dei QWidget per i campi specifici**
     QWidget *softwareFields;
