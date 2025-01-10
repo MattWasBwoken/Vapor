@@ -78,6 +78,7 @@ void MainWindow::setupToolBar() {
     topToolBar = new QToolBar(this);
     searchBar = new QLineEdit(this);
     searchBar->setPlaceholderText(tr("Search..."));
+    connect(searchBar, &QLineEdit::returnPressed, this, &MainWindow::handleSearch);
     filterComboBox = new QComboBox(this);
     filterComboBox->addItems({tr("All"), tr("Software"), tr("Videogame"), tr("DLC"), tr("Soundtrack")});
 
@@ -130,6 +131,11 @@ void MainWindow::populateItems() {
 void MainWindow::handleSearch() {
     const QString searchText = searchBar->text();
     const QString filter = filterComboBox->currentText();
+
+
+    if (viewRenderer->getViewType() == ViewRenderer::ViewType::Details) {
+        viewRenderer->setViewType(ViewRenderer::ViewType::Grid);
+    }
 
     // Filter items using the SearchItemVisitor
     SearchItemVisitor visitor(searchText, filter);

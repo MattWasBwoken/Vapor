@@ -14,6 +14,10 @@ void ViewRenderer::setViewType(ViewType viewType) {
     currentView = viewType;
 }
 
+ViewRenderer::ViewType ViewRenderer::getViewType() const {
+    return currentView;
+}
+
 void ViewRenderer::render(const QVector<AbstractItem*>& items) {
     // Clear existing layout
     QLayout* layout = this->layout();

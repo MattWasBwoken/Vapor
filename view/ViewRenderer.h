@@ -20,6 +20,7 @@ public:
 
     explicit ViewRenderer(QWidget* parent = nullptr);
     void setViewType(ViewType viewType);
+    ViewType getViewType() const;
     void render(const QVector<AbstractItem*> &items);
 
 signals:

@@ -14,15 +14,14 @@ void SearchItemVisitor::visit(const Software* item) {
         QString lowerSearchString = this->searchString.toLower();
         QString lowerName = item->getName().toLower();
         QString lowerDescription = item->getDescription().toLower();
-        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString))) { // ricerca stringa
+        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString))) {
             matches = false;
         }
     }
-    if (!this->typeFilter.isEmpty() && this->typeFilter != "Software") {
+    if (!this->typeFilter.isEmpty() && this->typeFilter != "All" && this->typeFilter != "Software") {
         matches = false;
     }
-    if (this->winCompatibilityFilter && !item->getWinCompatibility())
-    {
+    if (this->winCompatibilityFilter && !item->getWinCompatibility()) {
         matches = false;
     }
     if (matches) {
@@ -36,15 +35,15 @@ void SearchItemVisitor::visit(const Videogame* item) {
         QString lowerSearchString = this->searchString.toLower();
         QString lowerName = item->getName().toLower();
         QString lowerDescription = item->getDescription().toLower();
-        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString))) {
+        QString lowerDeveloper = item->getDeveloper().toLower();
+        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString) || lowerDeveloper.contains(lowerSearchString))) {
             matches = false;
         }
     }
-    if (!this->typeFilter.isEmpty() && this->typeFilter != "Videogame") {
+    if (!this->typeFilter.isEmpty() && this->typeFilter != "All" && this->typeFilter != "Videogame") {
         matches = false;
     }
-    if(!this->genreFilter.isEmpty() && item->getGenre() != this->genreFilter)
-    {
+    if(!this->genreFilter.isEmpty() && item->getGenre() != this->genreFilter) {
         matches = false;
     }
     if (matches) {
@@ -58,15 +57,15 @@ void SearchItemVisitor::visit(const DLC* item) {
         QString lowerSearchString = this->searchString.toLower();
         QString lowerName = item->getName().toLower();
         QString lowerDescription = item->getDescription().toLower();
-        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString))) {
+        QString lowerDeveloper = item->getDeveloper().toLower();
+        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString) || lowerDeveloper.contains(lowerSearchString))) {
             matches = false;
         }
     }
-    if (!this->typeFilter.isEmpty() && this->typeFilter != "DLC") {
+    if (!this->typeFilter.isEmpty() && this->typeFilter != "All" && this->typeFilter != "DLC") {
         matches = false;
     }
-    if(!this->genreFilter.isEmpty() && item->getGenre() != this->genreFilter)
-    {
+    if(!this->genreFilter.isEmpty() && item->getGenre() != this->genreFilter) {
         matches = false;
     }
     if (matches) {
@@ -80,15 +79,16 @@ void SearchItemVisitor::visit(const Soundtrack* item) {
         QString lowerSearchString = this->searchString.toLower();
         QString lowerName = item->getName().toLower();
         QString lowerDescription = item->getDescription().toLower();
-        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString))) {
+        QString lowerDeveloper = item->getDeveloper().toLower();
+        QString lowerComposer = item->getComposer().toLower();
+        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString) || lowerDeveloper.contains(lowerSearchString) || lowerComposer.contains(lowerSearchString))) {
             matches = false;
         }
     }
-    if (!this->typeFilter.isEmpty() && this->typeFilter != "Soundtrack") {
+    if (!this->typeFilter.isEmpty() && this->typeFilter != "All" && this->typeFilter != "Soundtrack") {
         matches = false;
     }
-    if(!this->genreFilter.isEmpty() && item->getGenre() != this->genreFilter)
-    {
+    if(!this->genreFilter.isEmpty() && item->getGenre() != this->genreFilter) {
         matches = false;
     }
     if (matches) {
