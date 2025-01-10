@@ -131,7 +131,7 @@ void MainWindow::populateItems() {
     }
 
     items = JsonItemLoader::loadItemsFromJson(filePath);
-    updateStatus(tr("Loaded %1 items from resources").arg(items.size()));
+    updateStatus(tr("Loaded %1 items from default library").arg(items.size()));
     viewRenderer->render(items);
 }
 
