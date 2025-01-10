@@ -18,12 +18,6 @@
 #include <QFile>
 #include <QTextStream>
 
-/* #include "../model/Software.h"
-#include "../model/Videogame.h"
-#include "../model/DLC.h"
-#include "../model/Soundtrack.h"
-#include <algorithm> */
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
     setupMenus();
