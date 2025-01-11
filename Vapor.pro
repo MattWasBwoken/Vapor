@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     data/JsonItemLoader.cpp \
     data/JsonItemSaver.cpp \
+    data/JsonVisitor.cpp \
     model/SearchItemVisitor.cpp \
     model/Soundtrack.cpp \
     model/DLC.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
     view/ViewRenderer.cpp
 
 HEADERS += \    #controllare spesso che ci siano tutti
+    data/JsonVisitor.h \
     data/JsonItemLoader.h \
     data/JsonItemSaver.h \
     model/SearchItemVisitor.h \
