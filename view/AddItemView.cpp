@@ -18,8 +18,14 @@ void AddItemView::resetFields() {
     versionEdit->clear();
     winCompatibilityCheck->setChecked(false);
     developerEdit->clear();
+    dlcdeveloperEdit->clear();
+    soundtrackdeveloperEdit->clear();
     genreEdit->clear();
+    dlcgenreEdit->clear();
+    soundtrackgenreEdit->clear();
     releaseDateEdit->clear();
+    dlcreleaseDateEdit->clear();
+    soundtrackreleaseDateEdit->clear();
     dlcTypeEdit->clear();
     standaloneCheck->setChecked(false);
     composerEdit->clear();
@@ -91,18 +97,18 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
 
     // DLC specific fields
     QVBoxLayout* dlcLayout = new QVBoxLayout(dlcFields);
-    developerEdit = new QLineEdit(this);
-    developerEdit->setPlaceholderText(tr("Developer"));
+    dlcdeveloperEdit = new QLineEdit(this);
+    dlcdeveloperEdit->setPlaceholderText(tr("Developer"));
     dlcLayout->addWidget(new QLabel("Developer:"));
-    dlcLayout->addWidget(developerEdit);
-    genreEdit = new QLineEdit(this);
-    genreEdit->setPlaceholderText(tr("Genre"));
+    dlcLayout->addWidget(dlcdeveloperEdit);
+    dlcgenreEdit = new QLineEdit(this);
+    dlcgenreEdit->setPlaceholderText(tr("Genre"));
     dlcLayout->addWidget(new QLabel("Genre:"));
-    dlcLayout->addWidget(genreEdit);
-    releaseDateEdit = new QLineEdit(this);
-    releaseDateEdit->setPlaceholderText(tr("Release Date"));
+    dlcLayout->addWidget(dlcgenreEdit);
+    dlcreleaseDateEdit = new QLineEdit(this);
+    dlcreleaseDateEdit->setPlaceholderText(tr("Release Date"));
     dlcLayout->addWidget(new QLabel("Release Date:"));
-    dlcLayout->addWidget(releaseDateEdit);
+    dlcLayout->addWidget(dlcreleaseDateEdit);
     dlcTypeEdit = new QLineEdit(this);
     dlcTypeEdit->setPlaceholderText(tr("(Expansion, Mod, Skin, etc.)"));
     dlcLayout->addWidget(new QLabel("DLC Type:"));
@@ -113,18 +119,18 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
 
     // Soundtrack specific fields
     QVBoxLayout* soundtrackLayout = new QVBoxLayout(soundtrackFields);
-    developerEdit = new QLineEdit(this);
-    developerEdit->setPlaceholderText(tr("Developer"));
+    soundtrackdeveloperEdit = new QLineEdit(this);
+    soundtrackdeveloperEdit->setPlaceholderText(tr("Developer"));
     soundtrackLayout->addWidget(new QLabel("Developer:"));
-    soundtrackLayout->addWidget(developerEdit);
-    genreEdit = new QLineEdit(this);
-    genreEdit->setPlaceholderText(tr("Genre"));
+    soundtrackLayout->addWidget(soundtrackdeveloperEdit);
+    soundtrackgenreEdit = new QLineEdit(this);
+    soundtrackgenreEdit->setPlaceholderText(tr("Genre"));
     soundtrackLayout->addWidget(new QLabel("Genre:"));
-    soundtrackLayout->addWidget(genreEdit);
-    releaseDateEdit = new QLineEdit(this);
-    releaseDateEdit->setPlaceholderText(tr("Release Date"));
+    soundtrackLayout->addWidget(soundtrackgenreEdit);
+    soundtrackreleaseDateEdit = new QLineEdit(this);
+    soundtrackreleaseDateEdit->setPlaceholderText(tr("Release Date"));
     soundtrackLayout->addWidget(new QLabel("Release Date:"));
-    soundtrackLayout->addWidget(releaseDateEdit);
+    soundtrackLayout->addWidget(soundtrackreleaseDateEdit);
     composerEdit = new QLineEdit(this);
     composerEdit->setPlaceholderText(tr("Composer"));
     soundtrackLayout->addWidget(new QLabel("Composer:"));
@@ -224,15 +230,15 @@ void AddItemView::addItem() {
     }
     else if (type == "DLC") {
         bool ok;
-        unsigned int releaseDate = releaseDateEdit->text().toUInt(&ok);
+        unsigned int releaseDate = dlcreleaseDateEdit->text().toUInt(&ok);
         if(!ok){
             releaseDate=0;
         }
-        newItem = new DLC(id, name, description, developerEdit->text(), genreEdit->text(),releaseDate, dlcTypeEdit->text(), standaloneCheck->isChecked(), selectedImagePath);
+        newItem = new DLC(id, name, description, dlcdeveloperEdit->text(), dlcgenreEdit->text(),releaseDate, dlcTypeEdit->text(), standaloneCheck->isChecked(), selectedImagePath);
     }
     else if (type == "Soundtrack") {
         bool ok;
-        unsigned int releaseDate = releaseDateEdit->text().toUInt(&ok);
+        unsigned int releaseDate = soundtrackreleaseDateEdit->text().toUInt(&ok);
         if(!ok){
             releaseDate=0;
         }
@@ -241,7 +247,7 @@ void AddItemView::addItem() {
         if(!ok2){
             tracksNumber = 0;
         }
-        newItem = new Soundtrack(id, name, description, developerEdit->text(), genreEdit->text(), releaseDate, composerEdit->text(), tracksNumber, selectedImagePath);
+        newItem = new Soundtrack(id, name, description, soundtrackdeveloperEdit->text(), soundtrackgenreEdit->text(), releaseDate, composerEdit->text(), tracksNumber, selectedImagePath);
     }
 
     if(newItem){

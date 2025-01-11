@@ -36,8 +36,14 @@ private:
     QLineEdit *versionEdit;
     QCheckBox *winCompatibilityCheck;
     QLineEdit *developerEdit;
+    QLineEdit *dlcdeveloperEdit;
+    QLineEdit *soundtrackdeveloperEdit;
     QLineEdit *genreEdit;
+    QLineEdit *dlcgenreEdit;
+    QLineEdit *soundtrackgenreEdit;
     QLineEdit *releaseDateEdit;
+    QLineEdit *dlcreleaseDateEdit;
+    QLineEdit *soundtrackreleaseDateEdit;
     QLineEdit *dlcTypeEdit;
     QCheckBox *standaloneCheck;
     QLineEdit *composerEdit;
