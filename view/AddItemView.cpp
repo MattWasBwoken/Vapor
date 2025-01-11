@@ -44,7 +44,7 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
     mainLayout->addWidget(new QLabel("Name:"));
     mainLayout->addWidget(nameEdit);
     descriptionEdit = new QTextEdit(this);
-    descriptionEdit->setPlaceholderText(tr("Description"));
+    descriptionEdit->setPlaceholderText(tr("Add a description here"));
     mainLayout->addWidget(new QLabel("Description:"));
     mainLayout->addWidget(descriptionEdit);
 
@@ -73,7 +73,6 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
     softwareLayout->addWidget(winCompatibilityCheck);
     softwareFields->setLayout(softwareLayout);
 
-
     // Videogame specific fields
     QVBoxLayout* videogameLayout = new QVBoxLayout(videogameFields);
     developerEdit = new QLineEdit(this);
@@ -92,6 +91,18 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
 
     // DLC specific fields
     QVBoxLayout* dlcLayout = new QVBoxLayout(dlcFields);
+    developerEdit = new QLineEdit(this);
+    developerEdit->setPlaceholderText(tr("Developer"));
+    dlcLayout->addWidget(new QLabel("Developer:"));
+    dlcLayout->addWidget(developerEdit);
+    genreEdit = new QLineEdit(this);
+    genreEdit->setPlaceholderText(tr("Genre"));
+    dlcLayout->addWidget(new QLabel("Genre:"));
+    dlcLayout->addWidget(genreEdit);
+    releaseDateEdit = new QLineEdit(this);
+    releaseDateEdit->setPlaceholderText(tr("Release Date"));
+    dlcLayout->addWidget(new QLabel("Release Date:"));
+    dlcLayout->addWidget(releaseDateEdit);
     dlcTypeEdit = new QLineEdit(this);
     dlcTypeEdit->setPlaceholderText(tr("(Expansion, Mod, Skin, etc.)"));
     dlcLayout->addWidget(new QLabel("DLC Type:"));
@@ -100,9 +111,20 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
     dlcLayout->addWidget(standaloneCheck);
     dlcFields->setLayout(dlcLayout);
 
-
     // Soundtrack specific fields
     QVBoxLayout* soundtrackLayout = new QVBoxLayout(soundtrackFields);
+    developerEdit = new QLineEdit(this);
+    developerEdit->setPlaceholderText(tr("Developer"));
+    soundtrackLayout->addWidget(new QLabel("Developer:"));
+    soundtrackLayout->addWidget(developerEdit);
+    genreEdit = new QLineEdit(this);
+    genreEdit->setPlaceholderText(tr("Genre"));
+    soundtrackLayout->addWidget(new QLabel("Genre:"));
+    soundtrackLayout->addWidget(genreEdit);
+    releaseDateEdit = new QLineEdit(this);
+    releaseDateEdit->setPlaceholderText(tr("Release Date"));
+    soundtrackLayout->addWidget(new QLabel("Release Date:"));
+    soundtrackLayout->addWidget(releaseDateEdit);
     composerEdit = new QLineEdit(this);
     composerEdit->setPlaceholderText(tr("Composer"));
     soundtrackLayout->addWidget(new QLabel("Composer:"));
