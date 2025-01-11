@@ -118,6 +118,7 @@ void MainWindow::setupCentralWidget() {
     setCentralWidget(centralWidget);
     addItemView = new AddItemView(this);
     centralWidget->addWidget(addItemView);
+    connect(addItemView, &AddItemView::itemAdded, this, &MainWindow::handleItemAdded);
     connect(addItemView, &AddItemView::backToGridRequested, this, &MainWindow::handleBackToGrid);
 }
 
@@ -221,6 +222,14 @@ void MainWindow::handleAddItem() {
     centralWidget->setCurrentWidget(addItemView);
     updateStatus(tr("Adding new item"));
 }
+
+void MainWindow::handleItemAdded(AbstractItem *item) {
+    items.append(item);
+    updateStatus(tr("Added item: %1").arg(item->getName()));
+    viewRenderer->render(items);
+    centralWidget->setCurrentWidget(centralWidget->widget(0));
+}
+
 void MainWindow::handleModifyItem(AbstractItem *item) {
     // Placeholder for item modification logic
     emit itemModified(item);
