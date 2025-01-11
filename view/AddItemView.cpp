@@ -29,7 +29,7 @@ void AddItemView::resetFields() {
     updateFieldsVisibility(0);
 }
 
-AddItemView::AddItemView(QWidget *parent) : QWidget(parent) {
+AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidget(parent), items(items) {
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
     // Type selection
@@ -183,7 +183,7 @@ void AddItemView::updateFieldsVisibility(int index) {
 
 void AddItemView::addItem() {
     QString type = typeComboBox->currentText();
-    unsigned int id = 0; // da decidere come generare l'id, omettiamo per ora
+    unsigned int id =  getMaxId() + 1;
     QString name = nameEdit->text();
     QString description = descriptionEdit->toPlainText();
 
@@ -231,4 +231,14 @@ void AddItemView::addItem() {
 
 void AddItemView::handleCancel() {
     emit backToGridRequested();
+}
+
+unsigned int AddItemView::getMaxId() const{
+    unsigned int maxId = 0;
+    if(items){
+        for(const auto& item: *items){
+            maxId = std::max(maxId, item->getId());
+        }
+    }
+    return maxId;
 }

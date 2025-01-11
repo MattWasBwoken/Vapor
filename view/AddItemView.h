@@ -10,12 +10,13 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QString>
+#include <QVector>
 
 class AddItemView : public QWidget {
     Q_OBJECT
 
 public:
-    explicit AddItemView(QWidget* parent = nullptr);
+    explicit AddItemView(QWidget* parent = nullptr, QVector<AbstractItem*>* items = nullptr);
     void resetFields();
 
 signals:
@@ -45,6 +46,8 @@ private:
     QPushButton *selectImageButton;
     QLabel *imagePreviewLabel;
     QString selectedImagePath;
+    QVector<AbstractItem*>* items;
+    unsigned int getMaxId() const;
 
     // **Dichiarazione dei QWidget per i campi specifici**
     QWidget *softwareFields;

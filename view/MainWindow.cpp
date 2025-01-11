@@ -116,7 +116,7 @@ void MainWindow::setupCentralWidget() {
 
     centralWidget->addWidget(scrollArea);
     setCentralWidget(centralWidget);
-    addItemView = new AddItemView(this);
+    addItemView = new AddItemView(this, &items);
     centralWidget->addWidget(addItemView);
     connect(addItemView, &AddItemView::itemAdded, this, &MainWindow::handleItemAdded);
     connect(addItemView, &AddItemView::backToGridRequested, this, &MainWindow::handleBackToGrid);
