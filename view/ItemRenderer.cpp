@@ -175,9 +175,9 @@ void ItemRenderer::visit(const DLC* item) {
         QPainter painter(&overlayedPixmap);
         painter.setRenderHint(QPainter::Antialiasing);
         QPixmap arrowPixmap(":/assets/dlc_icon.png");
-        arrowPixmap = arrowPixmap.scaled(imageWidth/4, imageHeight/4, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation);
-        int overlayX = overlayedPixmap.width()-arrowPixmap.width()-1;
-        int overlayY = overlayedPixmap.height()-arrowPixmap.height()-1;
+        arrowPixmap = arrowPixmap.scaled(imageWidth/5, imageHeight/5, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation);
+        int overlayX = overlayedPixmap.width()-arrowPixmap.width()-5;
+        int overlayY = overlayedPixmap.height()-arrowPixmap.height()-5;
         painter.drawPixmap(overlayX, overlayY, arrowPixmap);
         painter.end();
         imageLabel->setPixmap(overlayedPixmap);
