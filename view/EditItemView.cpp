@@ -49,7 +49,6 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
 
     imagePreviewLabel = new QLabel(this);
     imagePreviewLabel->setFixedSize(100, 100);
-    imagePreviewLabel->setScaledContents(true);
     mainLayout->addWidget(imagePreviewLabel);
 
     // Specific fields containers
@@ -185,7 +184,7 @@ void EditItemView::selectImage() {
         selectedImagePath = filePath;
         QPixmap image(selectedImagePath);
         if(!image.isNull()){
-            imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
         }
         else{
             QMessageBox::warning(this, tr("Error"), tr("Can't load the chosen image."));

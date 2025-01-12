@@ -196,6 +196,9 @@ void MainWindow::handleSave() {
 void MainWindow::handleSaveAs() {
     QString filePath = QFileDialog::getSaveFileName(this, tr("Save JSON File"), "", tr("JSON Files (*.json)"));
     if (!filePath.isEmpty()) {
+        if (!filePath.endsWith(".json", Qt::CaseInsensitive)) {
+            filePath += ".json";
+        }
         if (JsonItemSaver::saveItemsToJson(items, filePath)) {
             currentFilePath = filePath; // update currentFilePath
             updateStatus(tr("Saved items to file: %1").arg(filePath));

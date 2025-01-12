@@ -28,7 +28,7 @@ void SetItemVisitor::visit(const Software* item) {
     winCompatibilityCheck->setChecked(item->getWinCompatibility());
     QPixmap image(item->getImage());
     if(!image.isNull()){
-        imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
     }
     else{
         imagePreviewLabel->clear();
@@ -45,7 +45,7 @@ void SetItemVisitor::visit(const Videogame* item) {
     releaseDateEdit->setText(QString::number(item->getReleaseDate()));
     QPixmap image(item->getImage());
     if(!image.isNull()){
-        imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
     }
     else{
         imagePreviewLabel->clear();
@@ -63,7 +63,7 @@ void SetItemVisitor::visit(const DLC* item) {
     standaloneCheck->setChecked(item->getStandalone());
     QPixmap image(item->getImage());
     if(!image.isNull()){
-        imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
     }
     else{
         imagePreviewLabel->clear();
@@ -81,7 +81,7 @@ void SetItemVisitor::visit(const Soundtrack* item) {
     tracksNumberEdit->setText(QString::number(item->getTracksNumber()));
     QPixmap image(item->getImage());
     if(!image.isNull()){
-        imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
     }
     else{
         imagePreviewLabel->clear();
