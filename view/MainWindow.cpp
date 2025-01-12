@@ -232,10 +232,7 @@ void MainWindow::handleAddItem() {
 }
 
 void MainWindow::handleModifyItem(AbstractItem *item) {
-    if(viewRenderer->getViewType() != ViewType::Details) return;
-
     editItemView->setItem(item);
-
     centralWidget->setCurrentWidget(editItemView);
     updateStatus(tr("Editing item: %1").arg(item->getName()));
 }
@@ -243,25 +240,19 @@ void MainWindow::handleModifyItem(AbstractItem *item) {
 void MainWindow::handleModifyItemFromMenu() {
     QDialog dialog(this);
     dialog.setWindowTitle(tr("Select Item to Edit"));
-
     QVBoxLayout dialogLayout;
     QListWidget itemList;
-
     for (const auto& item : items) {
         itemList.addItem(item->getName());
     }
-
     dialogLayout.addWidget(&itemList);
-
     QPushButton okButton(tr("OK"));
     QPushButton cancelButton(tr("Cancel"));
-
     QHBoxLayout buttonLayout;
     buttonLayout.addWidget(&okButton);
     buttonLayout.addWidget(&cancelButton);
     dialogLayout.addLayout(&buttonLayout);
     dialog.setLayout(&dialogLayout);
-
     connect(&okButton, &QPushButton::clicked, [&](){
         int selectedRow = itemList.currentRow();
         if(selectedRow >= 0 && selectedRow < items.size()){
@@ -273,7 +264,6 @@ void MainWindow::handleModifyItemFromMenu() {
     connect(&cancelButton, &QPushButton::clicked, [&](){
         dialog.reject();
     });
-
     dialog.exec();
 }
 
