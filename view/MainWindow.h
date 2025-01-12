@@ -46,9 +46,6 @@ private:
     void populateItems();
 
 signals:
-    void itemAdded(AbstractItem *item);
-    void itemModified(AbstractItem *item);
-    void itemDeleted(unsigned int id);
     void searchRequested(const QString &searchText, const QString &filter);
     void itemSelected(AbstractItem *item);
 
@@ -57,7 +54,7 @@ private slots:
     void handleAddItem();
     void handleModifyItem(AbstractItem *item);
     void handleModifyItemFromMenu();
-    void handleDeleteItem(unsigned int id);
+    void handleDeleteItem(AbstractItem *item);
     void updateStatus(const QString &message);
     void showItemDetails(AbstractItem* item);
     void handleItemAdded(AbstractItem *item);

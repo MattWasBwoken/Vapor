@@ -20,6 +20,7 @@ signals:
     void itemSelected(AbstractItem *item);
     void backToGridRequested();
     void editItemRequested(AbstractItem* item);
+    void deleteItemRequested(AbstractItem* item);
 
 private:
     ViewType currentView;

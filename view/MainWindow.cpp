@@ -34,29 +34,10 @@ MainWindow::MainWindow(QWidget *parent)
     resize(1200, 800);
     setMinimumSize(400, 400);
 
-    connect(this, &MainWindow::itemAdded, this, [this](AbstractItem *item) {
-        items.append(item);
-        updateStatus(tr("Item added: %1").arg(item->getName()));
-    });
-
-    connect(this, &MainWindow::itemModified, this, [this](AbstractItem *item) {
-        updateStatus(tr("Item modified: %1").arg(item->getName()));
-    });
-
-    connect(this, &MainWindow::itemDeleted, this, [this](unsigned int id) {
-        auto it = std::find_if(items.begin(), items.end(), [id](AbstractItem *item) {
-            return item->getId() == id;
-        });
-        if (it != items.end()) {
-            QString name = (*it)->getName();
-            items.erase(it);
-            updateStatus(tr("Item deleted: %1").arg(name));
-        }
-    });
-
     connect(viewRenderer, &ViewRenderer::itemSelected, this, &MainWindow::showItemDetails);
     connect(viewRenderer, &ViewRenderer::backToGridRequested, this, &MainWindow::handleBackToGrid);
     connect(viewRenderer, &ViewRenderer::editItemRequested, this, &MainWindow::handleModifyItem);
+    connect(viewRenderer, &ViewRenderer::deleteItemRequested, this, &MainWindow::handleDeleteItem);
 }
 
 void MainWindow::setupMenus() {
@@ -68,7 +49,7 @@ void MainWindow::setupMenus() {
 
     QMenu *itemMenu = menuBar->addMenu(tr("Item"));
     itemMenu->addAction(tr("Add"), this, &MainWindow::handleAddItem);
-    itemMenu->addAction(tr("Edit"), this, &MainWindow::handleModifyItemFromMenu); // probably needs to change with a pop-up window to choose item
+    itemMenu->addAction(tr("Edit"), this, &MainWindow::handleModifyItemFromMenu);
     itemMenu->addAction(tr("Delete"), this, []() { /* TODO: Add delete item dialog */ });
 
     QMenu* viewMenu = menuBar->addMenu(tr("View"));
@@ -267,33 +248,34 @@ void MainWindow::handleModifyItemFromMenu() {
     dialog.exec();
 }
 
+void MainWindow::handleDeleteItem(AbstractItem *item) {
+    QMessageBox::StandardButton reply = QMessageBox::question(this, "Confirm Deletion", "Are you really sure you want to delete '" + item->getName() + "'?", QMessageBox::Yes | QMessageBox::No);
+    if (reply == QMessageBox::Yes) {
+        unsigned int id = item->getId();
+        auto it = std::find_if(items.begin(), items.end(), [id](AbstractItem* item) {
+            return item->getId() == id;
+        });
+        if (it != items.end()) {
+            QString name = (*it)->getName();
+            items.erase(it);
+            emit handleBackToGrid();
+            viewRenderer->render(items);
+            updateStatus(tr("Deleted item: %1").arg(item->getName()));
+        }
+    }
+}
+
 void MainWindow::handleItemAdded(AbstractItem *item) {
     items.append(item);
+    emit handleBackToGrid();
     viewRenderer->render(items);
-    centralWidget->setCurrentWidget(centralWidget->widget(0));
     updateStatus(tr("Added item: %1").arg(item->getName()));
 }
 
 void MainWindow::handleItemModified(AbstractItem *item) {
-    emit itemModified(item);
+    emit handleBackToGrid();
     viewRenderer->render(items);
-    centralWidget->setCurrentWidget(centralWidget->widget(0));
     updateStatus(tr("Modified item: %1").arg(item->getName()));
-}
-
-void MainWindow::handleDeleteItem(unsigned int id) {
-    auto it = std::find_if(items.begin(), items.end(), [id](AbstractItem* item) {
-        return item->getId() == id;
-    });
-    if (it != items.end()) {
-        QString name = (*it)->getName();
-        items.erase(it);
-
-        // Call render to update the view
-        viewRenderer->render(items);
-        emit itemDeleted(id);
-        updateStatus(tr("Deleted item: %1").arg(name));
-    }
 }
 
 void MainWindow::updateStatus(const QString &message) {
