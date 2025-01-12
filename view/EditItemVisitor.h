@@ -9,7 +9,7 @@
 
 class EditItemVisitor : public IVisitor {
 public:
-    EditItemVisitor(QComboBox* typeComboBox, QLineEdit* nameEdit, QTextEdit* descriptionEdit,
+    EditItemVisitor(QLineEdit* nameEdit, QTextEdit* descriptionEdit,
                     QLineEdit* versionEdit, QCheckBox* winCompatibilityCheck,
                     QLineEdit* developerEdit, QLineEdit* dlcdeveloperEdit, QLineEdit* soundtrackdeveloperEdit,
                     QLineEdit* genreEdit, QLineEdit* dlcgenreEdit, QLineEdit* soundtrackgenreEdit,
@@ -23,7 +23,6 @@ public:
     void visit(Soundtrack* item) override;
 
 private:
-    QComboBox* typeComboBox;
     QLineEdit* nameEdit;
     QTextEdit* descriptionEdit;
     QLineEdit* versionEdit;

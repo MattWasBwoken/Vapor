@@ -11,7 +11,7 @@
 
 class SetItemVisitor : public IConstVisitor {
 public:
-    SetItemVisitor(QComboBox* typeComboBox, QLineEdit* nameEdit, QTextEdit* descriptionEdit,
+    SetItemVisitor(QLineEdit* nameEdit, QTextEdit* descriptionEdit,
                    QLineEdit* versionEdit, QCheckBox* winCompatibilityCheck,
                    QLineEdit* developerEdit, QLineEdit* dlcdeveloperEdit, QLineEdit* soundtrackdeveloperEdit,
                    QLineEdit* genreEdit, QLineEdit* dlcgenreEdit, QLineEdit* soundtrackgenreEdit,
@@ -26,7 +26,6 @@ public:
     void visit(const Soundtrack* item) override;
 
 private:
-    QComboBox* typeComboBox;
     QLineEdit* nameEdit;
     QTextEdit* descriptionEdit;
     QLineEdit* versionEdit;

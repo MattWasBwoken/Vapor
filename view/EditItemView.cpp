@@ -2,13 +2,11 @@
 #include "SetItemVisitor.h"
 #include "EditItemVisitor.h"
 #include "../model/Software.h"
-#include "../model/DLC.h"
 #include "../model/Videogame.h"
 #include "../model/Soundtrack.h"
-
+#include "../model/DLC.h"
 
 void EditItemView::resetFields() {
-    typeComboBox->setCurrentIndex(0);
     nameEdit->clear();
     descriptionEdit->clear();
     versionEdit->clear();
@@ -33,12 +31,6 @@ void EditItemView::resetFields() {
 
 EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidget(parent), items(items), currentItem(nullptr) {
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
-
-    // Type selection
-    typeComboBox = new QComboBox(this);
-    typeComboBox->addItems({tr("Software"), tr("Videogame"), tr("DLC"), tr("Soundtrack")});
-    mainLayout->addWidget(new QLabel("Type:"));
-    mainLayout->addWidget(typeComboBox);
 
     // Basic information
     nameEdit = new QLineEdit(this);
@@ -92,7 +84,6 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     videogameLayout->addWidget(releaseDateEdit);
     videogameFields->setLayout(videogameLayout);
 
-
     // DLC specific fields
     QVBoxLayout* dlcLayout = new QVBoxLayout(dlcFields);
     dlcdeveloperEdit = new QLineEdit(this);
@@ -139,7 +130,6 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     soundtrackLayout->addWidget(tracksNumberEdit);
     soundtrackFields->setLayout(soundtrackLayout);
 
-
     // Add containers to main layout
     mainLayout->addWidget(softwareFields);
     mainLayout->addWidget(videogameFields);
@@ -155,7 +145,6 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     connect(editButton, &QPushButton::clicked, this, &EditItemView::editItem);
     connect(cancelButton, &QPushButton::clicked, this, &EditItemView::handleCancel);
     mainLayout->addLayout(buttonLayout);
-
     setLayout(mainLayout);
 
     // Initially hide all specific fields
@@ -163,13 +152,6 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     videogameFields->setVisible(false);
     dlcFields->setVisible(false);
     soundtrackFields->setVisible(false);
-
-    connect(typeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            [this](int index){
-                updateFieldsVisibility(index);
-            });
-
-    updateFieldsVisibility(0); // Show fields for the initial selection
 }
 
 void EditItemView::setItem(AbstractItem* item) {
@@ -178,15 +160,24 @@ void EditItemView::setItem(AbstractItem* item) {
         resetFields();
         return;
     }
-    SetItemVisitor visitor(typeComboBox, nameEdit, descriptionEdit, versionEdit,
+
+    if (dynamic_cast<Software*>(item)) {
+        updateFieldsVisibility(0);
+    } else if (dynamic_cast<DLC*>(item)) {
+        updateFieldsVisibility(2);
+    } else if (dynamic_cast<Soundtrack*>(item)) {
+        updateFieldsVisibility(3);
+    } else if (dynamic_cast<Videogame*>(item)) {
+        updateFieldsVisibility(1);
+    }
+
+
+    SetItemVisitor visitor(nameEdit, descriptionEdit, versionEdit,
                            winCompatibilityCheck, developerEdit, dlcdeveloperEdit, soundtrackdeveloperEdit,
                            genreEdit, dlcgenreEdit, soundtrackgenreEdit, releaseDateEdit, dlcreleaseDateEdit,
                            soundtrackreleaseDateEdit, dlcTypeEdit, standaloneCheck, composerEdit, tracksNumberEdit, imagePreviewLabel, selectedImagePath);
     item->accept(&visitor);
-
-    updateFieldsVisibility(typeComboBox->currentIndex());
 }
-
 
 void EditItemView::selectImage() {
     QString filePath = QFileDialog::getOpenFileName(this, tr("Select Image"), "", tr("Images (*.png *.jpg *.jpeg)"));
@@ -203,7 +194,6 @@ void EditItemView::selectImage() {
         }
     }
 }
-
 
 void EditItemView::updateFieldsVisibility(int index) {
     softwareFields->setVisible(false);
@@ -222,19 +212,17 @@ void EditItemView::updateFieldsVisibility(int index) {
     }
 }
 
-
 void EditItemView::editItem() {
     if (!currentItem) return;
-    EditItemVisitor visitor(typeComboBox, nameEdit, descriptionEdit, versionEdit,
+
+    EditItemVisitor visitor(nameEdit, descriptionEdit, versionEdit,
                             winCompatibilityCheck, developerEdit, dlcdeveloperEdit, soundtrackdeveloperEdit,
                             genreEdit, dlcgenreEdit, soundtrackgenreEdit, releaseDateEdit, dlcreleaseDateEdit,
                             soundtrackreleaseDateEdit, dlcTypeEdit, standaloneCheck, composerEdit, tracksNumberEdit, selectedImagePath);
-
     currentItem->accept(&visitor);
     emit itemModified(currentItem);
     emit backToGridRequested();
 }
-
 
 void EditItemView::handleCancel() {
     emit backToGridRequested();

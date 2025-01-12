@@ -5,14 +5,14 @@
 #include "../model/Soundtrack.h"
 #include <QPixmap>
 
-SetItemVisitor::SetItemVisitor(QComboBox* typeComboBox, QLineEdit* nameEdit, QTextEdit* descriptionEdit,
+SetItemVisitor::SetItemVisitor(QLineEdit* nameEdit, QTextEdit* descriptionEdit,
                                QLineEdit* versionEdit, QCheckBox* winCompatibilityCheck,
                                QLineEdit* developerEdit, QLineEdit* dlcdeveloperEdit, QLineEdit* soundtrackdeveloperEdit,
                                QLineEdit* genreEdit, QLineEdit* dlcgenreEdit, QLineEdit* soundtrackgenreEdit,
                                QLineEdit* releaseDateEdit, QLineEdit* dlcreleaseDateEdit, QLineEdit* soundtrackreleaseDateEdit,
                                QLineEdit* dlcTypeEdit, QCheckBox* standaloneCheck,
                                QLineEdit* composerEdit, QLineEdit* tracksNumberEdit, QLabel *imagePreviewLabel, QString &selectedImagePath)
-    : typeComboBox(typeComboBox), nameEdit(nameEdit), descriptionEdit(descriptionEdit),
+    : nameEdit(nameEdit), descriptionEdit(descriptionEdit),
     versionEdit(versionEdit), winCompatibilityCheck(winCompatibilityCheck),
     developerEdit(developerEdit), dlcdeveloperEdit(dlcdeveloperEdit), soundtrackdeveloperEdit(soundtrackdeveloperEdit),
     genreEdit(genreEdit), dlcgenreEdit(dlcgenreEdit), soundtrackgenreEdit(soundtrackgenreEdit),
@@ -22,7 +22,6 @@ SetItemVisitor::SetItemVisitor(QComboBox* typeComboBox, QLineEdit* nameEdit, QTe
 {}
 
 void SetItemVisitor::visit(const Software* item) {
-    typeComboBox->setCurrentIndex(0);
     nameEdit->setText(item->getName());
     descriptionEdit->setText(item->getDescription());
     versionEdit->setText(item->getCurrentVersion());
@@ -39,7 +38,6 @@ void SetItemVisitor::visit(const Software* item) {
 }
 
 void SetItemVisitor::visit(const Videogame* item) {
-    typeComboBox->setCurrentIndex(1);
     nameEdit->setText(item->getName());
     descriptionEdit->setText(item->getDescription());
     developerEdit->setText(item->getDeveloper());
@@ -56,7 +54,6 @@ void SetItemVisitor::visit(const Videogame* item) {
 }
 
 void SetItemVisitor::visit(const DLC* item) {
-    typeComboBox->setCurrentIndex(2);
     nameEdit->setText(item->getName());
     descriptionEdit->setText(item->getDescription());
     dlcdeveloperEdit->setText(item->getDeveloper());
@@ -75,7 +72,6 @@ void SetItemVisitor::visit(const DLC* item) {
 }
 
 void SetItemVisitor::visit(const Soundtrack* item) {
-    typeComboBox->setCurrentIndex(3);
     nameEdit->setText(item->getName());
     descriptionEdit->setText(item->getDescription());
     soundtrackdeveloperEdit->setText(item->getDeveloper());

@@ -8,13 +8,13 @@
 #include <QTextEdit>
 #include <QCheckBox>
 #include <QPushButton>
-#include <QFileDialog>
-#include <QMessageBox>
 #include <QLabel>
 #include <QVector>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QPixmap>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QPixmap>
 
 class EditItemView : public QWidget {
     Q_OBJECT
@@ -35,7 +35,6 @@ private slots:
     void selectImage();
 
 private:
-    QComboBox *typeComboBox;
     QLineEdit *nameEdit;
     QTextEdit *descriptionEdit;
     QLineEdit *versionEdit;
@@ -58,8 +57,6 @@ private:
     QString selectedImagePath;
     QVector<AbstractItem*>* items;
     AbstractItem* currentItem;
-
-
     QWidget *softwareFields;
     QWidget *videogameFields;
     QWidget *dlcFields;

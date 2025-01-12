@@ -4,14 +4,14 @@
 #include "../model/DLC.h"
 #include "../model/Soundtrack.h"
 
-EditItemVisitor::EditItemVisitor(QComboBox* typeComboBox, QLineEdit* nameEdit, QTextEdit* descriptionEdit,
+EditItemVisitor::EditItemVisitor(QLineEdit* nameEdit, QTextEdit* descriptionEdit,
                                  QLineEdit* versionEdit, QCheckBox* winCompatibilityCheck,
                                  QLineEdit* developerEdit, QLineEdit* dlcdeveloperEdit, QLineEdit* soundtrackdeveloperEdit,
                                  QLineEdit* genreEdit, QLineEdit* dlcgenreEdit, QLineEdit* soundtrackgenreEdit,
                                  QLineEdit* releaseDateEdit, QLineEdit* dlcreleaseDateEdit, QLineEdit* soundtrackreleaseDateEdit,
                                  QLineEdit* dlcTypeEdit, QCheckBox* standaloneCheck,
                                  QLineEdit* composerEdit, QLineEdit* tracksNumberEdit, QString selectedImagePath)
-    : typeComboBox(typeComboBox), nameEdit(nameEdit), descriptionEdit(descriptionEdit),
+    : nameEdit(nameEdit), descriptionEdit(descriptionEdit),
     versionEdit(versionEdit), winCompatibilityCheck(winCompatibilityCheck),
     developerEdit(developerEdit), dlcdeveloperEdit(dlcdeveloperEdit), soundtrackdeveloperEdit(soundtrackdeveloperEdit),
     genreEdit(genreEdit), dlcgenreEdit(dlcgenreEdit), soundtrackgenreEdit(soundtrackgenreEdit),
