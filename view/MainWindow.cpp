@@ -7,6 +7,7 @@
 #include "ViewRenderer.h"
 #include <QAction>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QMessageBox>
 #include <QCoreApplication>
 #include <QDir>
@@ -18,6 +19,9 @@
 #include <QJsonArray>
 #include <QFile>
 #include <QTextStream>
+#include <QDialog>
+#include <QListWidget>
+#include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
@@ -64,7 +68,7 @@ void MainWindow::setupMenus() {
 
     QMenu *itemMenu = menuBar->addMenu(tr("Item"));
     itemMenu->addAction(tr("Add"), this, &MainWindow::handleAddItem);
-    //itemMenu->addAction(tr("Modify"), this, &MainWindow::handleModifyItem); // probably needs to change with a pop-up window to choose item
+    itemMenu->addAction(tr("Edit"), this, &MainWindow::handleModifyItemFromMenu); // probably needs to change with a pop-up window to choose item
     itemMenu->addAction(tr("Delete"), this, []() { /* TODO: Add delete item dialog */ });
 
     QMenu* viewMenu = menuBar->addMenu(tr("View"));
@@ -227,20 +231,57 @@ void MainWindow::handleAddItem() {
     updateStatus(tr("Adding new item"));
 }
 
-void MainWindow::handleItemAdded(AbstractItem *item) {
-    items.append(item);
-    updateStatus(tr("Added item: %1").arg(item->getName()));
-    viewRenderer->render(items);
-    centralWidget->setCurrentWidget(centralWidget->widget(0));
-}
-
 void MainWindow::handleModifyItem(AbstractItem *item) {
     if(viewRenderer->getViewType() != ViewType::Details) return;
 
     editItemView->setItem(item);
 
     centralWidget->setCurrentWidget(editItemView);
-    updateStatus(tr("Modifying item: %1").arg(item->getName()));
+    updateStatus(tr("Editing item: %1").arg(item->getName()));
+}
+
+void MainWindow::handleModifyItemFromMenu() {
+    QDialog dialog(this);
+    dialog.setWindowTitle(tr("Select Item to Edit"));
+
+    QVBoxLayout dialogLayout;
+    QListWidget itemList;
+
+    for (const auto& item : items) {
+        itemList.addItem(item->getName());
+    }
+
+    dialogLayout.addWidget(&itemList);
+
+    QPushButton okButton(tr("OK"));
+    QPushButton cancelButton(tr("Cancel"));
+
+    QHBoxLayout buttonLayout;
+    buttonLayout.addWidget(&okButton);
+    buttonLayout.addWidget(&cancelButton);
+    dialogLayout.addLayout(&buttonLayout);
+    dialog.setLayout(&dialogLayout);
+
+    connect(&okButton, &QPushButton::clicked, [&](){
+        int selectedRow = itemList.currentRow();
+        if(selectedRow >= 0 && selectedRow < items.size()){
+            AbstractItem* selectedItem = items[selectedRow];
+            handleModifyItem(selectedItem);
+            dialog.accept();
+        }
+    });
+    connect(&cancelButton, &QPushButton::clicked, [&](){
+        dialog.reject();
+    });
+
+    dialog.exec();
+}
+
+void MainWindow::handleItemAdded(AbstractItem *item) {
+    items.append(item);
+    viewRenderer->render(items);
+    centralWidget->setCurrentWidget(centralWidget->widget(0));
+    updateStatus(tr("Added item: %1").arg(item->getName()));
 }
 
 void MainWindow::handleItemModified(AbstractItem *item) {

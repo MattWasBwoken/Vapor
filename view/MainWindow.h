@@ -56,6 +56,7 @@ private slots:
     void handleSearch();
     void handleAddItem();
     void handleModifyItem(AbstractItem *item);
+    void handleModifyItemFromMenu();
     void handleDeleteItem(unsigned int id);
     void updateStatus(const QString &message);
     void showItemDetails(AbstractItem* item);
