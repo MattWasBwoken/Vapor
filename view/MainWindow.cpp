@@ -50,7 +50,7 @@ void MainWindow::setupMenus() {
     QMenu *itemMenu = menuBar->addMenu(tr("Item"));
     itemMenu->addAction(tr("Add"), this, &MainWindow::handleAddItem);
     itemMenu->addAction(tr("Edit"), this, &MainWindow::handleModifyItemFromMenu);
-    itemMenu->addAction(tr("Delete"), this, []() { /* TODO: Add delete item dialog */ });
+    itemMenu->addAction(tr("Delete"), this, &MainWindow::handleDeleteItemFromMenu);
 
     QMenu* viewMenu = menuBar->addMenu(tr("View"));
     QAction* gridViewAction = viewMenu->addAction(tr("Grid View"));
@@ -263,6 +263,36 @@ void MainWindow::handleDeleteItem(AbstractItem *item) {
             updateStatus(tr("Deleted item: %1").arg(item->getName()));
         }
     }
+}
+
+void MainWindow::handleDeleteItemFromMenu() {
+    QDialog dialog(this);
+    dialog.setWindowTitle(tr("Select Item to Delete"));
+    QVBoxLayout dialogLayout;
+    QListWidget itemList;
+    for (const auto& item : items) {
+        itemList.addItem(item->getName());
+    }
+    dialogLayout.addWidget(&itemList);
+    QPushButton okButton(tr("OK"));
+    QPushButton cancelButton(tr("Cancel"));
+    QHBoxLayout buttonLayout;
+    buttonLayout.addWidget(&okButton);
+    buttonLayout.addWidget(&cancelButton);
+    dialogLayout.addLayout(&buttonLayout);
+    dialog.setLayout(&dialogLayout);
+    connect(&okButton, &QPushButton::clicked, [&](){
+        int selectedRow = itemList.currentRow();
+        if(selectedRow >= 0 && selectedRow < items.size()){
+            AbstractItem* selectedItem = items[selectedRow];
+            handleDeleteItem(selectedItem);
+            dialog.accept();
+        }
+    });
+    connect(&cancelButton, &QPushButton::clicked, [&](){
+        dialog.reject();
+    });
+    dialog.exec();
 }
 
 void MainWindow::handleItemAdded(AbstractItem *item) {
