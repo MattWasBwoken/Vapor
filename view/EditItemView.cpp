@@ -1,4 +1,6 @@
 #include "EditItemView.h"
+#include "SetItemVisitor.h"
+#include "EditItemVisitor.h"
 #include "../model/Software.h"
 #include "../model/DLC.h"
 #include "../model/Videogame.h"
@@ -176,46 +178,13 @@ void EditItemView::setItem(AbstractItem* item) {
         resetFields();
         return;
     }
-    nameEdit->setText(currentItem->getName());
-    descriptionEdit->setText(currentItem->getDescription());
-    selectedImagePath = currentItem->getImage();
-    QPixmap image(selectedImagePath);
-    if(!image.isNull()){
-        imagePreviewLabel->setPixmap(image.scaled(imagePreviewLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    }
-    else{
-        imagePreviewLabel->clear();
-        selectedImagePath.clear();
-    }
+    SetItemVisitor visitor(typeComboBox, nameEdit, descriptionEdit, versionEdit,
+                           winCompatibilityCheck, developerEdit, dlcdeveloperEdit, soundtrackdeveloperEdit,
+                           genreEdit, dlcgenreEdit, soundtrackgenreEdit, releaseDateEdit, dlcreleaseDateEdit,
+                           soundtrackreleaseDateEdit, dlcTypeEdit, standaloneCheck, composerEdit, tracksNumberEdit, imagePreviewLabel, selectedImagePath);
+    item->accept(&visitor);
 
-    if (Software* software = dynamic_cast<Software*>(currentItem)) {
-        typeComboBox->setCurrentIndex(0);
-        versionEdit->setText(software->getCurrentVersion());
-        winCompatibilityCheck->setChecked(software->getWinCompatibility());
-        updateFieldsVisibility(0);
-    } else if (DLC* dlc = dynamic_cast<DLC*>(currentItem)) {
-        typeComboBox->setCurrentIndex(2);
-        dlcdeveloperEdit->setText(dlc->getDeveloper());
-        dlcgenreEdit->setText(dlc->getGenre());
-        dlcreleaseDateEdit->setText(QString::number(dlc->getReleaseDate()));
-        dlcTypeEdit->setText(dlc->getDlcType());
-        standaloneCheck->setChecked(dlc->getStandalone());
-        updateFieldsVisibility(2);
-    } else if (Soundtrack* soundtrack = dynamic_cast<Soundtrack*>(currentItem)) {
-        typeComboBox->setCurrentIndex(3);
-        soundtrackdeveloperEdit->setText(soundtrack->getDeveloper());
-        soundtrackgenreEdit->setText(soundtrack->getGenre());
-        soundtrackreleaseDateEdit->setText(QString::number(soundtrack->getReleaseDate()));
-        composerEdit->setText(soundtrack->getComposer());
-        tracksNumberEdit->setText(QString::number(soundtrack->getTracksNumber()));
-        updateFieldsVisibility(3);
-    } else if (Videogame* videogame = dynamic_cast<Videogame*>(currentItem)) {
-        typeComboBox->setCurrentIndex(1);
-        developerEdit->setText(videogame->getDeveloper());
-        genreEdit->setText(videogame->getGenre());
-        releaseDateEdit->setText(QString::number(videogame->getReleaseDate()));
-        updateFieldsVisibility(1);
-    }
+    updateFieldsVisibility(typeComboBox->currentIndex());
 }
 
 
@@ -256,65 +225,12 @@ void EditItemView::updateFieldsVisibility(int index) {
 
 void EditItemView::editItem() {
     if (!currentItem) return;
+    EditItemVisitor visitor(typeComboBox, nameEdit, descriptionEdit, versionEdit,
+                            winCompatibilityCheck, developerEdit, dlcdeveloperEdit, soundtrackdeveloperEdit,
+                            genreEdit, dlcgenreEdit, soundtrackgenreEdit, releaseDateEdit, dlcreleaseDateEdit,
+                            soundtrackreleaseDateEdit, dlcTypeEdit, standaloneCheck, composerEdit, tracksNumberEdit, selectedImagePath);
 
-    QString type = typeComboBox->currentText();
-    currentItem->setName(nameEdit->text());
-    currentItem->setDescription(descriptionEdit->toPlainText());
-    currentItem->setImage(selectedImagePath);
-
-    if (type == "Software") {
-        Software* software = dynamic_cast<Software*>(currentItem);
-        if(software){
-            software->setCurrentVersion(versionEdit->text());
-            software->setWinCompatibility(winCompatibilityCheck->isChecked());
-        }
-    } else if (type == "DLC") {
-        DLC* dlc = dynamic_cast<DLC*>(currentItem);
-        if(dlc){
-            bool ok;
-            unsigned int releaseDate = dlcreleaseDateEdit->text().toUInt(&ok);
-            if(!ok){
-                releaseDate=0;
-            }
-            dlc->setDeveloper(dlcdeveloperEdit->text());
-            dlc->setGenre(dlcgenreEdit->text());
-            dlc->setReleaseDate(releaseDate);
-            dlc->setDlcType(dlcTypeEdit->text());
-            dlc->setStandalone(standaloneCheck->isChecked());
-        }
-    } else if (type == "Soundtrack") {
-        Soundtrack* soundtrack = dynamic_cast<Soundtrack*>(currentItem);
-        if(soundtrack){
-            bool ok;
-            unsigned int releaseDate = soundtrackreleaseDateEdit->text().toUInt(&ok);
-            if(!ok){
-                releaseDate=0;
-            }
-            bool ok2;
-            unsigned int tracksNumber = tracksNumberEdit->text().toUInt(&ok2);
-            if(!ok2){
-                tracksNumber = 0;
-            }
-            soundtrack->setDeveloper(soundtrackdeveloperEdit->text());
-            soundtrack->setGenre(soundtrackgenreEdit->text());
-            soundtrack->setReleaseDate(releaseDate);
-            soundtrack->setComposer(composerEdit->text());
-            soundtrack->setTracksNumber(tracksNumber);
-        }
-    } else if (type == "Videogame") {
-        Videogame* videogame = dynamic_cast<Videogame*>(currentItem);
-        if(videogame){
-            bool ok;
-            unsigned int releaseDate = releaseDateEdit->text().toUInt(&ok);
-            if(!ok){
-                releaseDate=0;
-            }
-            videogame->setDeveloper(developerEdit->text());
-            videogame->setGenre(genreEdit->text());
-            videogame->setReleaseDate(releaseDate);
-        }
-    }
-
+    currentItem->accept(&visitor);
     emit itemModified(currentItem);
     emit backToGridRequested();
 }

@@ -25,6 +25,7 @@ SOURCES += \
     view/EditItemVisitor.cpp \
     view/ItemRenderer.cpp \
     view/MainWindow.cpp \
+    view/SetItemVisitor.cpp \
     view/ViewRenderer.cpp
 
 HEADERS += \    #controllare spesso che ci siano tutti
@@ -45,6 +46,7 @@ HEADERS += \    #controllare spesso che ci siano tutti
     view/EditItemVisitor.h \
     view/ItemRenderer.h \
     view/MainWindow.h \
+    view/SetItemVisitor.h \
     view/ViewRenderer.h \
     view/ViewType.h
 
