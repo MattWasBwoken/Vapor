@@ -17,6 +17,7 @@
 #include "../model/AbstractItem.h"
 #include "ViewRenderer.h"
 #include "AddItemView.h"
+#include "EditItemView.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -32,9 +33,10 @@ private:
     QLineEdit *searchBar;
     QComboBox *filterComboBox;
 
-    QVector<AbstractItem*> items; // The collection of items
+    QVector<AbstractItem*> items;
     ViewRenderer* viewRenderer;
     AddItemView *addItemView;
+    EditItemView *editItemView;
     QString currentFilePath;
 
     void setupMenus();
@@ -58,6 +60,7 @@ private slots:
     void updateStatus(const QString &message);
     void showItemDetails(AbstractItem* item);
     void handleItemAdded(AbstractItem *item);
+    void handleItemModified(AbstractItem *item);
     void handleBackToGrid();
     void handleOpenFile();
     void handleSave();

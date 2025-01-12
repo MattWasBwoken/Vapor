@@ -1,5 +1,6 @@
 #include "ViewRenderer.h"
 #include "ItemRenderer.h"
+#include "MainWindow.h"
 #include <QLayout>
 #include <QPushButton>
 #include <QFrame>
@@ -108,15 +109,26 @@ QWidget* ViewRenderer::createListView(const QVector<AbstractItem*>& items) {
 QWidget* ViewRenderer::createDetailsView(AbstractItem* item) {
     QWidget* container = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout(container);
-
     ItemRenderer* itemRenderer = new ItemRenderer(container);
     layout->addWidget(itemRenderer->render(item, ViewType::Details));
 
-    // back button
+    QPushButton* editButton = new QPushButton("Edit", container);
+    connect(editButton, &QPushButton::clicked, [this, item]() {
+        emit itemSelected(item);
+    });
+
+    QPushButton* deleteButton = new QPushButton("Delete", container);
+
+    QHBoxLayout* buttonLayout = new QHBoxLayout;
+    buttonLayout->addWidget(editButton);
+    buttonLayout->addWidget(deleteButton);
+    layout->addLayout(buttonLayout);
+    container->setLayout(layout);
+
     QPushButton* backButton = new QPushButton("Back to grid", container);
     layout->addWidget(backButton);
+    connect(backButton, &QPushButton::clicked, this, &ViewRenderer::backToGridRequested);
 
-    connect(backButton, &QPushButton::clicked, this, &ViewRenderer::backToGridRequested); // emit signal
     container->setLayout(layout);
     return container;
 }

@@ -106,14 +106,6 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         if (attributeLayout) {
             layout->addLayout(attributeLayout);
         }
-
-        QPushButton* editButton = new QPushButton("Edit", widget);
-        QPushButton* deleteButton = new QPushButton("Delete", widget);
-        QHBoxLayout* buttonLayout = new QHBoxLayout;
-        buttonLayout->addWidget(editButton);
-        buttonLayout->addWidget(deleteButton);
-        layout->addLayout(buttonLayout);
-        widget->setLayout(layout);
     }
 
     return widget;

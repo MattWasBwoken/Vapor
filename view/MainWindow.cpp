@@ -2,6 +2,7 @@
 #include "../data/JsonItemLoader.h"
 #include "../data/JsonItemSaver.h"
 #include "AddItemView.h"
+#include "EditItemView.h"
 #include "../model/SearchItemVisitor.h"
 #include "ViewRenderer.h"
 #include <QAction>
@@ -62,7 +63,7 @@ void MainWindow::setupMenus() {
 
     QMenu *itemMenu = menuBar->addMenu(tr("Item"));
     itemMenu->addAction(tr("Add"), this, &MainWindow::handleAddItem);
-    itemMenu->addAction(tr("Modify"), this, []() { /* TODO: Add modify item dialog */ });
+    //itemMenu->addAction(tr("Modify"), this, &MainWindow::handleModifyItem); // probably needs to change with a pop-up window to choose item
     itemMenu->addAction(tr("Delete"), this, []() { /* TODO: Add delete item dialog */ });
 
     QMenu* viewMenu = menuBar->addMenu(tr("View"));
@@ -70,12 +71,12 @@ void MainWindow::setupMenus() {
     QAction* listViewAction = viewMenu->addAction(tr("List View"));
 
     connect(gridViewAction, &QAction::triggered, this, [this]() {
-        viewRenderer->setViewType(ViewType::Grid); // Use enum
+        viewRenderer->setViewType(ViewType::Grid);
         viewRenderer->render(items);
     });
 
     connect(listViewAction, &QAction::triggered, this, [this]() {
-        viewRenderer->setViewType(ViewType::List); // Use enum
+        viewRenderer->setViewType(ViewType::List);
         viewRenderer->render(items);
     });
 
@@ -118,8 +119,12 @@ void MainWindow::setupCentralWidget() {
     setCentralWidget(centralWidget);
     addItemView = new AddItemView(this, &items);
     centralWidget->addWidget(addItemView);
+    editItemView = new EditItemView(this, &items);
+    centralWidget->addWidget(editItemView);
     connect(addItemView, &AddItemView::itemAdded, this, &MainWindow::handleItemAdded);
     connect(addItemView, &AddItemView::backToGridRequested, this, &MainWindow::handleBackToGrid);
+    connect(editItemView, &EditItemView::itemModified, this, &MainWindow::handleItemModified);
+    connect(editItemView, &EditItemView::backToGridRequested, this, &MainWindow::handleBackToGrid);
 }
 
 void MainWindow::setupStatusBar() {
@@ -129,14 +134,12 @@ void MainWindow::setupStatusBar() {
 
 void MainWindow::populateItems() {
     QString filePath = ":/data/library.json";
-
     QFile file(filePath);
     if (!file.exists()) {
         qWarning() << "File does not exist in resources:" << filePath;
         updateStatus(tr("Failed to load items: File not found in resources"));
         return;
     }
-
     items = JsonItemLoader::loadItemsFromJson(filePath);
     updateStatus(tr("Loaded %1 items from default library").arg(items.size()));
     viewRenderer->render(items);
@@ -231,9 +234,18 @@ void MainWindow::handleItemAdded(AbstractItem *item) {
 }
 
 void MainWindow::handleModifyItem(AbstractItem *item) {
-    // Placeholder for item modification logic
+    if(viewRenderer->getViewType() != ViewType::Details) return;
+    QVector<AbstractItem*> selectedItem;
+    selectedItem.push_back(item);
+    editItemView->setItem(item);
+    centralWidget->setCurrentWidget(editItemView);
+    updateStatus(tr("Modifying item: %1").arg(item->getName()));
+}
+
+void MainWindow::handleItemModified(AbstractItem *item) {
     emit itemModified(item);
     viewRenderer->render(items);
+    centralWidget->setCurrentWidget(centralWidget->widget(0));
     updateStatus(tr("Modified item: %1").arg(item->getName()));
 }
 

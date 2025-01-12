@@ -21,6 +21,7 @@ SOURCES += \
     model/Software.cpp \
     view/AddItemView.cpp \
     view/DefaultImageVisitor.cpp \
+    view/EditItemView.cpp \
     view/ItemRenderer.cpp \
     view/MainWindow.cpp \
     view/ViewRenderer.cpp
@@ -39,6 +40,7 @@ HEADERS += \    #controllare spesso che ci siano tutti
     model/Software.h \
     view/AddItemView.h \
     view/DefaultImageVisitor.h \
+    view/EditItemView.h \
     view/ItemRenderer.h \
     view/MainWindow.h \
     view/ViewRenderer.h \
