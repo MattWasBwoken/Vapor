@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(viewRenderer, &ViewRenderer::itemSelected, this, &MainWindow::showItemDetails);
     connect(viewRenderer, &ViewRenderer::backToGridRequested, this, &MainWindow::handleBackToGrid);
+    connect(viewRenderer, &ViewRenderer::editItemRequested, this, &MainWindow::handleModifyItem);
 }
 
 void MainWindow::setupMenus() {
@@ -235,9 +236,9 @@ void MainWindow::handleItemAdded(AbstractItem *item) {
 
 void MainWindow::handleModifyItem(AbstractItem *item) {
     if(viewRenderer->getViewType() != ViewType::Details) return;
-    QVector<AbstractItem*> selectedItem;
-    selectedItem.push_back(item);
+
     editItemView->setItem(item);
+
     centralWidget->setCurrentWidget(editItemView);
     updateStatus(tr("Modifying item: %1").arg(item->getName()));
 }

@@ -114,7 +114,7 @@ QWidget* ViewRenderer::createDetailsView(AbstractItem* item) {
 
     QPushButton* editButton = new QPushButton("Edit", container);
     connect(editButton, &QPushButton::clicked, [this, item]() {
-        emit itemSelected(item);
+        emit editItemRequested(item);
     });
 
     QPushButton* deleteButton = new QPushButton("Delete", container);
