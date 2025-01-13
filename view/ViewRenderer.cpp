@@ -36,7 +36,7 @@ void ViewRenderer::render(const QVector<AbstractItem*>& items) {
         this->layout()->addWidget(createListView(items));
     } else if (currentView == ViewType::Details && items.size() == 1) {
         this->setLayout(new QVBoxLayout);
-        this->layout()->addWidget(createDetailsView(items.first())); // pass selected object
+        this->layout()->addWidget(createDetailsView(items.first()));
     }
 }
 
@@ -59,7 +59,7 @@ QWidget* ViewRenderer::createGridView(const QVector<AbstractItem*>& items) {
         QWidget* renderedItem = itemRenderer->render(item, ViewType::Grid);
         QPushButton* button = new QPushButton(container);
         button->setLayout(renderedItem->layout());
-        button->setFixedSize(itemWidth,350); // 350 or more for Linux?
+        button->setFixedSize(itemWidth,350);
 
         connect(button, &QPushButton::clicked, [this, item]() {
             emit itemSelected(item);
@@ -97,6 +97,7 @@ QWidget* ViewRenderer::createListView(const QVector<AbstractItem*>& items) {
 QWidget* ViewRenderer::createDetailsView(AbstractItem* item) {
     QWidget* container = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout(container);
+
     ItemRenderer* itemRenderer = new ItemRenderer(container);
     layout->addWidget(itemRenderer->render(item, ViewType::Details));
 
@@ -110,17 +111,24 @@ QWidget* ViewRenderer::createDetailsView(AbstractItem* item) {
         emit deleteItemRequested(item);
     });
 
-    QHBoxLayout* buttonLayout = new QHBoxLayout;
-    buttonLayout->addWidget(editButton);
-    buttonLayout->addWidget(deleteButton);
-    layout->addLayout(buttonLayout);
-
     QPushButton* backButton = new QPushButton("Back to grid", container);
-    layout->addWidget(backButton);
     connect(backButton, &QPushButton::clicked, this, [this]() {
         emit backToGridRequested(true);
     });
 
+    QGridLayout* buttonLayout = new QGridLayout;
+    buttonLayout->addWidget(backButton, 0, 0, 1, 1, Qt::AlignLeft);
+    buttonLayout->setColumnStretch(1, 1);
+    buttonLayout->addWidget(editButton, 0, 2, 1, 1, Qt::AlignRight);
+    buttonLayout->addWidget(deleteButton, 0, 3, 1, 1, Qt::AlignRight);
+
+    layout->addLayout(buttonLayout);
+
+    editButton->setStyleSheet("QPushButton { background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; } QPushButton:hover { background-color: #367c39; }");
+    deleteButton->setStyleSheet("QPushButton { background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px; } QPushButton:hover { background-color: #b00a02; }");
+    backButton->setStyleSheet("QPushButton { background-color: #2196F3; color: white; border: none; padding: 10px 20px; border-radius: 5px; } QPushButton:hover { background-color: #1868a3; }");
+
     container->setLayout(layout);
     return container;
 }
+

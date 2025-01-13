@@ -30,25 +30,25 @@ void EditItemView::resetFields() {
 }
 
 EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidget(parent), items(items), currentItem(nullptr) {
-    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+    QGridLayout* mainLayout = new QGridLayout(this);
 
+    mainLayout->addWidget(new QLabel("Name:"), 0, 0);
     nameEdit = new QLineEdit(this);
     nameEdit->setPlaceholderText(tr("Name"));
-    mainLayout->addWidget(new QLabel("Name:"));
-    mainLayout->addWidget(nameEdit);
+    mainLayout->addWidget(nameEdit, 0, 1);
 
+    mainLayout->addWidget(new QLabel("Description:"), 1, 0);
     descriptionEdit = new QTextEdit(this);
     descriptionEdit->setPlaceholderText(tr("Add a description here"));
-    mainLayout->addWidget(new QLabel("Description:"));
-    mainLayout->addWidget(descriptionEdit);
+    mainLayout->addWidget(descriptionEdit, 1, 1);
 
     selectImageButton = new QPushButton(tr("Select Image"), this);
     connect(selectImageButton, &QPushButton::clicked, this, &EditItemView::selectImage);
-    mainLayout->addWidget(selectImageButton);
+    mainLayout->addWidget(selectImageButton, 2, 0);
 
     imagePreviewLabel = new QLabel(this);
     imagePreviewLabel->setFixedSize(100, 100);
-    mainLayout->addWidget(imagePreviewLabel);
+    mainLayout->addWidget(imagePreviewLabel, 2, 1);
 
     softwareFields = new QWidget(this);
     videogameFields = new QWidget(this);
@@ -63,6 +63,7 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     winCompatibilityCheck = new QCheckBox("Windows Compatible", this);
     softwareLayout->addWidget(winCompatibilityCheck);
     softwareFields->setLayout(softwareLayout);
+    mainLayout->addWidget(softwareFields, 3, 0, 1, 2);
 
     QVBoxLayout* videogameLayout = new QVBoxLayout(videogameFields);
     developerEdit = new QLineEdit(this);
@@ -78,6 +79,7 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     videogameLayout->addWidget(new QLabel("Release Date:"));
     videogameLayout->addWidget(releaseDateEdit);
     videogameFields->setLayout(videogameLayout);
+    mainLayout->addWidget(videogameFields, 3, 0, 1, 2);
 
     QVBoxLayout* dlcLayout = new QVBoxLayout(dlcFields);
     dlcdeveloperEdit = new QLineEdit(this);
@@ -99,6 +101,7 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     standaloneCheck = new QCheckBox(tr("Standalone"), this);
     dlcLayout->addWidget(standaloneCheck);
     dlcFields->setLayout(dlcLayout);
+    mainLayout->addWidget(dlcFields, 3, 0, 1, 2);
 
     QVBoxLayout* soundtrackLayout = new QVBoxLayout(soundtrackFields);
     soundtrackdeveloperEdit = new QLineEdit(this);
@@ -122,11 +125,7 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     soundtrackLayout->addWidget(new QLabel("Tracks Number:"));
     soundtrackLayout->addWidget(tracksNumberEdit);
     soundtrackFields->setLayout(soundtrackLayout);
-
-    mainLayout->addWidget(softwareFields);
-    mainLayout->addWidget(videogameFields);
-    mainLayout->addWidget(dlcFields);
-    mainLayout->addWidget(soundtrackFields);
+    mainLayout->addWidget(soundtrackFields, 3, 0, 1, 2);
 
     QHBoxLayout* buttonLayout = new QHBoxLayout();
     QPushButton* editButton = new QPushButton("Edit", this);
@@ -135,13 +134,18 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     buttonLayout->addWidget(cancelButton);
     connect(editButton, &QPushButton::clicked, this, &EditItemView::editItem);
     connect(cancelButton, &QPushButton::clicked, this, &EditItemView::handleCancel);
-    mainLayout->addLayout(buttonLayout);
+    mainLayout->addLayout(buttonLayout, 5, 0, 1, 2, Qt::AlignCenter);
+
     setLayout(mainLayout);
 
     softwareFields->setVisible(false);
     videogameFields->setVisible(false);
     dlcFields->setVisible(false);
     soundtrackFields->setVisible(false);
+
+    editButton->setStyleSheet("QPushButton { background-color: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; } QPushButton:hover { background-color: #367c39; }");
+    cancelButton->setStyleSheet("QPushButton { background-color: #f44336; color: white; border: none; padding: 10px 20px; border-radius: 5px; } QPushButton:hover { background-color: #b00a02; }");
+    selectImageButton->setStyleSheet("QPushButton { background-color: #2196F3; color: white; border: none; padding: 10px 20px; border-radius: 5px; } QPushButton:hover { background-color: #1868a3; }");
 }
 
 void EditItemView::setItem(AbstractItem* item) {

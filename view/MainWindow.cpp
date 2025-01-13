@@ -56,12 +56,14 @@ void MainWindow::setupMenus() {
     QAction* listViewAction = viewMenu->addAction(tr("List View"));
 
     connect(gridViewAction, &QAction::triggered, this, [this]() {
+        centralWidget->setCurrentWidget(centralWidget->widget(0));
         viewRenderer->setViewType(ViewType::Grid);
         updateStatus(tr("Switched to Grid View"));
         viewRenderer->render(items);
     });
 
     connect(listViewAction, &QAction::triggered, this, [this]() {
+        centralWidget->setCurrentWidget(centralWidget->widget(0));
         viewRenderer->setViewType(ViewType::List);
         updateStatus(tr("Switched to List View"));
         viewRenderer->render(items);
