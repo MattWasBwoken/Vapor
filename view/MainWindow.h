@@ -60,7 +60,7 @@ private slots:
     void showItemDetails(AbstractItem* item);
     void handleItemAdded(AbstractItem *item);
     void handleItemModified(AbstractItem *item);
-    void handleBackToGrid();
+    void handleBackToGrid(bool showMessage);
     void handleOpenFile();
     void handleSave();
     void handleSaveAs();

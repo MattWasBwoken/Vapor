@@ -26,7 +26,7 @@ public:
 
 signals:
     void itemModified(AbstractItem* item);
-    void backToGridRequested();
+    void backToGridRequested(bool showMessage);
 
 private slots:
     void editItem();

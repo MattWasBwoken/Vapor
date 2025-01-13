@@ -18,7 +18,7 @@ public:
 
 signals:
     void itemSelected(AbstractItem *item);
-    void backToGridRequested();
+    void backToGridRequested(bool showMessage);
     void editItemRequested(AbstractItem* item);
     void deleteItemRequested(AbstractItem* item);
 

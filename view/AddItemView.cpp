@@ -253,11 +253,11 @@ void AddItemView::addItem() {
         emit itemAdded(newItem);
     }
 
-    emit backToGridRequested();
+    emit backToGridRequested(false);
 }
 
 void AddItemView::handleCancel() {
-    emit backToGridRequested();
+    emit backToGridRequested(true);
 }
 
 unsigned int AddItemView::getMaxId() const{

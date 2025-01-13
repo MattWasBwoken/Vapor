@@ -22,6 +22,7 @@
 #include <QDialog>
 #include <QListWidget>
 #include <QPushButton>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
@@ -58,11 +59,13 @@ void MainWindow::setupMenus() {
 
     connect(gridViewAction, &QAction::triggered, this, [this]() {
         viewRenderer->setViewType(ViewType::Grid);
+        updateStatus(tr("Switched to Grid View"));
         viewRenderer->render(items);
     });
 
     connect(listViewAction, &QAction::triggered, this, [this]() {
         viewRenderer->setViewType(ViewType::List);
+        updateStatus(tr("Switched to List View"));
         viewRenderer->render(items);
     });
 
@@ -261,7 +264,7 @@ void MainWindow::handleDeleteItem(AbstractItem *item) {
         if (it != items.end()) {
             QString name = (*it)->getName();
             items.erase(it);
-            emit handleBackToGrid();
+            emit handleBackToGrid(false);
             viewRenderer->render(items);
             updateStatus(tr("Deleted item: %1").arg(item->getName()));
         }
@@ -300,13 +303,13 @@ void MainWindow::handleDeleteItemFromMenu() {
 
 void MainWindow::handleItemAdded(AbstractItem *item) {
     items.append(item);
-    emit handleBackToGrid();
+    emit handleBackToGrid(false);
     viewRenderer->render(items);
     updateStatus(tr("Added item: %1").arg(item->getName()));
 }
 
 void MainWindow::handleItemModified(AbstractItem *item) {
-    emit handleBackToGrid();
+    emit handleBackToGrid(false);
     viewRenderer->render(items);
     updateStatus(tr("Modified item: %1").arg(item->getName()));
 }
@@ -323,9 +326,11 @@ void MainWindow::showItemDetails(AbstractItem* item){
     updateStatus(tr("Opening details of item: %1").arg(item->getName()));
 }
 
-void MainWindow::handleBackToGrid() {
+void MainWindow::handleBackToGrid(bool showMessage) {
     centralWidget->setCurrentWidget(centralWidget->widget(0));
     viewRenderer->setViewType(ViewType::Grid);
     viewRenderer->render(items);
-    updateStatus(tr("Back to Grid View"));
+    if (showMessage) {
+        updateStatus(tr("Back to Grid View"));
+    }
 }

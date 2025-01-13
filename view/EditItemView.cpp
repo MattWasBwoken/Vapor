@@ -220,9 +220,9 @@ void EditItemView::editItem() {
                             soundtrackreleaseDateEdit, dlcTypeEdit, standaloneCheck, composerEdit, tracksNumberEdit, selectedImagePath);
     currentItem->accept(&visitor);
     emit itemModified(currentItem);
-    emit backToGridRequested();
+    emit backToGridRequested(false);
 }
 
 void EditItemView::handleCancel() {
-    emit backToGridRequested();
+    emit backToGridRequested(true);
 }

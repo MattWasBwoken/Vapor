@@ -1,6 +1,5 @@
 #include "ViewRenderer.h"
 #include "ItemRenderer.h"
-#include "MainWindow.h"
 #include <QLayout>
 #include <QPushButton>
 #include <QFrame>
@@ -130,7 +129,9 @@ QWidget* ViewRenderer::createDetailsView(AbstractItem* item) {
 
     QPushButton* backButton = new QPushButton("Back to grid", container);
     layout->addWidget(backButton);
-    connect(backButton, &QPushButton::clicked, this, &ViewRenderer::backToGridRequested);
+    connect(backButton, &QPushButton::clicked, this, [this]() {
+        emit backToGridRequested(true);
+    });
 
     container->setLayout(layout);
     return container;
