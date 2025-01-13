@@ -10,6 +10,7 @@
 #include <QComboBox>
 #include <QString>
 #include <QVector>
+#include <QTimer>
 #include "model/AbstractItem.h"
 #include "ViewRenderer.h"
 #include "AddItemView.h"
@@ -51,6 +52,7 @@ private:
     AddItemView *addItemView;
     EditItemView *editItemView;
     QString currentFilePath;
+    QTimer* searchTimer;
 
     void setupMenus();
     void setupToolBar();

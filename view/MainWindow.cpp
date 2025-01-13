@@ -37,6 +37,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(viewRenderer, &ViewRenderer::backToGridRequested, this, &MainWindow::handleBackToGrid);
     connect(viewRenderer, &ViewRenderer::editItemRequested, this, &MainWindow::handleModifyItem);
     connect(viewRenderer, &ViewRenderer::deleteItemRequested, this, &MainWindow::handleDeleteItem);
+    searchTimer = new QTimer(this);
+    searchTimer->setSingleShot(true);
+    connect(searchTimer, &QTimer::timeout, this, &MainWindow::handleSearch);
 }
 
 void MainWindow::setupMenus() {
@@ -76,7 +79,12 @@ void MainWindow::setupToolBar() {
     topToolBar = new QToolBar(this);
     searchBar = new QLineEdit(this);
     searchBar->setPlaceholderText(tr("Search..."));
-    connect(searchBar, &QLineEdit::textChanged, this, &MainWindow::handleSearch);
+    connect(searchBar, &QLineEdit::textChanged, this, [this](){
+        if (searchTimer->isActive()) {
+            searchTimer->stop();
+        }
+        searchTimer->start(300);
+    });
     filterComboBox = new QComboBox(this);
     filterComboBox->addItems({tr("All"), tr("Software"), tr("Videogame"), tr("DLC"), tr("Soundtrack")});
     connect(filterComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::handleSearch);
@@ -143,6 +151,11 @@ void MainWindow::populateItems() {
 }
 
 void MainWindow::handleSearch() {
+    if (searchTimer->isActive()) {
+        searchTimer->stop();
+    }
+    searchTimer->start(300);
+
     const QString searchText = searchBar->text();
     const QString filter = filterComboBox->currentText();
 
