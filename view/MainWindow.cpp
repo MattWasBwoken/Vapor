@@ -1,17 +1,13 @@
 #include "MainWindow.h"
-#include "../data/JsonItemLoader.h"
-#include "../data/JsonItemSaver.h"
-#include "AddItemView.h"
-#include "EditItemView.h"
-#include "../model/SearchItemVisitor.h"
-#include "ViewRenderer.h"
+#include "data/JsonItemLoader.h"
+#include "data/JsonItemSaver.h"
+#include "model/SearchItemVisitor.h"
 #include "model/DLC.h"
 #include "model/Software.h"
 #include "model/Soundtrack.h"
 #include "model/Videogame.h"
 #include <QAction>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
+#include <QBoxLayout>
 #include <QMessageBox>
 #include <QCoreApplication>
 #include <QDir>
@@ -22,11 +18,8 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QFile>
-#include <QTextStream>
-#include <QDialog>
 #include <QListWidget>
 #include <QPushButton>
-#include <QDebug>
 #include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -145,9 +138,9 @@ void MainWindow::populateItems() {
         return;
     }
     items = JsonItemLoader::loadItemsFromJson(filePath);
-    updateStatus(tr("Loaded %1 items from default library").arg(items.size()));
     viewRenderer->render(items);
     handleSort(0);
+    updateStatus(tr("Loaded %1 items from default library").arg(items.size()));
 }
 
 void MainWindow::handleSearch() {
@@ -158,39 +151,34 @@ void MainWindow::handleSearch() {
         viewRenderer->setViewType(ViewType::Grid);
     }
 
-    // Filter items using the SearchItemVisitor
     SearchItemVisitor visitor(searchText, filter);
     for (const auto& item : items) {
         item->accept(&visitor);
     }
 
-    // Convert QVector<const AbstractItem*> to QVector<AbstractItem*>
     QVector<const AbstractItem*> constResults = visitor.getResults();
     QVector<AbstractItem*> filteredItems;
     for (const AbstractItem* constItem : constResults) {
         filteredItems.append(const_cast<AbstractItem*>(constItem));
     }
 
-    // Call render with the converted QVector<AbstractItem*>
     viewRenderer->render(filteredItems);
-
     updateStatus(tr("Search performed with filter: %1").arg(filter));
 }
 
 void MainWindow::handleOpenFile() {
     QString filePath = QFileDialog::getOpenFileName(this, tr("Open JSON File"), "", tr("JSON Files (*.json)"));
     if (!filePath.isEmpty()) {
-        currentFilePath = filePath; // keep json path for saving
+        currentFilePath = filePath;
         QVector<AbstractItem*> loadedItems = JsonItemLoader::loadItemsFromJson(filePath);
         if (!loadedItems.isEmpty()) {
-            // Clear existing items
             for (AbstractItem* item : items) {
                 delete item;
             }
             items.clear();
-            //assign loaded items
             items = loadedItems;
             viewRenderer->render(items);
+            handleSort(0);
             updateStatus(tr("Loaded %1 items from file: %2").arg(items.size()).arg(filePath));
         } else {
             updateStatus(tr("Failed to load items from file: %1").arg(filePath));
@@ -201,7 +189,7 @@ void MainWindow::handleOpenFile() {
 
 void MainWindow::handleSave() {
     if (currentFilePath.isEmpty()) {
-        handleSaveAs(); // if no file is open, handleSaveAs
+        handleSaveAs();
     } else {
         if (JsonItemSaver::saveItemsToJson(items, currentFilePath)) {
             updateStatus(tr("Saved items to file: %1").arg(currentFilePath));
@@ -219,7 +207,7 @@ void MainWindow::handleSaveAs() {
             filePath += ".json";
         }
         if (JsonItemSaver::saveItemsToJson(items, filePath)) {
-            currentFilePath = filePath; // update currentFilePath
+            currentFilePath = filePath;
             updateStatus(tr("Saved items to file: %1").arg(filePath));
         } else {
             updateStatus(tr("Failed to save items to file: %1").arg(filePath));

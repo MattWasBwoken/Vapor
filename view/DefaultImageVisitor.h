@@ -1,13 +1,10 @@
 #ifndef DEFAULTIMAGEVISITOR_H
 #define DEFAULTIMAGEVISITOR_H
 
-#include "../model/IConstVisitor.h"
+#include "model/IConstVisitor.h"
 #include <QString>
 
 class DefaultImageVisitor : public IConstVisitor {
-private:
-    QString defaultImagePath;
-
 public:
     DefaultImageVisitor();
 
@@ -17,6 +14,8 @@ public:
     void visit(const Soundtrack* item) override;
 
     QString getDefaultImagePath() const;
+private:
+    QString defaultImagePath;
 };
 
 #endif

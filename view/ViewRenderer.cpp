@@ -28,7 +28,6 @@ void ViewRenderer::render(const QVector<AbstractItem*>& items) {
         }
         delete layout;
     }
-
     if (currentView == ViewType::Grid) {
         this->setLayout(new QVBoxLayout);
         this->layout()->addWidget(createGridView(items));
@@ -67,7 +66,6 @@ QWidget* ViewRenderer::createGridView(const QVector<AbstractItem*>& items) {
         });
         layout->addWidget(button, row, col);
     }
-
     container->setLayout(layout);
     return container;
 }
@@ -116,7 +114,6 @@ QWidget* ViewRenderer::createDetailsView(AbstractItem* item) {
     buttonLayout->addWidget(editButton);
     buttonLayout->addWidget(deleteButton);
     layout->addLayout(buttonLayout);
-    container->setLayout(layout);
 
     QPushButton* backButton = new QPushButton("Back to grid", container);
     layout->addWidget(backButton);

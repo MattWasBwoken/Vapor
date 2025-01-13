@@ -1,24 +1,17 @@
 #include "EditItemVisitor.h"
-#include "../model/Software.h"
-#include "../model/Videogame.h"
-#include "../model/DLC.h"
-#include "../model/Soundtrack.h"
+#include "model/Software.h"
+#include "model/Videogame.h"
+#include "model/DLC.h"
+#include "model/Soundtrack.h"
 
-EditItemVisitor::EditItemVisitor(QLineEdit* nameEdit, QTextEdit* descriptionEdit,
-                                 QLineEdit* versionEdit, QCheckBox* winCompatibilityCheck,
-                                 QLineEdit* developerEdit, QLineEdit* dlcdeveloperEdit, QLineEdit* soundtrackdeveloperEdit,
-                                 QLineEdit* genreEdit, QLineEdit* dlcgenreEdit, QLineEdit* soundtrackgenreEdit,
-                                 QLineEdit* releaseDateEdit, QLineEdit* dlcreleaseDateEdit, QLineEdit* soundtrackreleaseDateEdit,
-                                 QLineEdit* dlcTypeEdit, QCheckBox* standaloneCheck,
-                                 QLineEdit* composerEdit, QLineEdit* tracksNumberEdit, QString selectedImagePath)
-    : nameEdit(nameEdit), descriptionEdit(descriptionEdit),
-    versionEdit(versionEdit), winCompatibilityCheck(winCompatibilityCheck),
-    developerEdit(developerEdit), dlcdeveloperEdit(dlcdeveloperEdit), soundtrackdeveloperEdit(soundtrackdeveloperEdit),
-    genreEdit(genreEdit), dlcgenreEdit(dlcgenreEdit), soundtrackgenreEdit(soundtrackgenreEdit),
-    releaseDateEdit(releaseDateEdit), dlcreleaseDateEdit(dlcreleaseDateEdit), soundtrackreleaseDateEdit(soundtrackreleaseDateEdit),
-    dlcTypeEdit(dlcTypeEdit), standaloneCheck(standaloneCheck),
-    composerEdit(composerEdit), tracksNumberEdit(tracksNumberEdit), selectedImagePath(selectedImagePath)
-{}
+EditItemVisitor::EditItemVisitor(QLineEdit* nameEdit, QTextEdit* descriptionEdit, QLineEdit* versionEdit, QCheckBox* winCompatibilityCheck,
+                    QLineEdit* developerEdit, QLineEdit* dlcdeveloperEdit, QLineEdit* soundtrackdeveloperEdit, QLineEdit* genreEdit, QLineEdit* dlcgenreEdit,
+                    QLineEdit* soundtrackgenreEdit, QLineEdit* releaseDateEdit, QLineEdit* dlcreleaseDateEdit, QLineEdit* soundtrackreleaseDateEdit,
+                    QLineEdit* dlcTypeEdit, QCheckBox* standaloneCheck, QLineEdit* composerEdit, QLineEdit* tracksNumberEdit, QString selectedImagePath)
+    : nameEdit(nameEdit), descriptionEdit(descriptionEdit), versionEdit(versionEdit), winCompatibilityCheck(winCompatibilityCheck),
+    developerEdit(developerEdit), dlcdeveloperEdit(dlcdeveloperEdit), soundtrackdeveloperEdit(soundtrackdeveloperEdit), genreEdit(genreEdit), dlcgenreEdit(dlcgenreEdit),
+    soundtrackgenreEdit(soundtrackgenreEdit), releaseDateEdit(releaseDateEdit), dlcreleaseDateEdit(dlcreleaseDateEdit), soundtrackreleaseDateEdit(soundtrackreleaseDateEdit),
+    dlcTypeEdit(dlcTypeEdit), standaloneCheck(standaloneCheck), composerEdit(composerEdit), tracksNumberEdit(tracksNumberEdit), selectedImagePath(selectedImagePath) {}
 
 void EditItemVisitor::visit(Software* item) {
     item->setName(nameEdit->text());

@@ -1,10 +1,10 @@
 #include "EditItemView.h"
 #include "SetItemVisitor.h"
 #include "EditItemVisitor.h"
-#include "../model/Software.h"
-#include "../model/Videogame.h"
-#include "../model/Soundtrack.h"
-#include "../model/DLC.h"
+#include "model/Software.h"
+#include "model/Videogame.h"
+#include "model/Soundtrack.h"
+#include "model/DLC.h"
 
 void EditItemView::resetFields() {
     nameEdit->clear();
@@ -32,7 +32,6 @@ void EditItemView::resetFields() {
 EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidget(parent), items(items), currentItem(nullptr) {
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
-    // Basic information
     nameEdit = new QLineEdit(this);
     nameEdit->setPlaceholderText(tr("Name"));
     mainLayout->addWidget(new QLabel("Name:"));
@@ -51,13 +50,11 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     imagePreviewLabel->setFixedSize(100, 100);
     mainLayout->addWidget(imagePreviewLabel);
 
-    // Specific fields containers
     softwareFields = new QWidget(this);
     videogameFields = new QWidget(this);
     dlcFields = new QWidget(this);
     soundtrackFields = new QWidget(this);
 
-    // Software specific fields
     QVBoxLayout* softwareLayout = new QVBoxLayout(softwareFields);
     versionEdit = new QLineEdit(this);
     versionEdit->setPlaceholderText("Current Version");
@@ -67,7 +64,6 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     softwareLayout->addWidget(winCompatibilityCheck);
     softwareFields->setLayout(softwareLayout);
 
-    // Videogame specific fields
     QVBoxLayout* videogameLayout = new QVBoxLayout(videogameFields);
     developerEdit = new QLineEdit(this);
     developerEdit->setPlaceholderText(tr("Developer"));
@@ -83,7 +79,6 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     videogameLayout->addWidget(releaseDateEdit);
     videogameFields->setLayout(videogameLayout);
 
-    // DLC specific fields
     QVBoxLayout* dlcLayout = new QVBoxLayout(dlcFields);
     dlcdeveloperEdit = new QLineEdit(this);
     dlcdeveloperEdit->setPlaceholderText(tr("Developer"));
@@ -105,7 +100,6 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     dlcLayout->addWidget(standaloneCheck);
     dlcFields->setLayout(dlcLayout);
 
-    // Soundtrack specific fields
     QVBoxLayout* soundtrackLayout = new QVBoxLayout(soundtrackFields);
     soundtrackdeveloperEdit = new QLineEdit(this);
     soundtrackdeveloperEdit->setPlaceholderText(tr("Developer"));
@@ -129,13 +123,11 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     soundtrackLayout->addWidget(tracksNumberEdit);
     soundtrackFields->setLayout(soundtrackLayout);
 
-    // Add containers to main layout
     mainLayout->addWidget(softwareFields);
     mainLayout->addWidget(videogameFields);
     mainLayout->addWidget(dlcFields);
     mainLayout->addWidget(soundtrackFields);
 
-    // Button layout
     QHBoxLayout* buttonLayout = new QHBoxLayout();
     QPushButton* editButton = new QPushButton("Edit", this);
     QPushButton* cancelButton = new QPushButton("Cancel", this);
@@ -146,7 +138,6 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     mainLayout->addLayout(buttonLayout);
     setLayout(mainLayout);
 
-    // Initially hide all specific fields
     softwareFields->setVisible(false);
     videogameFields->setVisible(false);
     dlcFields->setVisible(false);
@@ -159,7 +150,6 @@ void EditItemView::setItem(AbstractItem* item) {
         resetFields();
         return;
     }
-
     if (dynamic_cast<Software*>(item)) {
         updateFieldsVisibility(0);
     } else if (dynamic_cast<DLC*>(item)) {
@@ -169,8 +159,6 @@ void EditItemView::setItem(AbstractItem* item) {
     } else if (dynamic_cast<Videogame*>(item)) {
         updateFieldsVisibility(1);
     }
-
-
     SetItemVisitor visitor(nameEdit, descriptionEdit, versionEdit,
                            winCompatibilityCheck, developerEdit, dlcdeveloperEdit, soundtrackdeveloperEdit,
                            genreEdit, dlcgenreEdit, soundtrackgenreEdit, releaseDateEdit, dlcreleaseDateEdit,
@@ -213,7 +201,6 @@ void EditItemView::updateFieldsVisibility(int index) {
 
 void EditItemView::editItem() {
     if (!currentItem) return;
-
     EditItemVisitor visitor(nameEdit, descriptionEdit, versionEdit,
                             winCompatibilityCheck, developerEdit, dlcdeveloperEdit, soundtrackdeveloperEdit,
                             genreEdit, dlcgenreEdit, soundtrackgenreEdit, releaseDateEdit, dlcreleaseDateEdit,

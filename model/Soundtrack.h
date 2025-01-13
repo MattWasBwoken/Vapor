@@ -5,9 +5,6 @@
 #include <QString>
 
 class Soundtrack : public Videogame {
-private:
-    QString composer;
-    unsigned int tracksNumber;
 public:
     Soundtrack(unsigned int id, const QString& name, const QString& description, const QString& developer, const QString& genre, unsigned int releaseDate, const QString& composer, unsigned int tracksNumber, const QString& imagePath = "");
     ~Soundtrack() override = default;
@@ -16,9 +13,11 @@ public:
     unsigned int getTracksNumber() const;
     void setTracksNumber(unsigned int tracksNumber);
 
-    // Visitor Pattern
     void accept(class IVisitor* visitor) override;
     void accept(class IConstVisitor* visitor) const override;
+private:
+    QString composer;
+    unsigned int tracksNumber;
 };
 
 #endif

@@ -1,11 +1,9 @@
 #include "AddItemView.h"
-#include "../model/Software.h"
-#include "../model/DLC.h"
-#include "../model/Videogame.h"
-#include "../model/Soundtrack.h"
+#include "model/Software.h"
+#include "model/DLC.h"
+#include "model/Videogame.h"
+#include "model/Soundtrack.h"
 #include <QVBoxLayout>
-#include <QLabel>
-#include <QPushButton>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QPixmap>
@@ -38,13 +36,11 @@ void AddItemView::resetFields() {
 AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidget(parent), items(items) {
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
-    // Type selection
     typeComboBox = new QComboBox(this);
     typeComboBox->addItems({tr("Software"), tr("Videogame"), tr("DLC"), tr("Soundtrack")});
     mainLayout->addWidget(new QLabel("Type:"));
     mainLayout->addWidget(typeComboBox);
 
-    // Basic information
     nameEdit = new QLineEdit(this);
     nameEdit->setPlaceholderText(tr("Name"));
     mainLayout->addWidget(new QLabel("Name:"));
@@ -61,14 +57,11 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
     imagePreviewLabel->setFixedSize(100, 100);
     mainLayout->addWidget(imagePreviewLabel);
 
-    // Specific fields containers
     softwareFields = new QWidget(this);
     videogameFields = new QWidget(this);
     dlcFields = new QWidget(this);
     soundtrackFields = new QWidget(this);
 
-
-    // Software specific fields
     QVBoxLayout* softwareLayout = new QVBoxLayout(softwareFields);
     versionEdit = new QLineEdit(this);
     versionEdit->setPlaceholderText("Current Version");
@@ -78,7 +71,6 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
     softwareLayout->addWidget(winCompatibilityCheck);
     softwareFields->setLayout(softwareLayout);
 
-    // Videogame specific fields
     QVBoxLayout* videogameLayout = new QVBoxLayout(videogameFields);
     developerEdit = new QLineEdit(this);
     developerEdit->setPlaceholderText(tr("Developer"));
@@ -94,7 +86,6 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
     videogameLayout->addWidget(releaseDateEdit);
     videogameFields->setLayout(videogameLayout);
 
-    // DLC specific fields
     QVBoxLayout* dlcLayout = new QVBoxLayout(dlcFields);
     dlcdeveloperEdit = new QLineEdit(this);
     dlcdeveloperEdit->setPlaceholderText(tr("Developer"));
@@ -116,7 +107,6 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
     dlcLayout->addWidget(standaloneCheck);
     dlcFields->setLayout(dlcLayout);
 
-    // Soundtrack specific fields
     QVBoxLayout* soundtrackLayout = new QVBoxLayout(soundtrackFields);
     soundtrackdeveloperEdit = new QLineEdit(this);
     soundtrackdeveloperEdit->setPlaceholderText(tr("Developer"));
@@ -140,13 +130,11 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
     soundtrackLayout->addWidget(tracksNumberEdit);
     soundtrackFields->setLayout(soundtrackLayout);
 
-    // Add containers to main layout
     mainLayout->addWidget(softwareFields);
     mainLayout->addWidget(videogameFields);
     mainLayout->addWidget(dlcFields);
     mainLayout->addWidget(soundtrackFields);
 
-    // Button layout
     QHBoxLayout* buttonLayout = new QHBoxLayout();
     QPushButton* addButton = new QPushButton("Add", this);
     QPushButton* cancelButton = new QPushButton("Cancel", this);
@@ -160,19 +148,16 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
 
     setLayout(mainLayout);
 
-    // Initially hide all specific fields and show fields based on initial selection
     softwareFields->setVisible(false);
     videogameFields->setVisible(false);
     dlcFields->setVisible(false);
     soundtrackFields->setVisible(false);
 
-
     connect(typeComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
             [this](int index){
                 updateFieldsVisibility(index);
             });
-    updateFieldsVisibility(0); // Show fields for the initial selection
-
+    updateFieldsVisibility(0);
 }
 
 void AddItemView::selectImage() {
@@ -213,7 +198,6 @@ void AddItemView::addItem() {
     unsigned int id =  getMaxId() + 1;
     QString name = nameEdit->text();
     QString description = descriptionEdit->toPlainText();
-
     AbstractItem *newItem = nullptr;
 
     if (type == "Software") {
@@ -252,7 +236,6 @@ void AddItemView::addItem() {
     if(newItem){
         emit itemAdded(newItem);
     }
-
     emit backToGridRequested(false);
 }
 

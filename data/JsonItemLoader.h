@@ -2,7 +2,7 @@
 #define JSONITEMLOADER_H
 
 #include <QVector>
-#include "../model/AbstractItem.h"
+#include "model/AbstractItem.h"
 
 class JsonItemLoader {
 public:

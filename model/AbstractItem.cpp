@@ -39,7 +39,6 @@ void AbstractItem::setImage(const QString& imagePath) {
     if (file.exists()) {
         this->imagePath = imagePath;
     } else {
-        // Use the DefaultImageVisitor to determine the default image
         DefaultImageVisitor defaultVisitor;
         this->accept(&defaultVisitor);
         this->imagePath = defaultVisitor.getDefaultImagePath();

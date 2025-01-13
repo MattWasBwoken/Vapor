@@ -1,27 +1,21 @@
 #ifndef ITEMRENDERER_H
 #define ITEMRENDERER_H
 
-#include <QWidget>
-#include "../model/IConstVisitor.h"
-#include "../model/AbstractItem.h"
+#include "model/IConstVisitor.h"
+#include "model/AbstractItem.h"
 #include "ViewType.h"
-
+#include <QWidget>
 
 class ItemRenderer : public QWidget, public IConstVisitor {
     Q_OBJECT
-
 public:
     explicit ItemRenderer(QWidget* parent = nullptr);
-
-    // Render methods
     QWidget* render(AbstractItem* item, ViewType viewType);
 
-    // Visitor methods
     void visit(const Software* item) override;
     void visit(const Videogame* item) override;
     void visit(const DLC* item) override;
     void visit(const Soundtrack* item) override;
-
 private:
     QWidget* renderedWidget;
     ViewType currentViewType;

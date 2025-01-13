@@ -3,10 +3,8 @@
 #include "Videogame.h"
 #include "DLC.h"
 #include "Soundtrack.h"
-#include <QString>
 
-SearchItemVisitor::SearchItemVisitor(const QString& searchString, const QString& typeFilter)
-    : searchString(searchString), typeFilter(typeFilter) {}
+SearchItemVisitor::SearchItemVisitor(const QString& searchString, const QString& typeFilter): searchString(searchString), typeFilter(typeFilter) {}
 
 void SearchItemVisitor::visit(const Software* item) {
     bool matches = true;

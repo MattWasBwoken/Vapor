@@ -3,7 +3,7 @@
 
 #include <QVector>
 #include <QString>
-#include "../model/AbstractItem.h"
+#include "model/AbstractItem.h"
 
 class JsonItemSaver {
 public:

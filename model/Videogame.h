@@ -5,10 +5,6 @@
 #include <QString>
 
 class Videogame : public AbstractItem {
-private:
-    QString developer;
-    QString genre;
-    unsigned int releaseDate;
 public:
     Videogame(unsigned int id, const QString& name, const QString& description, const QString& developer, const QString& genre, unsigned int releaseDate, const QString& imagePath = "");
     ~Videogame() override = default;
@@ -19,9 +15,12 @@ public:
     unsigned int getReleaseDate() const;
     void setReleaseDate(unsigned int releaseDate);
 
-    // Visitor Pattern
     void accept(class IVisitor* visitor) override;
     void accept(class IConstVisitor* visitor) const override;
+private:
+    QString developer;
+    QString genre;
+    unsigned int releaseDate;
 };
 
 #endif

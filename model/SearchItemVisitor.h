@@ -6,10 +6,6 @@
 #include <QVector>
 
 class SearchItemVisitor : public IConstVisitor {
-private:
-    QString searchString;
-    QString typeFilter;
-    QVector<const AbstractItem*> results;
 public:
     SearchItemVisitor(const QString& searchString, const QString& typeFilter = "");
     ~SearchItemVisitor() override = default;
@@ -19,6 +15,10 @@ public:
     void visit(const Soundtrack* item) override;
     const QVector<const AbstractItem*>& getResults() const;
     void clearResults();
+private:
+    QString searchString;
+    QString typeFilter;
+    QVector<const AbstractItem*> results;
 };
 
 #endif

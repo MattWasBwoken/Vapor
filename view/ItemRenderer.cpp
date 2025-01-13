@@ -1,9 +1,8 @@
-// Updated ItemRenderer.cpp
 #include "ItemRenderer.h"
-#include "../model/Software.h"
-#include "../model/Videogame.h"
-#include "../model/DLC.h"
-#include "../model/Soundtrack.h"
+#include "model/Software.h"
+#include "model/Videogame.h"
+#include "model/DLC.h"
+#include "model/Soundtrack.h"
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QPixmap>
@@ -21,8 +20,8 @@ void ItemRenderer::setRenderedWidget(QWidget* widget) {
 }
 
 QWidget* ItemRenderer::render(AbstractItem* item, ViewType viewType) {
-    currentViewType = viewType; // Set the current view type
-    item->accept(this);         // Use the visitor pattern
+    currentViewType = viewType;
+    item->accept(this);
     return renderedWidget;
 }
 
@@ -77,27 +76,22 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
                     textLayout->addWidget(firstLabel);
                 }
             }
-
         }
-
         layout->addLayout(textLayout, 1);
         widget->setLayout(layout);
     } else if (viewType == ViewType::Details){
         QVBoxLayout* layout = new QVBoxLayout(widget);
 
-        // Add item image
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
         imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
         imageLabel->setAlignment(Qt::AlignCenter);
         layout->addWidget(imageLabel);
 
-        // Add item name
         QLabel* nameLabel = new QLabel("<h2>" + name + "</h2>", widget);
         nameLabel->setAlignment(Qt::AlignCenter);
         layout->addWidget(nameLabel);
 
-        // Add description
         QLabel* descriptionLabel = new QLabel(description, widget);
         descriptionLabel->setWordWrap(true);
         descriptionLabel->setAlignment(Qt::AlignLeft);
@@ -112,7 +106,6 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 }
 
 
-// Visitor implementations using the helper function
 void ItemRenderer::visit(const Software* item) {
     int imageWidth = 200;
     int imageHeight = 94;
@@ -147,7 +140,6 @@ void ItemRenderer::visit(const Videogame* item) {
 }
 
 void ItemRenderer::visit(const DLC* item) {
-    // Determine sizes based on currentViewType
     int imageWidth = 200;
     int imageHeight = 300;
     if (currentViewType == ViewType::List) {
@@ -186,7 +178,6 @@ void ItemRenderer::visit(const DLC* item) {
 }
 
 void ItemRenderer::visit(const Soundtrack* item) {
-    // Determine sizes based on currentViewType
     int imageWidth = 200;
     int imageHeight = 200;
     if (currentViewType == ViewType::List) {

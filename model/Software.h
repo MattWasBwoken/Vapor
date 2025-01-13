@@ -5,9 +5,6 @@
 #include <QString>
 
 class Software : public AbstractItem {
-private:
-    QString currentVersion;
-    bool winCompatibility;
 public:
     Software(unsigned int id, const QString& name, const QString& description, const QString& currentVersion, bool winCompatibility, const QString& imagePath = "");
     ~Software() override = default;
@@ -16,9 +13,11 @@ public:
     bool getWinCompatibility() const;
     void setWinCompatibility(bool winCompatibility);
 
-    // Visitor Pattern
     void accept(class IVisitor* visitor) override;
     void accept(class IConstVisitor* visitor) const override;
+private:
+    QString currentVersion;
+    bool winCompatibility;
 };
 
 #endif

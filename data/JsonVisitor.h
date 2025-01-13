@@ -4,8 +4,6 @@
 #include "model/IVisitor.h"
 #include <QJsonObject>
 
-class JsonVisitor;
-
 class JsonVisitor : public IVisitor {
     QJsonObject currentObject;
 public:

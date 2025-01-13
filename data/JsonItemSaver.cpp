@@ -5,7 +5,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-
 bool JsonItemSaver::saveItemsToJson(const QVector<AbstractItem*> &items, const QString &filePath) {
     QJsonArray itemsArray;
     for (const auto& item : items) {

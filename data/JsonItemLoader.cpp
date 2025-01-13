@@ -4,10 +4,10 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QMessageBox>
-#include "../model/Software.h"
-#include "../model/Videogame.h"
-#include "../model/DLC.h"
-#include "../model/Soundtrack.h"
+#include "model/Software.h"
+#include "model/Videogame.h"
+#include "model/DLC.h"
+#include "model/Soundtrack.h"
 
 QVector<AbstractItem*> JsonItemLoader::loadItemsFromJson(const QString &filePath) {
     QVector<AbstractItem*> items;
@@ -31,10 +31,8 @@ QVector<AbstractItem*> JsonItemLoader::loadItemsFromJson(const QString &filePath
 
     for (const QJsonValue &value : itemsArray) {
         if (!value.isObject()) continue;
-
         QJsonObject itemObj = value.toObject();
         QString type = itemObj["type"].toString();
-
         AbstractItem *item = nullptr;
         if (type == "Software") {
             item = new Software(
@@ -80,11 +78,9 @@ QVector<AbstractItem*> JsonItemLoader::loadItemsFromJson(const QString &filePath
                 itemObj["imagePath"].toString()
                 );
         }
-
         if (item) {
             items.append(item);
         }
     }
-
     return items;
 }

@@ -8,49 +8,20 @@
 #include <QStackedWidget>
 #include <QLineEdit>
 #include <QComboBox>
-#include <QListView>
-#include <QTableWidget>
 #include <QString>
 #include <QVector>
-#include <algorithm>
-#include <QFileDialog>
-#include <QMessageBox>
-#include "../model/AbstractItem.h"
+#include "model/AbstractItem.h"
 #include "ViewRenderer.h"
 #include "AddItemView.h"
 #include "EditItemView.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
-
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-
-private:
-    QMenuBar *menuBar;
-    QToolBar *topToolBar;
-    QStatusBar *statusBar;
-    QStackedWidget *centralWidget;
-    QLineEdit *searchBar;
-    QComboBox *filterComboBox;
-    QComboBox *sortComboBox;
-
-    QVector<AbstractItem*> items;
-    ViewRenderer* viewRenderer;
-    AddItemView *addItemView;
-    EditItemView *editItemView;
-    QString currentFilePath;
-
-    void setupMenus();
-    void setupToolBar();
-    void setupCentralWidget();
-    void setupStatusBar();
-    void populateItems();
-
 signals:
     void searchRequested(const QString &searchText, const QString &filter);
     void itemSelected(AbstractItem *item);
-
 private slots:
     void handleSearch();
     void handleAddItem();
@@ -67,6 +38,25 @@ private slots:
     void handleSave();
     void handleSaveAs();
     void handleSort(int index);
+private:
+    QMenuBar *menuBar;
+    QToolBar *topToolBar;
+    QStatusBar *statusBar;
+    QStackedWidget *centralWidget;
+    QLineEdit *searchBar;
+    QComboBox *filterComboBox;
+    QComboBox *sortComboBox;
+    QVector<AbstractItem*> items;
+    ViewRenderer* viewRenderer;
+    AddItemView *addItemView;
+    EditItemView *editItemView;
+    QString currentFilePath;
+
+    void setupMenus();
+    void setupToolBar();
+    void setupCentralWidget();
+    void setupStatusBar();
+    void populateItems();
 };
 
 #endif
