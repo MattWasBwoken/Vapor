@@ -141,7 +141,7 @@ void MainWindow::populateItems() {
     }
     items = JsonItemLoader::loadItemsFromJson(filePath);
     viewRenderer->render(items);
-    handleSort(0);
+    handleSort(sortComboBox->currentIndex());
     updateStatus(tr("Loaded %1 items from default library").arg(items.size()));
 }
 
@@ -180,7 +180,7 @@ void MainWindow::handleOpenFile() {
             items.clear();
             items = loadedItems;
             viewRenderer->render(items);
-            handleSort(0);
+            handleSort(sortComboBox->currentIndex());
             updateStatus(tr("Loaded %1 items from file: %2").arg(items.size()).arg(filePath));
         } else {
             updateStatus(tr("Failed to load items from file: %1").arg(filePath));
@@ -310,12 +310,14 @@ void MainWindow::handleDeleteItemFromMenu() {
 void MainWindow::handleItemAdded(AbstractItem *item) {
     items.append(item);
     emit handleBackToGrid(false);
+    handleSort(sortComboBox->currentIndex());
     viewRenderer->render(items);
     updateStatus(tr("Added item: %1").arg(item->getName()));
 }
 
 void MainWindow::handleItemModified(AbstractItem *item) {
     emit handleBackToGrid(false);
+    handleSort(sortComboBox->currentIndex());
     viewRenderer->render(items);
     updateStatus(tr("Modified item: %1").arg(item->getName()));
 }
