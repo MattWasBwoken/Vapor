@@ -76,12 +76,10 @@ void MainWindow::setupToolBar() {
     topToolBar = new QToolBar(this);
     searchBar = new QLineEdit(this);
     searchBar->setPlaceholderText(tr("Search..."));
-    connect(searchBar, &QLineEdit::returnPressed, this, &MainWindow::handleSearch);
+    connect(searchBar, &QLineEdit::textChanged, this, &MainWindow::handleSearch);
     filterComboBox = new QComboBox(this);
     filterComboBox->addItems({tr("All"), tr("Software"), tr("Videogame"), tr("DLC"), tr("Soundtrack")});
-
-    QAction *searchAction = new QAction(tr("Search"), this);
-    connect(searchAction, &QAction::triggered, this, &MainWindow::handleSearch);
+    connect(filterComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::handleSearch);
 
     QLabel* sortLabel = new QLabel("Sort by: ");
     sortComboBox = new QComboBox(this);
@@ -90,7 +88,6 @@ void MainWindow::setupToolBar() {
 
     topToolBar->addWidget(searchBar);
     topToolBar->addWidget(filterComboBox);
-    topToolBar->addAction(searchAction);
 
     QWidget* spacer = new QWidget(this);
     spacer->setFixedWidth(50);
