@@ -19,7 +19,6 @@ ViewType ViewRenderer::getViewType() const {
 }
 
 void ViewRenderer::render(const QVector<AbstractItem*>& items) {
-    // Clear existing layout
     QLayout* layout = this->layout();
     if (layout) {
         QLayoutItem* child;
@@ -30,7 +29,6 @@ void ViewRenderer::render(const QVector<AbstractItem*>& items) {
         delete layout;
     }
 
-    // Render items based on the current view type
     if (currentView == ViewType::Grid) {
         this->setLayout(new QVBoxLayout);
         this->layout()->addWidget(createGridView(items));
@@ -43,14 +41,12 @@ void ViewRenderer::render(const QVector<AbstractItem*>& items) {
     }
 }
 
-
 QWidget* ViewRenderer::createGridView(const QVector<AbstractItem*>& items) {
-    const int itemWidth = 200;
     int containerWidth = this->width();
     if (containerWidth < itemWidth) {
         containerWidth = 1200;
     }
-    int columns = qMax(1, containerWidth / (itemWidth+20));
+    int columns = qMax(1, containerWidth / (itemWidth));
 
     QWidget* container = new QWidget(this);
     QGridLayout* layout = new QGridLayout(container);
@@ -63,11 +59,11 @@ QWidget* ViewRenderer::createGridView(const QVector<AbstractItem*>& items) {
         ItemRenderer* itemRenderer = new ItemRenderer(container);
         QWidget* renderedItem = itemRenderer->render(item, ViewType::Grid);
         QPushButton* button = new QPushButton(container);
-        button->setLayout(renderedItem->layout()); // Use the rendered item's layout
-        button->setFixedSize(220,350);
+        button->setLayout(renderedItem->layout());
+        button->setFixedSize(itemWidth,350); // 350 or more for Linux?
 
         connect(button, &QPushButton::clicked, [this, item]() {
-            emit itemSelected(item); // Emit signal on click
+            emit itemSelected(item);
         });
         layout->addWidget(button, row, col);
     }

@@ -5,6 +5,7 @@
 #include <QVector>
 #include "../model/AbstractItem.h"
 #include "ViewType.h"
+
 class ItemRenderer;
 
 class ViewRenderer : public QWidget {
@@ -23,6 +24,7 @@ signals:
     void deleteItemRequested(AbstractItem* item);
 
 private:
+    const int itemWidth = 220;
     ViewType currentView;
     QWidget* createListView(const QVector<AbstractItem*> &items);
     QWidget* createGridView(const QVector<AbstractItem*> &items);
