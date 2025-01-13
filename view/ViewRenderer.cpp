@@ -83,19 +83,14 @@ QWidget* ViewRenderer::createListView(const QVector<AbstractItem*>& items) {
         QPushButton* button = new QPushButton(container);
         button->setLayout(renderedItem->layout());
         button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        button->setMaximumHeight(200);
 
         connect(button, &QPushButton::clicked, [this, item]() {
             emit itemSelected(item);
         });
 
         layout->addWidget(button);
-
-        QFrame* separator = new QFrame(container);
-        separator->setFrameShape(QFrame::HLine);
-        separator->setFrameShadow(QFrame::Sunken);
-        layout->addWidget(separator);
     }
-
     container->setLayout(layout);
     return container;
 }
