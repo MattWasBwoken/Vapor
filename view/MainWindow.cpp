@@ -93,15 +93,13 @@ void MainWindow::setupToolBar() {
 void MainWindow::setupCentralWidget() {
     centralWidget = new QStackedWidget(this);
     QScrollArea *scrollArea = new QScrollArea(this);
-    viewRenderer = new ViewRenderer(scrollArea); // Attach ViewRenderer to scrollArea
+    viewRenderer = new ViewRenderer(scrollArea);
 
-    // Configure the scroll area for vertical scrolling only
     scrollArea->setWidget(viewRenderer);
-    scrollArea->setWidgetResizable(true); // Resize content dynamically
-    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); // Disable horizontal scrolling
-    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);   // Enable vertical scrolling
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-    // Ensure the ViewRenderer widget expands to the full width of the scroll area
     viewRenderer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     centralWidget->addWidget(scrollArea);
