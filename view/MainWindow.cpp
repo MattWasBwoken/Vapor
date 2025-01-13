@@ -321,7 +321,7 @@ void MainWindow::handleItemModified(AbstractItem *item) {
 void MainWindow::handleSort(int index) {
     if (index==0) {
         std::sort(items.begin(), items.end(), [](AbstractItem* a, AbstractItem* b) {
-            return a->getName() < b->getName();
+            return a->getName().toLower() < b->getName().toLower();
         });
     } else if (index==1) {
         std::sort(items.begin(), items.end(), [](AbstractItem* a, AbstractItem* b) {
