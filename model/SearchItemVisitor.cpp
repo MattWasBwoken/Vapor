@@ -5,8 +5,8 @@
 #include "Soundtrack.h"
 #include <QString>
 
-SearchItemVisitor::SearchItemVisitor(const QString& searchString, const QString& typeFilter, const QString& genreFilter, bool winCompatibilityFilter)
-    : searchString(searchString), typeFilter(typeFilter), genreFilter(genreFilter), winCompatibilityFilter(winCompatibilityFilter) {}
+SearchItemVisitor::SearchItemVisitor(const QString& searchString, const QString& typeFilter)
+    : searchString(searchString), typeFilter(typeFilter) {}
 
 void SearchItemVisitor::visit(const Software* item) {
     bool matches = true;
@@ -19,9 +19,6 @@ void SearchItemVisitor::visit(const Software* item) {
         }
     }
     if (!this->typeFilter.isEmpty() && this->typeFilter != "All" && this->typeFilter != "Software") {
-        matches = false;
-    }
-    if (this->winCompatibilityFilter && !item->getWinCompatibility()) {
         matches = false;
     }
     if (matches) {
@@ -43,9 +40,6 @@ void SearchItemVisitor::visit(const Videogame* item) {
     if (!this->typeFilter.isEmpty() && this->typeFilter != "All" && this->typeFilter != "Videogame") {
         matches = false;
     }
-    if(!this->genreFilter.isEmpty() && item->getGenre() != this->genreFilter) {
-        matches = false;
-    }
     if (matches) {
         this->results.push_back(item);
     }
@@ -63,9 +57,6 @@ void SearchItemVisitor::visit(const DLC* item) {
         }
     }
     if (!this->typeFilter.isEmpty() && this->typeFilter != "All" && this->typeFilter != "DLC") {
-        matches = false;
-    }
-    if(!this->genreFilter.isEmpty() && item->getGenre() != this->genreFilter) {
         matches = false;
     }
     if (matches) {
@@ -86,9 +77,6 @@ void SearchItemVisitor::visit(const Soundtrack* item) {
         }
     }
     if (!this->typeFilter.isEmpty() && this->typeFilter != "All" && this->typeFilter != "Soundtrack") {
-        matches = false;
-    }
-    if(!this->genreFilter.isEmpty() && item->getGenre() != this->genreFilter) {
         matches = false;
     }
     if (matches) {

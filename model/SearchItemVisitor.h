@@ -9,17 +9,15 @@ class SearchItemVisitor : public IConstVisitor {
 private:
     QString searchString;
     QString typeFilter;
-    QString genreFilter;
-    bool winCompatibilityFilter;
-    QVector<const AbstractItem*> results; // save search results
+    QVector<const AbstractItem*> results;
 public:
-    SearchItemVisitor(const QString& searchString, const QString& typeFilter = "", const QString& genreFilter = "", bool winCompatibilityFilter = false);
+    SearchItemVisitor(const QString& searchString, const QString& typeFilter = "");
     ~SearchItemVisitor() override = default;
     void visit(const Software* item) override;
     void visit(const Videogame* item) override;
     void visit(const DLC* item) override;
     void visit(const Soundtrack* item) override;
-    const QVector<const AbstractItem*>& getResults() const; // fetch results
+    const QVector<const AbstractItem*>& getResults() const;
     void clearResults();
 };
 
