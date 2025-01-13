@@ -12,6 +12,7 @@
 #include <QTableWidget>
 #include <QString>
 #include <QVector>
+#include <algorithm>
 #include <QFileDialog>
 #include <QMessageBox>
 #include "../model/AbstractItem.h"
@@ -32,6 +33,7 @@ private:
     QStackedWidget *centralWidget;
     QLineEdit *searchBar;
     QComboBox *filterComboBox;
+    QComboBox *sortComboBox;
 
     QVector<AbstractItem*> items;
     ViewRenderer* viewRenderer;
@@ -64,6 +66,7 @@ private slots:
     void handleOpenFile();
     void handleSave();
     void handleSaveAs();
+    void handleSort(int index);
 };
 
 #endif

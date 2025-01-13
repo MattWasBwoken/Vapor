@@ -5,6 +5,10 @@
 #include "EditItemView.h"
 #include "../model/SearchItemVisitor.h"
 #include "ViewRenderer.h"
+#include "model/DLC.h"
+#include "model/Software.h"
+#include "model/Soundtrack.h"
+#include "model/Videogame.h"
 #include <QAction>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -23,6 +27,7 @@
 #include <QListWidget>
 #include <QPushButton>
 #include <QDebug>
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
@@ -83,9 +88,21 @@ void MainWindow::setupToolBar() {
     QAction *searchAction = new QAction(tr("Search"), this);
     connect(searchAction, &QAction::triggered, this, &MainWindow::handleSearch);
 
+    QLabel* sortLabel = new QLabel("Sort by: ");
+    sortComboBox = new QComboBox(this);
+    sortComboBox->addItems({tr("Alphabetical"), tr("Recently added"), tr("Type")});
+    connect(sortComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::handleSort);
+
     topToolBar->addWidget(searchBar);
     topToolBar->addWidget(filterComboBox);
     topToolBar->addAction(searchAction);
+
+    QWidget* spacer = new QWidget(this);
+    spacer->setFixedWidth(50);
+    spacer->setFixedHeight(30);
+    topToolBar->addWidget(spacer);
+    topToolBar->addWidget(sortLabel);
+    topToolBar->addWidget(sortComboBox);
 
     addToolBar(Qt::TopToolBarArea, topToolBar);
 }
@@ -130,6 +147,7 @@ void MainWindow::populateItems() {
     items = JsonItemLoader::loadItemsFromJson(filePath);
     updateStatus(tr("Loaded %1 items from default library").arg(items.size()));
     viewRenderer->render(items);
+    handleSort(0);
 }
 
 void MainWindow::handleSearch() {
@@ -310,6 +328,45 @@ void MainWindow::handleItemModified(AbstractItem *item) {
     emit handleBackToGrid(false);
     viewRenderer->render(items);
     updateStatus(tr("Modified item: %1").arg(item->getName()));
+}
+
+void MainWindow::handleSort(int index) {
+    if (index==0) {
+        std::sort(items.begin(), items.end(), [](AbstractItem* a, AbstractItem* b) {
+            return a->getName() < b->getName();
+        });
+    } else if (index==1) {
+        std::sort(items.begin(), items.end(), [](AbstractItem* a, AbstractItem* b) {
+            return a->getId() > b->getId();
+        });
+    } else if (index==2) {
+        std::sort(items.begin(), items.end(), [](AbstractItem* a, AbstractItem* b) {
+            int priorityIndexA = 0;
+            int priorityIndexB = 0;
+            if (dynamic_cast<Software*>(a)) {
+                priorityIndexA = 1;
+            } else if (dynamic_cast<DLC*>(a)) {
+                priorityIndexA = 3;
+            } else if (dynamic_cast<Soundtrack*>(a)) {
+                priorityIndexA = 2;
+            } else if (dynamic_cast<Videogame*>(a)) {
+                priorityIndexA = 4;
+            }
+            if (dynamic_cast<Software*>(b)) {
+                priorityIndexB = 1;
+            } else if (dynamic_cast<DLC*>(b)) {
+                priorityIndexB = 3;
+            } else if (dynamic_cast<Soundtrack*>(b)) {
+                priorityIndexB = 2;
+            } else if (dynamic_cast<Videogame*>(b)) {
+                priorityIndexB = 4;
+            }
+            return priorityIndexA > priorityIndexB;
+        });
+    }
+    viewRenderer->render(items);
+    QString sortType = sortComboBox->itemText(index);
+    updateStatus(tr("Items sorted by: %1").arg(sortType));
 }
 
 void MainWindow::updateStatus(const QString &message) {
