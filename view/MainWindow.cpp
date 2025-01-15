@@ -95,7 +95,7 @@ void MainWindow::setupToolBar() {
     searchBar = new QLineEdit(this);
     searchBar->setPlaceholderText(tr("Search..."));
     searchBar->setStyleSheet("QLineEdit {padding: 2px 5px; margin: 5px; background-image: url(:/assets/icons/icon_search.png); background-repeat: no-repeat; background-position: right center;"
-                             "background-origin: content; border: 1px solid #ccc; border-radius: 5px; } ");
+                             "background-origin: content; border: 1px solid #666; border-radius: 5px; } ");
     connect(searchBar, &QLineEdit::textChanged, this, [this](){
         if (searchTimer->isActive()) {
             searchTimer->stop();
