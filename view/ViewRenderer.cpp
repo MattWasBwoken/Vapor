@@ -81,6 +81,7 @@ QWidget* ViewRenderer::createListView(const QVector<AbstractItem*>& items) {
         QPushButton* button = new QPushButton(container);
         button->setLayout(renderedItem->layout());
         button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        button->setMinimumHeight(100);
         button->setMaximumHeight(200);
 
         connect(button, &QPushButton::clicked, [this, item]() {

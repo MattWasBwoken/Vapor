@@ -25,7 +25,6 @@ QWidget* ItemRenderer::render(AbstractItem* item, ViewType viewType) {
     return renderedWidget;
 }
 
-
 QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QString& name, const QString& description, QLayout* attributeLayout, ViewType viewType, int imageWidth, int imageHeight) {
     QWidget* widget = new QWidget(this);
 
@@ -54,6 +53,8 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         QLabel* imageLabel = new QLabel(widget);
         QPixmap pixmap(imagePath);
         imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation));
+        imageLabel->setAlignment(Qt::AlignCenter);
+        imageLabel->setFixedSize(imageWidth, imageHeight);
         layout->addWidget(imageLabel, 0);
         layout->addSpacing(10);
 
@@ -64,7 +65,15 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         nameLabel->setFont(nameFont);
         textLayout->addWidget(nameLabel);
 
-        QLabel* descriptionLabel = new QLabel(description.left(250) + "...", widget);
+        QString shortText;
+        if (description.size() == 0) {
+            shortText = "No description provided.";
+        } else if (description.size() <= 250){
+            shortText = description;
+        } else {
+            shortText = description.left(250) + "...";
+        }
+        QLabel* descriptionLabel = new QLabel(shortText, widget);
         descriptionLabel->setWordWrap(true);
         textLayout->addWidget(descriptionLabel);
 
@@ -86,7 +95,8 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
         QPixmap pixmap(imagePath);
         imageLabel->setPixmap(pixmap.scaled(imageWidth, imageHeight, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
         imageLabel->setAlignment(Qt::AlignCenter);
-        layout->addWidget(imageLabel);
+        imageLabel->setFixedSize(imageWidth, imageHeight);
+        layout->addWidget(imageLabel, 0, Qt::AlignCenter);
 
         QLabel* nameLabel = new QLabel("<h2>" + name + "</h2>", widget);
         nameLabel->setAlignment(Qt::AlignCenter);
@@ -94,14 +104,13 @@ QWidget* ItemRenderer::createGenericWidget(const QString& imagePath, const QStri
 
         QLabel* descriptionLabel = new QLabel(description, widget);
         descriptionLabel->setWordWrap(true);
-        descriptionLabel->setAlignment(Qt::AlignLeft);
+        descriptionLabel->setAlignment(Qt::AlignCenter);
         layout->addWidget(descriptionLabel);
 
         if (attributeLayout) {
             layout->addLayout(attributeLayout);
         }
     }
-
     return widget;
 }
 
@@ -146,7 +155,6 @@ void ItemRenderer::visit(const DLC* item) {
         imageWidth /= 2;
         imageHeight /= 2;
     }
-
     QVBoxLayout* attributeLayout = new QVBoxLayout();
     QLabel* dlcTypeLabel = new QLabel("DLC Type: " + item->getDlcType());
     attributeLayout->addWidget(dlcTypeLabel);
@@ -168,8 +176,8 @@ void ItemRenderer::visit(const DLC* item) {
         painter.setRenderHint(QPainter::Antialiasing);
         QPixmap arrowPixmap(":/assets/dlc_icon.png");
         arrowPixmap = arrowPixmap.scaled(imageWidth/5, imageHeight/5, Qt::KeepAspectRatioByExpanding , Qt::SmoothTransformation);
-        int overlayX = overlayedPixmap.width()-arrowPixmap.width()-5;
-        int overlayY = overlayedPixmap.height()-arrowPixmap.height()-5;
+        int overlayX = (overlayedPixmap.width()/2)+(imageWidth/5.3);
+        int overlayY = (overlayedPixmap.height()/2)+(imageHeight/3.5);
         painter.drawPixmap(overlayX, overlayY, arrowPixmap);
         painter.end();
         imageLabel->setPixmap(overlayedPixmap);

@@ -22,8 +22,7 @@
 #include <QPushButton>
 #include <QLabel>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent) {
+MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
     setupMenus();
     setupToolBar();
     setupCentralWidget();
@@ -31,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     populateItems();
 
     resize(1200, 800);
-    setMinimumSize(400, 400);
+    setMinimumSize(600, 400);
 
     connect(viewRenderer, &ViewRenderer::itemSelected, this, &MainWindow::showItemDetails);
     connect(viewRenderer, &ViewRenderer::backToGridRequested, this, &MainWindow::handleBackToGrid);
@@ -116,15 +115,27 @@ void MainWindow::setupCentralWidget() {
     scrollArea->setWidgetResizable(true);
     scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-
     viewRenderer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-
     centralWidget->addWidget(scrollArea);
-    setCentralWidget(centralWidget);
+
+    QScrollArea *addScrollArea = new QScrollArea(this);
     addItemView = new AddItemView(this, &items);
-    centralWidget->addWidget(addItemView);
+    addScrollArea->setWidget(addItemView);
+    addScrollArea->setWidgetResizable(true);
+    addScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    addScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    centralWidget->addWidget(addScrollArea);
+
+    QScrollArea *editScrollArea = new QScrollArea(this);
     editItemView = new EditItemView(this, &items);
-    centralWidget->addWidget(editItemView);
+    editScrollArea->setWidget(editItemView);
+    editScrollArea->setWidgetResizable(true);
+    editScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    editScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    centralWidget->addWidget(editScrollArea);
+
+    setCentralWidget(centralWidget);
+
     connect(addItemView, &AddItemView::itemAdded, this, &MainWindow::handleItemAdded);
     connect(addItemView, &AddItemView::backToGridRequested, this, &MainWindow::handleBackToGrid);
     connect(editItemView, &EditItemView::itemModified, this, &MainWindow::handleItemModified);
@@ -230,13 +241,13 @@ void MainWindow::handleSaveAs() {
 
 void MainWindow::handleAddItem() {
     addItemView->resetFields();
-    centralWidget->setCurrentWidget(addItemView);
+    centralWidget->setCurrentWidget(centralWidget->widget(1));
     updateStatus(tr("Adding new item"));
 }
 
 void MainWindow::handleModifyItem(AbstractItem *item) {
     editItemView->setItem(item);
-    centralWidget->setCurrentWidget(editItemView);
+    centralWidget->setCurrentWidget(centralWidget->widget(2));
     updateStatus(tr("Editing item: %1").arg(item->getName()));
 }
 

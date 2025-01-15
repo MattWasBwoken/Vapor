@@ -2,9 +2,7 @@
 #include <QFile>
 #include "view/DefaultImageVisitor.h"
 
-AbstractItem::AbstractItem(unsigned int id, const QString& name, const QString& description)
-    : id(id), name(name), description(description)
-{}
+AbstractItem::AbstractItem(unsigned int id, const QString& name, const QString& description): id(id), name(name), description(description) {}
 
 unsigned int AbstractItem::getId() const {
     return this->id;

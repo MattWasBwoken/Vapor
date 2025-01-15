@@ -3,8 +3,7 @@
 #include "IConstVisitor.h"
 
 Videogame::Videogame(unsigned int id, const QString& name, const QString& description, const QString& developer, const QString& genre, unsigned int releaseDate, const QString& imagePath)
-    : AbstractItem(id, name, description), developer(developer), genre(genre), releaseDate(releaseDate)
-{
+    : AbstractItem(id, name, description), developer(developer), genre(genre), releaseDate(releaseDate) {
     setImage(imagePath);
 }
 

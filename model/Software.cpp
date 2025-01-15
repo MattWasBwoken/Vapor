@@ -3,8 +3,7 @@
 #include "IConstVisitor.h"
 
 Software::Software(unsigned int id, const QString& name, const QString& description, const QString& currentVersion, bool winCompatibility, const QString& imagePath)
-    : AbstractItem(id, name, description), currentVersion(currentVersion), winCompatibility(winCompatibility)
-{
+    : AbstractItem(id, name, description), currentVersion(currentVersion), winCompatibility(winCompatibility) {
     setImage(imagePath);
 }
 
