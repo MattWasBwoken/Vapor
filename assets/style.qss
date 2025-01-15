@@ -2,7 +2,7 @@ QMainWindow { background-color: #252525; }
 ViewRenderer > QWidget, AddItemView > QWidget, EditItemView > QWidget { background-color: #252525; border-radius: 5px; }
 QWidget { color: #eee; }
 QMenuBar { background-color: #232323; color: #eee; }
-QMenuBar::item { background-color: #232323; color: #eee; border-radius: 5px; padding: 2px 5px; }
+QMenuBar::item { background-color: #232323; color: #eee; border-radius: 5px; padding: 5px; margin: 2px }
 QMenuBar::item::selected { background-color: #666; }
 QMenu { background-color: #232323; color: #eee; }
 QMenu::item { background-color: #232323; color: #eee; }
@@ -34,3 +34,4 @@ QScrollBar::sub-line:horizontal { border: none; background: none; }
 QDialog { background-color: #252525 }
 QDialog QWidget { background-color: #232323 }
 QDialog QPushButton { background-color: #303030; color: #eee; border: 0px; padding: 5px 10px; border-radius: 5px; }
+QDialog QListWidget::item::selected { background-color: #666; }
