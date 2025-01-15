@@ -153,8 +153,8 @@ void MainWindow::populateItems() {
 void MainWindow::handleSearch() {
     if (searchTimer->isActive()) {
         searchTimer->stop();
+        searchTimer->start(300);
     }
-    searchTimer->start(300);
 
     const QString searchText = searchBar->text();
     const QString filter = filterComboBox->currentText();
