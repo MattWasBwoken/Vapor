@@ -108,9 +108,7 @@ void MainWindow::setupToolBar() {
     connect(filterComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::handleSearch);
     filterComboBox->setStyleSheet("QComboBox { padding: 2px 5px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; } QComboBox:focus { border-color: #66afe9; outline: 0; }"
                                   "QComboBox::drop-down { background: transparent; border: transparent; }"
-                                  "QComboBox::down-arrow { image: url(:/assets/icon_dropdown.png); width: 20px; height: 20px; padding-right:10px; }");
-
-
+                                  "QComboBox::down-arrow { image: url(:/assets/icon_dropdown.png); width: 20px; height: 20px; padding-right: 10px; }");
 
     QLabel* sortLabel = new QLabel("Sort by: ");
     sortComboBox = new QComboBox(this);
@@ -118,8 +116,7 @@ void MainWindow::setupToolBar() {
     connect(sortComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::handleSort);
     sortComboBox->setStyleSheet("QComboBox { padding: 2px 5px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; } QComboBox:focus { border-color: #66afe9; outline: 0; }"
                                 "QComboBox::drop-down { background: transparent; border: transparent; }"
-                                "QComboBox::down-arrow { image: url(:/assets/icon_dropdown.png); width: 20px; height: 20px; padding-right:10px; } ");
-
+                                "QComboBox::down-arrow { image: url(:/assets/icon_dropdown.png); width: 20px; height: 20px; padding-right: 10px; } ");
 
     topToolBar->addWidget(searchBar);
     topToolBar->addWidget(filterComboBox);

@@ -31,8 +31,10 @@
         <file>assets/default_unknown.png</file>
         <file>assets/default_videogame.png</file>
         <file>assets/dlc_icon.png</file>
+        <file>assets/icon_check.png</file>
         <file>assets/icon_add.png</file>
         <file>assets/icon_delete.png</file>
+        <file>assets/icon_dropdown.png</file>
         <file>assets/icon_edit.png</file>
         <file>assets/icon_gridview.png</file>
         <file>assets/icon_listview.png</file>
@@ -40,6 +42,5 @@
         <file>assets/icon_save.png</file>
         <file>assets/icon_saveas.png</file>
         <file>assets/icon_search.png</file>
-        <file>assets/icon_dropdown.png</file>
     </qresource>
 </RCC>
