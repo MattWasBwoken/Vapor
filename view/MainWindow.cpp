@@ -44,18 +44,34 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent) {
 void MainWindow::setupMenus() {
     menuBar = new QMenuBar(this);
     QMenu *fileMenu = menuBar->addMenu(tr("File"));
-    fileMenu->addAction(tr("Open"), this, &MainWindow::handleOpenFile);
-    fileMenu->addAction(tr("Save"), this, &MainWindow::handleSave);
-    fileMenu->addAction(tr("Save As"), this, &MainWindow::handleSaveAs);
+
+    QAction* openAction = fileMenu->addAction(tr("Open"));
+    openAction->setIcon(QIcon(":/assets/icon_open.png"));
+    connect(openAction, &QAction::triggered, this, &MainWindow::handleOpenFile);
+    QAction* saveAction = fileMenu->addAction(tr("Save"));
+    saveAction->setIcon(QIcon(":/assets/icon_save.png"));
+    connect(saveAction, &QAction::triggered, this, &MainWindow::handleSave);
+    QAction* saveAsAction = fileMenu->addAction(tr("Save As"));
+    saveAsAction->setIcon(QIcon(":/assets/icon_saveas.png"));
+    connect(saveAsAction, &QAction::triggered, this, &MainWindow::handleSaveAs);
 
     QMenu *itemMenu = menuBar->addMenu(tr("Item"));
-    itemMenu->addAction(tr("Add"), this, &MainWindow::handleAddItem);
-    itemMenu->addAction(tr("Edit"), this, &MainWindow::handleModifyItemFromMenu);
-    itemMenu->addAction(tr("Delete"), this, &MainWindow::handleDeleteItemFromMenu);
+
+    QAction* addAction = itemMenu->addAction(tr("Add"));
+    addAction->setIcon(QIcon(":/assets/icon_add.png"));
+    connect(addAction, &QAction::triggered, this, &MainWindow::handleAddItem);
+    QAction* editAction = itemMenu->addAction(tr("Edit"));
+    editAction->setIcon(QIcon(":/assets/icon_edit.png"));
+    connect(editAction, &QAction::triggered, this, &MainWindow::handleModifyItemFromMenu);
+    QAction* deleteAction = itemMenu->addAction(tr("Delete"));
+    deleteAction->setIcon(QIcon(":/assets/icon_delete.png"));
+    connect(deleteAction, &QAction::triggered, this, &MainWindow::handleDeleteItemFromMenu);
 
     QMenu* viewMenu = menuBar->addMenu(tr("View"));
     QAction* gridViewAction = viewMenu->addAction(tr("Grid View"));
+    gridViewAction->setIcon(QIcon(":/assets/icon_gridview.png"));
     QAction* listViewAction = viewMenu->addAction(tr("List View"));
+    listViewAction->setIcon(QIcon(":/assets/icon_listview.png"));
 
     connect(gridViewAction, &QAction::triggered, this, [this]() {
         centralWidget->setCurrentWidget(centralWidget->widget(0));
@@ -78,6 +94,8 @@ void MainWindow::setupToolBar() {
     topToolBar = new QToolBar(this);
     searchBar = new QLineEdit(this);
     searchBar->setPlaceholderText(tr("Search..."));
+    searchBar->setStyleSheet("QLineEdit {padding: 2px 5px; margin: 5px; background-image: url(:/assets/icon_search.png); background-repeat: no-repeat; background-position: right center;"
+                             "background-origin: content; border: 1px solid #ccc; border-radius: 5px; } QLineEdit:focus { border-color: #66afe9; outline: 0; }");
     connect(searchBar, &QLineEdit::textChanged, this, [this](){
         if (searchTimer->isActive()) {
             searchTimer->stop();
