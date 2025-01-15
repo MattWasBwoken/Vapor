@@ -31,3 +31,6 @@ QScrollBar:horizontal { border: none; background: #303030; height: 10px; margin:
 QScrollBar::handle:horizontal { background: #555; min-width: 20px; border-radius: 5px; }
 QScrollBar::add-line:horizontal { border: none; background: none; }
 QScrollBar::sub-line:horizontal { border: none; background: none; }
+QDialog { background-color: #252525 }
+QDialog QWidget { background-color: #232323 }
+QDialog QPushButton { background-color: #303030; color: #eee; border: 0px; padding: 5px 10px; border-radius: 5px; }
