@@ -30,7 +30,8 @@ void EditItemView::resetFields() {
 }
 
 EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidget(parent), items(items), currentItem(nullptr) {
-    QGridLayout* mainLayout = new QGridLayout(this);
+    QWidget* container = new QWidget(this);
+    QGridLayout* mainLayout = new QGridLayout(container);
 
     mainLayout->addWidget(new QLabel("Name:"), 0, 0);
     nameEdit = new QLineEdit(this);
@@ -136,7 +137,9 @@ EditItemView::EditItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWi
     connect(cancelButton, &QPushButton::clicked, this, &EditItemView::handleCancel);
     mainLayout->addLayout(buttonLayout, 5, 0, 1, 2, Qt::AlignCenter);
 
-    setLayout(mainLayout);
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->addWidget(container);
+    setLayout(layout);
 
     softwareFields->setVisible(false);
     videogameFields->setVisible(false);

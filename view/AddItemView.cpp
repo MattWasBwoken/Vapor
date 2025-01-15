@@ -34,7 +34,8 @@ void AddItemView::resetFields() {
 }
 
 AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidget(parent), items(items) {
-    QGridLayout* mainLayout = new QGridLayout(this);
+    QWidget* container = new QWidget(this);
+    QGridLayout* mainLayout = new QGridLayout(container);
 
     mainLayout->addWidget(new QLabel("Type:"),0,0);
     typeComboBox = new QComboBox(this);
@@ -145,7 +146,9 @@ AddItemView::AddItemView(QWidget *parent, QVector<AbstractItem*>* items) : QWidg
     connect(cancelButton, &QPushButton::clicked, this, &AddItemView::handleCancel);
     mainLayout->addLayout(buttonLayout, 6, 0, 1, 2, Qt::AlignCenter);
 
-    setLayout(mainLayout);
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->addWidget(container);
+    setLayout(layout);
 
     softwareFields->setVisible(false);
     videogameFields->setVisible(false);

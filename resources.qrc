@@ -42,5 +42,6 @@
         <file>assets/icon_save.png</file>
         <file>assets/icon_saveas.png</file>
         <file>assets/icon_search.png</file>
+        <file>assets/style.qss</file>
     </qresource>
 </RCC>
