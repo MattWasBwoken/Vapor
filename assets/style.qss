@@ -14,16 +14,16 @@ QToolButton:hover { background-color: #666; color: #eee; }
 QLineEdit { background-color: #303030; color: #eee; border: 1px solid #777; border-radius: 5px; padding: 2px 5px; }
 QLineEdit:focus { border-color: #66afe9; outline: 0; }
 QTextEdit { background-color: #303030; color: #eee; border: 1px solid #777; border-radius: 5px; padding: 2px 5px; }
-QComboBox { background-color: #303030; color: #eee; padding: 2px 10px; margin: 5px; border: 1px solid #ccc; border-radius: 5px; }
+QComboBox { background-color: #303030; color: #eee; padding: 2px 10px; border: 1px solid #ccc; border-radius: 5px; }
 QComboBox::selected { background-color: #666; }
 QComboBox:focus { border-color: #66afe9; outline: 0; }
 QComboBox::drop-down { border: 0px; }
 QComboBox QAbstractItemView { background-color: #303030; color: #eee; border: 0px; border-radius: 5px; }
 QComboBox::drop-down { background: transparent; border: transparent; }
-QComboBox::down-arrow { image: url(:/assets/icon_dropdown.png); width: 20px; height: 20px; padding-right: 10px; }
+QComboBox::down-arrow { image: url(:/assets/icons/icon_dropdown.png); width: 20px; height: 20px; padding-right: 10px; }
 QCheckBox { color: #eee; }
 QCheckBox::indicator { background-color: #303030; border: 1px solid #777; width: 15px; height: 15px; border-radius: 3px; }
-QCheckBox::indicator:checked { background-color: #2196F3; border: 1px solid #2196F3; image: url(:/assets/icon_check.png); }
+QCheckBox::indicator:checked { background-color: #2196F3; border: 1px solid #2196F3; image: url(:/assets/icons/icon_check.png); }
 QPushButton { background-color: #303030; color: #eee; border: 0px; padding: 5px 10px; border-radius: 5px; }
 QPushButton:hover { background-color: #666; }
 QScrollArea { border: none; }
@@ -39,4 +39,3 @@ QDialog { background-color: #252525 }
 QDialog QWidget { background-color: #232323 }
 QDialog QPushButton { background-color: #303030; color: #eee; border: 0px; padding: 5px 10px; border-radius: 5px; }
 QDialog QListWidget::item::selected { background-color: #666; }
-
