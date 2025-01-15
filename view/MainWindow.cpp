@@ -423,6 +423,7 @@ void MainWindow::handleBackToGrid(bool showMessage) {
     centralWidget->setCurrentWidget(centralWidget->widget(0));
     viewRenderer->setViewType(ViewType::Grid);
     viewRenderer->render(items);
+    handleSearch();
     if (showMessage) {
         updateStatus(tr("Back to Grid View"));
     }
