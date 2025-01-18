@@ -3,12 +3,12 @@
         {
             "type": "Videogame",
             "id": 1,
-            "name": "Overwatch",
-            "description": "Overwatch is a vibrant team-based multiplayer shooter with a diverse cast of heroes, each with unique abilities. Players work together to secure objectives and outmaneuver opponents in visually stunning maps. Its emphasis on teamwork, strategic depth, and engaging lore has redefined the genre.",
-            "developer": "Blizzard Entertainment",
-            "genre": "Shooter",
-            "releaseDate": 2016,
-            "imagePath": ":/assets/images/overwatch.png"
+            "name": "Outer Wilds",
+            "description": "Outer Wilds is a critically acclaimed open-world exploration game where players uncover the mysteries of a solar system trapped in a time loop. With a focus on discovery, it blends puzzles, physics, and storytelling, offering a uniquely immersive experience that rewards curiosity and observation.",
+            "developer": "Mobius Digital",
+            "genre": "Puzzle-Exploration",
+            "releaseDate": 2019,
+            "imagePath": ":/assets/images/outerwilds.jpg"
         },
         {
             "type": "Videogame",
@@ -123,7 +123,7 @@
             "name": "Grand Theft Auto V",
             "description": "Grand Theft Auto V is a sprawling open-world action-adventure game set in Los Santos, a city teeming with life and danger. Players follow three interconnected protagonists in a gripping story of crime, betrayal, and redemption. With its expansive map, dynamic missions, and engaging online multiplayer mode, GTA V delivers an unparalleled gaming experience.",
             "developer": "Rockstar Games",
-            "genre": "Action-Adventure",
+            "genre": "Action",
             "releaseDate": 2013,
             "imagePath": ":/assets/images/gtav.jpg"
         },
@@ -131,10 +131,10 @@
             "type": "Soundtrack",
             "id": 13,
             "name": "Grand Theft Auto V OST",
-            "description": "The official soundtrack of Grand Theft Auto V features an eclectic mix of music, blending radio station hits with original compositions. Tracks range from high-energy electronic beats to atmospheric scores, perfectly capturing the game’s diverse settings and intense action. A true celebration of music and storytelling in gaming.",
+            "description": "The official soundtrack of Grand Theft Auto V features an eclectic mix of music, blending radio station hits with original compositions. Tracks range from high-energy electronic beats to atmospheric scores, perfectly capturing the game's diverse settings and intense action. A true celebration of music and storytelling in gaming.",
             "composer": "Various Artists",
             "developer": "Rockstar Games",
-            "genre": "Action-Adventure",
+            "genre": "Action",
             "releaseDate": 2013,
             "tracksNumber": 59,
             "imagePath": ":/assets/images/gtav_ost.jpg"
@@ -145,7 +145,7 @@
             "name": "Hollow Knight",
             "description": "Hollow Knight is a beautifully crafted action-adventure game set in the hauntingly atmospheric kingdom of Hallownest. Players explore vast interconnected areas, uncovering secrets, battling challenging foes, and discovering the tragic stories of its insect-like inhabitants. Its hand-drawn visuals, rich lore, and mesmerizing soundtrack make it a modern classic.",
             "developer": "Team Cherry",
-            "genre": "Action-Adventure",
+            "genre": "Metroidvania",
             "releaseDate": 2017,
             "imagePath": ":/assets/images/hollowknight.jpg"
         },
@@ -193,7 +193,7 @@
             "type": "Videogame",
             "id": 19,
             "name": "Dark Souls III",
-            "description": "Dark Souls III is a challenging action RPG set in a dark, interconnected world filled with peril and mystery. Players face relentless enemies, navigate intricate environments, and unravel a lore-rich story. Known for its punishing difficulty and rewarding combat, it’s a masterpiece of atmospheric storytelling and design.",
+            "description": "Dark Souls III is a challenging action RPG set in a dark, interconnected world filled with peril and mystery. Players face relentless enemies, navigate intricate environments, and unravel a lore-rich story. Known for its punishing difficulty and rewarding combat, it's a masterpiece of atmospheric storytelling and design.",
             "developer": "FromSoftware",
             "genre": "Action RPG",
             "releaseDate": 2016,
@@ -213,7 +213,7 @@
             "type": "DLC",
             "id": 21,
             "name": "Portal Stories: Mel",
-            "description": "Portal Stories: Mel is a standalone mod for Portal 2, offering a new narrative and a fresh set of challenging puzzles. Players take on the role of Mel, a test subject navigating a pre-Portal 2 Aperture Science. With its high-quality design and compelling story, it’s a must-play for Portal fans.",
+            "description": "Portal Stories: Mel is a standalone mod for Portal 2, offering a new narrative and a fresh set of challenging puzzles. Players take on the role of Mel, a test subject navigating a pre-Portal 2 Aperture Science. With its high-quality design and compelling story, it's a must-play for Portal fans.",
             "developer": "Prism Studios",
             "genre": "Puzzle",
             "releaseDate": 2015,
@@ -234,7 +234,7 @@
             "type": "Software",
             "id": 23,
             "name": "Final Cut Pro",
-            "description": "With optimizations for Apple silicon and the power of its Metal engine, Final Cut Pro allows you to edit more complex projects and work with larger frame sizes, higher frame rates, and more effects — all at incredible speeds. And it’s built to harness the extreme power of Mac Pro, Mac Studio or MacBook Pro for next-level performance. Tap into superfast unified memory shared across the CPU, the GPU, and the Apple Neural Engine to play back more high-resolution video streams and render your movie in record time.",
+            "description": "With optimizations for Apple silicon and the power of its Metal engine, Final Cut Pro allows you to edit more complex projects and work with larger frame sizes, higher frame rates, and more effects — all at incredible speeds. And it's built to harness the extreme power of Mac Pro, Mac Studio or MacBook Pro for next-level performance. Tap into superfast unified memory shared across the CPU, the GPU, and the Apple Neural Engine to play back more high-resolution video streams and render your movie in record time.",
             "currentVersion": "10.7.1",
             "winCompatibility": false,
             "imagePath": ":/assets/images/finalcut.jpg"
@@ -242,24 +242,196 @@
         {
             "type": "Videogame",
             "id": 24,
-            "name": "Videogioco di prova generico",
-            "description": "Descrizione corta generica.",
-            "developer": "Prova",
-            "genre": "Test",
+            "name": "Elden Ring",
+            "description": "Elden Ring is an expansive action RPG set in a dark fantasy world crafted by FromSoftware and George R.R. Martin. Featuring challenging combat, intricate lore, and a vast, interconnected open world, it invites players to explore, battle formidable foes, and uncover the secrets of the Lands Between.",
+            "developer": "FromSoftware",
+            "genre": "Action RPG",
+            "releaseDate": 2022,
+            "imagePath": ":/assets/images/eldenring.jpg"
+        },
+        {
+            "type": "Software",
+            "id": 25,
+            "name": "Spotify",
+            "description": "Spotify is a leading music streaming platform offering millions of songs, podcasts, and playlists. With personalized recommendations, offline listening, and curated content, it provides a seamless experience for discovering and enjoying audio on-demand across various devices.",
+            "currentVersion": "10.15",
+            "winCompatibility": true,
+            "imagePath": ":/assets/images/spotify.png"
+        },
+        {
+            "type": "Software",
+            "id": 26,
+            "name": "Discord",
+            "description": "Spotify is a leading music streaming platform offering millions of songs, podcasts, and playlists. With personalized recommendations, offline listening, and curated content, it provides a seamless experience for discovering and enjoying audio on-demand across various devices.",
+            "currentVersion": "2024.12.19",
+            "winCompatibility": true,
+            "imagePath": ":/assets/images/discord.png"
+        },
+        {
+            "type": "Software",
+            "id": 27,
+            "name": "Visual Studio Code",
+            "description": "Visual Studio Code is a free, powerful code editor developed by Microsoft. It provides syntax highlighting, intelligent code completion, and integrated Git, making it a popular choice among developers.",
+            "currentVersion": "1.80.0",
+            "winCompatibility": true,
+            "imagePath": ":/assets/images/vscode.png"
+        },
+        {
+            "type": "Software",
+            "id": 28,
+            "name": "Unity Engine",
+            "description": "Unity is a cross-platform game engine widely used for developing 2D and 3D video games and simulations. It features a robust asset store, real-time rendering, and an approachable interface for both beginners and professionals.",
+            "currentVersion": "2023.2",
+            "winCompatibility": true,
+            "imagePath": ":/assets/images/unity.png"
+        },
+        {
+            "type": "DLC",
+            "id": 29,
+            "name": "Elden Ring: Shadow of the Erdtree",
+            "description": "Elden Ring: Shadow of the Erdtree takes players beyond the Lands Between to explore the Land of Shadow, a completely new world from Elden Ring. Players can seamlessly travel back and forth between its vast maps interspersed with diverse situations and meticulous dungeons where menacing enemies roam.",
+            "developer": "FromSoftware",
+            "genre": "Action RPG",
             "releaseDate": 2024,
-            "imagePath": ":/assets/images/prova.jpg"
+            "dlcType": "Expansion",
+            "standalone": false,
+            "imagePath": ":/assets/images/eldenring_sote.png"
+        },
+        {
+            "type": "Videogame",
+            "id": 30,
+            "name": "Marvel's Spider-Man 2",
+            "description": "Spider-Man 2 is an action-packed adventure game by Insomniac Games, where players swing through New York City as Peter Parker and Miles Morales. Featuring a rich story, improved mechanics, and iconic villains like Venom, it delivers a thrilling superhero experience with dynamic combat and exploration.",
+            "developer": "Insomniac Games",
+            "genre": "Action-Adventure",
+            "releaseDate": 2023,
+            "imagePath": ":/assets/images/spiderman2.png"
+        },
+        {
+            "type": "DLC",
+            "id": 31,
+            "name": "Cyberpunk 2077: Phantom Liberty",
+            "description": "Cyberpunk 2077: Phantom Liberty is a gripping spy-thriller expansion for the base game, blending intense action with political intrigue. Set in a new district of Night City, it introduces fresh characters, high-stakes missions, and gameplay enhancements, delivering a deeper dive into the dystopian cyberpunk world.",
+            "developer": "CD Projekt Red",
+            "genre": "RPG",
+            "releaseDate": 2023,
+            "dlcType": "Expansion",
+            "standalone": false,
+            "imagePath": ":/assets/images/cyberpunk2077_phantomliberty.png"
+        },
+        {
+            "type": "Videogame",
+            "id": 32,
+            "name": "Mass Effect 2",
+            "description": "Mass Effect 2 is a critically acclaimed sci-fi RPG where players lead Commander Shepard and their crew to stop a galactic threat known as the Collectors. With deep storytelling, squad customization, and impactful choices, it delivers a cinematic experience.",
+            "developer": "BioWare",
+            "genre": "RPG/TPS",
+            "releaseDate": 2010,
+            "imagePath": ":/assets/images/masseffect2.png"
+        },
+        {
+            "type": "DLC",
+            "id": 33,
+            "name": "Mass Effect 2: Arrival",
+            "description": "Arrival is a gripping DLC for Mass Effect 2, focusing on Shepard's mission to prevent the Reapers' invasion by investigating a secretive project. With high stakes and narrative tension, it sets the stage for the events of Mass Effect 3.",
+            "developer": "BioWare",
+            "genre": "RPG/TPS",
+            "releaseDate": 2011,
+            "dlcType": "Expansion",
+            "standalone": false,
+            "imagePath": ":/assets/images/masseffect2_arrival.jpg"
         },
         {
             "type": "Soundtrack",
-            "id": 25,
-            "name": "Soundtrack di prova generica",
-            "description": "Descrizione corta generica.",
-            "developer": "Prova",
-            "genre": "Test",
-            "releaseDate": 2024,
-            "composer": "Tizio",
-            "tracksNumber": 12,
-            "imagePath": ":/assets/images/prova.jpg"
+            "id": 34,
+            "name": "Cyberpunk 2077: Original Score",
+            "description": "The Cyberpunk 2077 Original Score is a dynamic blend of futuristic electronic beats, industrial tones, and atmospheric tracks. Featuring artists like Refused (as Samurai) and other genre-defining acts, it perfectly captures the edgy, dystopian vibe of Night City, immersing players in its vibrant, chaotic world.",
+            "composer": "Various Artists",
+            "developer": "CD Projekt Red",
+            "genre": "RPG",
+            "releaseDate": 2020,
+            "tracksNumber": 43,
+            "imagePath": ":/assets/images/cyberpunk2077_score.jpg"
+        },
+        {
+            "type": "Soundtrack",
+            "id": 35,
+            "name": "Outer Wilds (Original Soundtrack)",
+            "description": "The Outer Wilds Original Soundtrack by Andrew Prahlow is a mesmerizing blend of folk, ambient, and cosmic themes. Its emotive melodies, like the iconic Timber Hearth and End Times, perfectly complement the game's sense of wonder, exploration, and introspection in a universe filled with mystery.",
+            "composer": "Andrew Prahlow",
+            "developer": "Mobius Digital",
+            "genre": "Puzzle-Exploration",
+            "releaseDate": 2019,
+            "tracksNumber": 28,
+            "imagePath": ":/assets/images/outerwilds_ost.jpg"
+        },
+        {
+            "type": "Soundtrack",
+            "id": 36,
+            "name": "Red Dead Redemption 2",
+            "description": "The Red Dead Redemption 2 Original Soundtrack is a masterful blend of Americana, folk, and cinematic orchestration. Produced by Daniel Lanois, it features haunting vocals and evocative instrumentals that capture the emotional depth, rugged beauty, and tragic storytelling of the game's epic Wild West journey.",
+            "composer": "Woody Jackson",
+            "developer": "Rockstar Games",
+            "genre": "Action-Adventure",
+            "releaseDate": 2018,
+            "tracksNumber": 22,
+            "imagePath": ":/assets/images/rdr2_ost.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 37,
+            "name": "Halo: The Master Chief Collection",
+            "description": "Halo: The Master Chief Collection (MCC) is a definitive compilation of the iconic Halo series, featuring remastered campaigns and multiplayer from Halo: CE to Halo 4. It offers stunning visuals, cross-platform play, and endless nostalgia for both longtime fans and newcomers.",
+            "developer": "Bungie",
+            "genre": "FPS",
+            "releaseDate": 2019,
+            "imagePath": ":/assets/images/halo.jpg"
+        },
+        {
+            "type": "Soundtrack",
+            "id": 38,
+            "name": "Halo: MCC Soundtrack",
+            "description": "Halo MCC Soundtrack is a celebration of the series' legendary music, from the ethereal choirs of Halo: CE to the cinematic scores of later entries. Composers like Martin O'Donnell and Michael Salvatori crafted timeless themes that elevate the emotional and epic scale of the Halo universe.",
+            "composer": "Martin O'Donnell, Michael Salvatori",
+            "developer": "Bungie",
+            "genre": "FPS",
+            "releaseDate": 2019,
+            "tracksNumber": 127,
+            "imagePath": ":/assets/images/halo_ost.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 39,
+            "name": "Doom (2016)",
+            "description": "Doom (2016) is a high-octane FPS reboot that redefines the franchise with relentless combat, fluid movement, and gory glory kills. Players battle demons in a fast-paced, adrenaline-fueled fight to save Mars from Hell's invasion.",
+            "developer": "id Software",
+            "genre": "FPS",
+            "releaseDate": 2016,
+            "imagePath": ":/assets/images/doom.jpg"
+        },
+        {
+            "type": "Soundtrack",
+            "id": 40,
+            "name": "DOOM (2016) Original Soundtrack",
+            "description": "Mick Gordon's intense industrial and electronic metal soundtrack drives the frenetic action of DOOM (2016). It combines aggressive guitar riffs with synth-based layers, capturing the game's relentless pace.",
+            "composer": "Mick Gordon",
+            "developer": "id Software",
+            "genre": "FPS",
+            "releaseDate": 2016,
+            "tracksNumber": 31,
+            "imagePath": ":/assets/images/doom_ost.jpg"
+        },
+        {
+            "type": "DLC",
+            "id": 41,
+            "name": "Outer Wilds: Echoes of the Eye",
+            "description": "Outer Wilds: Echoes of the Eye is an acclaimed expansion that deepens the mystery of the Outer Wilds universe. With a gripping new storyline, haunting environments, and fresh puzzles, it seamlessly integrates into the base game while introducing eerie, thought-provoking twists that challenge players' curiosity.",
+            "developer": "Mobius Digital",
+            "genre": "Puzzle-Exploration",
+            "releaseDate": 2021,
+            "dlcType": "Expansion",
+            "standalone": false,
+            "imagePath": ":/assets/images/outerwilds_eote.png"
         }
     ]
 }

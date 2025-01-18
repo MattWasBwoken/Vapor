@@ -28,7 +28,6 @@
         <file>assets/images/hollowknight.jpg</file>
         <file>assets/images/marioodyssey.png</file>
         <file>assets/images/minecraft.jpg</file>
-        <file>assets/images/overwatch.png</file>
         <file>assets/images/photoshop.png</file>
         <file>assets/images/portal2.jpg</file>
         <file>assets/images/portal2mel.jpg</file>
@@ -43,5 +42,24 @@
         <file>assets/defaults/default_unknown.png</file>
         <file>assets/defaults/default_videogame.png</file>
         <file>assets/icons/dlc_icon.png</file>
+        <file>assets/images/cyberpunk2077_phantomliberty.png</file>
+        <file>assets/images/cyberpunk2077_score.jpg</file>
+        <file>assets/images/discord.png</file>
+        <file>assets/images/doom.jpg</file>
+        <file>assets/images/doom_ost.jpg</file>
+        <file>assets/images/eldenring.jpg</file>
+        <file>assets/images/eldenring_sote.png</file>
+        <file>assets/images/halo.jpg</file>
+        <file>assets/images/halo_ost.jpg</file>
+        <file>assets/images/masseffect2.png</file>
+        <file>assets/images/masseffect2_arrival.jpg</file>
+        <file>assets/images/outerwilds.jpg</file>
+        <file>assets/images/outerwilds_eote.png</file>
+        <file>assets/images/outerwilds_ost.jpg</file>
+        <file>assets/images/rdr2_ost.jpg</file>
+        <file>assets/images/spiderman2.png</file>
+        <file>assets/images/spotify.png</file>
+        <file>assets/images/unity.png</file>
+        <file>assets/images/vscode.png</file>
     </qresource>
 </RCC>
