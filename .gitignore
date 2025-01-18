@@ -4,5 +4,6 @@
 Relazione/*
 !Relazione/*.tex
 !Relazione/*.pdf
+!Relazione/*.png
 #compilazione
 build/
