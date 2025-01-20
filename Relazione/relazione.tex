@@ -1,7 +1,7 @@
 \documentclass[10pt]{article}
 \linespread{1.3}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
-\usepackage{graphicx,multicol,hyperref,wrapfig,ragged2e} % ricordarsi di rimuovere quelle inutili
+\usepackage{graphicx,hyperref,wrapfig,ragged2e} % ricordarsi di rimuovere quelle inutili
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
@@ -22,28 +22,28 @@
     \includegraphics[width=0.3\textwidth]{./unipdlogo.png}
 \end{figure}
 \maketitle
+\begin{figure}
+    \centering
+    \includegraphics[width=0.3\textwidth]{./vaporlogo.png}
+\end{figure}
 
-\newpage
-
-\tableofcontents  % valutare se necessaria
 \newpage
 
 \section{Introduzione} % circa 200 parole, no immagini !
-Vapor è un software che permette di visualizzare la propria libreria digitale di software, videogiochi, DLC e colonne sonore. Si possono aggiungere, modificare, cercare e rimuovere gli elementi della libreria, ciascuno con dei propri attributi caratteristici e una differente visualizzazione grafica. È anche possibile importare una propria libreria, modificarla a piacimento e salvarla per un utilizzo continuo nel tempo.
+Vapor è un software che permette di visualizzare la propria libreria digitale di software, videogiochi, DLC e colonne sonore. Si possono aggiungere, modificare, cercare e rimuovere gli elementi della libreria, ciascuno con dei propri attributi caratteristici e una differente visualizzazione grafica. È anche possibile importare una propria libreria in formato JSON, modificarla a piacimento e salvarla per un utilizzo continuo nel tempo, oltre a godere di una serie di funzionalità aggiuntive elencate nel capitolo \ref{funzionalita}
 \\Ho scelto questo argomento per interesse personale nel mondo dei videogiochi e, nello specifico, perché ho sempre prestato attenzione a come vengono sviluppati i launcher (Steam, Epic Games, Ubisoft, EA, ecc.) e quali scelte vengono adottate da ciascun produttore nel corso degli anni. Questi esempi sono stati fonte di ispirazione per le categorie, gli attributi e alcuni elementi di presentazione estetica, benché il progetto sia estremamente ridotto in confronto.
-\\Il progetto è stato testato su un dispositivo personale con sistema operativo Windows e sulla macchina virtuale fornita con Linux, distribuzione Ubuntu.
+\\Il progetto è stato testato su un dispositivo personale con sistema operativo Windows 11 e sulla macchina virtuale fornita con Linux, distribuzione Ubuntu 22.04.
 
 \section{Descrizione del modello}
 Il modello logico di Vapor si articola in una gerarchia di classi che rappresentano i diversi tipi di oggetti e le loro caratteristiche. In cima a questa gerarchia si trova la classe astratta AbstractItem, che definisce le proprietà comuni a tutti i media: id, nome, descrizione e percorso dell'immagine. Questa classe è la base per la costruzione di classi concrete che rappresentano specifici tipi di elementi della libreria, ovvero Software, Videogame, DLC e Soundtrack. Si noti che l'attributo id di AbstractItem, che viene poi ereditato dalle classi derivate, non viene mai usato o modificato in attivamente dall'utente, bensì viene utilizzato unicamente per distinguere in maniera univoca gli elementi della libreria per interazioni come la cancellazione, la modifica o l'ordinamento.
-\begin{figure} [h]
+\begin{figure} [h] \label{fig:uml}
     \centering
     \includegraphics[width=0.9\textwidth]{./uml_diagram.png}
     \caption{Diagramma UML delle principali classi del modello}
 \end{figure}
-Il diagramma UML qui presente fornisce un'idea della struttura piuttosto tradizionale adottata per Vapor.
-La scelta di utilizzare una classe AbstractItem come classe di base astratta non presenta particolari peculiarità, e ciascuna classe ha dei normali metodi setter e getter che adempiono al loro scopo. Le classi DLC e Soundtrack, invece, sono state derivate direttamente da Videogame poiché si presuppone che tali elementi della libreria abbiano sempre un videogioco base di cui fanno parte, anche se esso non risieda necessariamente all'interno della stessa libreria. Nel diagramma si accenna anche a metodi accept destinati all'utilizzo dei visitor; sono state definite le interfacce IVisitor e IConstVisitor che consentono di estendere le funzionalità delle classi AbstractItem senza modificarle.
+Il diagramma UML \hyperref{fig:uml}{fig:uml}qui presente fornisce un'idea della struttura piuttosto tradizionale adottata per Vapor.
+La scelta di utilizzare una classe AbstractItem come classe di base astratta non presenta particolari peculiarità, e ciascuna classe ha dei classici metodi setter e getter che adempiono al loro scopo. Le classi DLC e Soundtrack, invece, sono state derivate direttamente da Videogame poiché si presuppone che esse abbiano sempre un videogioco base di cui fanno parte: anche se quest'ultimo non dovesse risiedere all'interno della stessa libreria, verranno ereditati gli attributi (genere, sviluppatore, data di rilascio) che permettono di rendere evidente il videogioco di appartenenza. Nel diagramma si accenna anche a metodi accept destinati all'utilizzo dei visitor; sono state definite le interfacce IVisitor e IConstVisitor che consentono di estendere le funzionalità delle classi AbstractItem senza modificarle.
 \\La separazione tra modello e vista è un aspetto fondamentale del design dell'applicazione: il codice del modello è riutilizzabile e indipendente dall'interfaccia utente, il che garantisce una maggiore flessibilità e manutenibilità.
-% da espandere
 
 \section{Polimorfismo}
 L'uso del polimorfismo è fondamentale per la gestione dei diversi tipi di media, ed è implementato attraverso le interfacce IVisitor e IConstVisitor.
@@ -61,11 +61,11 @@ Questi visitor dimostrano come il polimorfismo permette di eseguire operazioni d
 La persistenza dei dati in Vapor è gestita tramite file JSON, formato scelto per la sua leggibilità e facilità di manipolazione. La classe JsonItemSaver serializza gli oggetti del modello in formato JSON, mentre la classe JsonItemLoader deserializza i dati dal file, creando gli oggetti corrispondenti da visualizzare nel software. Questo file contiene un array di oggetti ciascuno rappresentante un elemento, come ci si aspetterrebbe da un comune file JSON. Il processo di salvataggio prevede la creazione di un file con questa struttura, mentre il caricamento dei dati segue il processo inverso: viene letto il file JSON scelto da finestra di dialogo di sistema, vengono creati gli oggetti corrispondenti e popolata la collezione di media.
 \\Un esempio di una ricca libreria per Vapor è fornito con il codice del progetto (nel file \textit{data/library.json}) che viene aperto automaticamente all'avvio del software.
 
-\section{Funzionalità implementate}
-Vapor offre una serie di funzionalità aggiuntive oltre a quelle richieste dalle specifiche, sia strutturali che estetiche:
+\section{Funzionalità implementate} \label{funzionalita}
+Vapor offre una serie di funzionalità oltre a quelle richieste dalle specifiche, sia strutturali che estetiche:
 \\Funzionalità principali:
 \begin{itemize}
-    \item Gestione di quattro tipi di media: ogni tipo di media ha attributi specifici e una visualizzazione personalizzata;
+    \item Gestione di quattro tipi di media: ognuno di essi ha attributi specifici e una visualizzazione personalizzata;
     \item Ricerca in tempo reale e filtro: l'applicazione permette di cercare media per nome e descrizione, e di filtrare per tipo;
     \item Ordinamento: gli elementi possono essere ordinati per nome, id e per tipo.
 \end{itemize}
@@ -73,8 +73,8 @@ Funzionalità estetiche e di usabilità:
 \begin{itemize}
     \item Visualizzazione in diverse modalità: sono implementate visualizzazioni a griglia, in lista o in dettaglio, oltre a quelle dedicate all'aggiunta e alla modifica di elementi;
     \item Menu e toolbar: l'applicazione offre un menu per le operazioni di file e gestione dei media, oltre a una toolbar spostabile con funzioni di ricerca e ordinamento;
-    \item Status bar: l'applicazione visualizza messaggi di stato per tenere informato l'utente sulle operazioni appena eseguite;
-    \item Stili e temi: l'interfaccia utente utilizza un foglio di stile (style.qss) per garantire un aspetto coerente;
+    \item Status bar: vengono visualizzati messaggi di stato per tenere informato l'utente sull'operazione appena eseguita;
+    \item Stili e temi: l'interfaccia utente utilizza un foglio di stile (\textit{style.qss}) per garantire un aspetto coerente;
     \item Icone: sono utilizzate icone per rendere più intuitive le operazioni disponibili;
     \item Effetti grafici: sono presenti effetti grafici come il cambio di colore al passaggio del mouse per migliorare l'interazione;
     \item Immagini predefinite: sono utilizzate immagini predefinite per i vari tipi di oggetti nel caso in cui non venga selezionata un'immagine dall'utente.
