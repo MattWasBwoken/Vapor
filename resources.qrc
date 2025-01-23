@@ -61,5 +61,10 @@
         <file>assets/images/spotify.png</file>
         <file>assets/images/unity.png</file>
         <file>assets/images/vscode.png</file>
+        <file>assets/images/balatro.jpg</file>
+        <file>assets/images/fable.jpg</file>
+        <file>assets/images/fh5.jpg</file>
+        <file>assets/images/gt7.png</file>
+        <file>assets/images/likeadragon8.jpg</file>
     </qresource>
 </RCC>

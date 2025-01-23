@@ -28,7 +28,7 @@ SOURCES += \
     view/SetItemVisitor.cpp \
     view/ViewRenderer.cpp
 
-HEADERS += \    #controllare spesso che ci siano tutti
+HEADERS += \
     data/JsonVisitor.h \
     data/JsonItemLoader.h \
     data/JsonItemSaver.h \

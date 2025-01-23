@@ -432,6 +432,56 @@
             "dlcType": "Expansion",
             "standalone": false,
             "imagePath": ":/assets/images/outerwilds_eote.png"
+        },
+        {
+            "type": "Videogame",
+            "id": 42,
+            "name": "Forza Horizon 5",
+            "description": "Forza Horizon 5 is an open-world racing game set in the vibrant landscapes of Mexico. With a vast selection of cars, dynamic weather, and stunning visuals, it offers exhilarating races and diverse events. Its seamless multiplayer and creative modes make it the ultimate playground for car enthusiasts.",
+            "developer": "Playground Games",
+            "genre": "Racing",
+            "releaseDate": 2021,
+            "imagePath": ":/assets/images/fh5.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 43,
+            "name": "Gran Turismo 7",
+            "description": "Gran Turismo 7 is a premier racing simulator that blends realistic driving physics with stunning visuals. Featuring a vast roster of meticulously detailed cars, dynamic weather, and immersive tracks, it offers a rich single-player campaign, online competition, and deep customization, celebrating automotive culture.",
+            "developer": "Polyphony Digital",
+            "genre": "Racing",
+            "releaseDate": 2021,
+            "imagePath": ":/assets/images/gt7.png"
+        },
+        {
+            "type": "Videogame",
+            "id": 44,
+            "name": "Fable: Anniversary",
+            "description": "Fable is a beloved action RPG where every choice shapes your hero's journey, affecting their appearance, morality, and the world around them. Set in the whimsical and immersive land of Albion, it blends humor, adventure, and rich storytelling, offering a unique and personal fantasy experience.",
+            "developer": "Lionhead Studios",
+            "genre": "RPG",
+            "releaseDate": 2014,
+            "imagePath": ":/assets/images/fable.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 45,
+            "name": "Balatro",
+            "description": "Balatro is a poker-inspired roguelike deck-builder that challenges players to craft powerful poker hands and utilize unique Joker cards to create varied synergies and builds. The game has achieved significant acclaim, selling over 5 million copies within its first year and winning multiple awards, including Best Independent Game, Best Debut Indie Game, and Best Mobile Game at The Game Awards 2024.",
+            "developer": "LocalThunk",
+            "genre": "Cards",
+            "releaseDate": 2024,
+            "imagePath": ":/assets/images/balatro.jpg"
+        },
+        {
+            "type": "Videogame",
+            "id": 46,
+            "name": "Like a Dragon: Infinite Wealth",
+            "description": "Like a Dragon: Infinite Wealth is a role-playing game developed by Ryu Ga Gotoku Studio and published by Sega. As the ninth mainline entry in the Like a Dragon series, it follows protagonists Ichiban Kasuga and Kazuma Kiryu as they navigate adventures in Yokohama, Japan, and Honolulu. The game introduces an enhanced turn-based combat system, allowing for strategic character positioning and dynamic team-up attacks. Players can engage in various mini-games, including karaoke, darts, and new additions like Crazy Delivery and Sujimon Battle.",
+            "developer": "Ryu Ga Gotoku Studio",
+            "genre": "JRPG",
+            "releaseDate": 2024,
+            "imagePath": ":/assets/images/likeadragon8.jpg"
         }
     ]
 }
