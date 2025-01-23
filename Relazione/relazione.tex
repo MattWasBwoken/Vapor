@@ -46,6 +46,7 @@ Il diagramma UML \hyperref[fig:uml]{qui} presente fornisce un'idea della struttu
 La scelta di utilizzare una classe AbstractItem come classe di base astratta non presenta particolari peculiarità, e ciascuna classe ha dei classici metodi setter e getter che adempiono al loro scopo. Le classi DLC e Soundtrack, invece, sono state derivate direttamente da Videogame poiché si presuppone che esse abbiano sempre un videogioco base di cui fanno parte: anche se quest'ultimo non dovesse risiedere all'interno della stessa libreria, verranno ereditati gli attributi (genere, sviluppatore, data di rilascio) che permetteranno di rendere evidente il videogioco di appartenenza. Nel diagramma si accenna anche a metodi accept destinati all'utilizzo dei visitor; sono state definite le interfacce IVisitor e IConstVisitor che consentono di estendere le funzionalità delle classi AbstractItem senza modificarle.
 \\La separazione tra modello e vista è un aspetto fondamentale del design dell'applicazione: il codice del modello è riutilizzabile e indipendente dall'interfaccia utente, garantendo una maggiore flessibilità e manutenibilità.
 
+\newpage
 \section{Polimorfismo}
 L'uso del polimorfismo è fondamentale per la gestione dei diversi tipi di media, ed è implementato attraverso le interfacce IVisitor e IConstVisitor.
 \\Un esempio di polimorfismo non banale si trova proprio in questo Visitor pattern: le classi ItemRenderer, SetItemVisitor, EditItemVisitor e SearchItemVisitor implementano l'interfaccia IConstVisitor o IVisitor per eseguire operazioni diverse su ciascun tipo di oggetto.
@@ -81,7 +82,9 @@ Funzionalità estetiche e di usabilità:
     \item Immagini predefinite: sono utilizzate immagini predefinite per i vari tipi di oggetti nel caso in cui non venga selezionata un'immagine dall'utente.
 \end{itemize}
 
+\newpage
 \section{Rendiconto ore}
+Il monte ore è stato superato rispetto a quanto preventivamente stimato in quasi tutte le attività. Lo studio del framework Qt mi ha messo in difficoltà ed impararne tutte le peculiarità è stato certamente una sfida; questo mi ha portato ad oltrepassare le ore previste anche in quanto a scrittura del codice nel mio personale percorso di apprendimento. Inoltre, alcune difficoltà nel trovare l'origine di problemi nati durante lo sviluppo del software hanno fatto crescere anche il numero di ore di debug. Le ore dedicate allo sviluppo meramente estetico, alla ricerca delle immagini, delle icone e dell'arricchimento della libreria naturalmente non sono state conteggiate.
 \begin{center}
     \begin{tabular}{| c | c | c |} \hline
     Attività & Ore previste & Ore effettive \\\hline
@@ -94,6 +97,5 @@ Funzionalità estetiche e di usabilità:
     Totale & 40 & 64 \\\hline
     \end{tabular}
 \end{center}
-Il monte ore è stato superato rispetto a quanto preventivamente stimato in quasi tutte le attività. Lo studio del framework Qt mi ha messo in difficoltà ed impararne tutte le peculiarità è stato certamente una sfida; questo mi ha portato ad oltrepassare le ore previste anche in quanto a scrittura del codice nel mio personale percorso di apprendimento. Inoltre, alcune difficoltà nel trovare l'origine di problemi nati durante lo sviluppo del software hanno fatto crescere anche il numero di ore di debug. Le ore dedicate allo sviluppo meramente estetico, alla ricerca delle immagini, delle icone e dell'arricchimento della libreria naturalmente non sono state conteggiate.
 
 \end{document}
