@@ -12,7 +12,7 @@ public:
     explicit ViewRenderer(QWidget* parent = nullptr);
     void setViewType(ViewType viewType);
     ViewType getViewType() const;
-    void render(const QVector<AbstractItem*> &items);
+    void render(QVector<AbstractItem*> &items);
 signals:
     void itemSelected(AbstractItem *item);
     void backToGridRequested(bool showMessage);

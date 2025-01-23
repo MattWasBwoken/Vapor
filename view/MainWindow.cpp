@@ -198,12 +198,7 @@ void MainWindow::handleSearch() {
         item->accept(&visitor);
     }
 
-    QVector<const AbstractItem*> constResults = visitor.getResults();
-    QVector<AbstractItem*> filteredItems;
-    for (const AbstractItem* constItem : constResults) {
-        filteredItems.append(const_cast<AbstractItem*>(constItem));
-    }
-
+    QVector<AbstractItem*> filteredItems = visitor.getResults();
     viewRenderer->render(filteredItems);
     updateStatus(tr("Search performed with filter: %1").arg(filter));
 }

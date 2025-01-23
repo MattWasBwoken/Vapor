@@ -6,7 +6,7 @@
 
 SearchItemVisitor::SearchItemVisitor(const QString& searchString, const QString& typeFilter): searchString(searchString), typeFilter(typeFilter) {}
 
-void SearchItemVisitor::visit(const Software* item) {
+void SearchItemVisitor::visit(Software* item) {
     bool matches = true;
     if (!this->searchString.isEmpty()) {
         QString lowerSearchString = this->searchString.toLower();
@@ -20,18 +20,19 @@ void SearchItemVisitor::visit(const Software* item) {
         matches = false;
     }
     if (matches) {
-        this->results.push_back(item);
+        results.push_back(item);
     }
 }
 
-void SearchItemVisitor::visit(const Videogame* item) {
+void SearchItemVisitor::visit(Videogame* item) {
     bool matches = true;
     if (!this->searchString.isEmpty()) {
         QString lowerSearchString = this->searchString.toLower();
         QString lowerName = item->getName().toLower();
         QString lowerDescription = item->getDescription().toLower();
         QString lowerDeveloper = item->getDeveloper().toLower();
-        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString) || lowerDeveloper.contains(lowerSearchString))) {
+        QString lowerGenre = item->getGenre().toLower();
+        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString) || lowerDeveloper.contains(lowerSearchString) || lowerGenre.contains(lowerSearchString))) {
             matches = false;
         }
     }
@@ -39,18 +40,19 @@ void SearchItemVisitor::visit(const Videogame* item) {
         matches = false;
     }
     if (matches) {
-        this->results.push_back(item);
+        results.push_back(item);
     }
 }
 
-void SearchItemVisitor::visit(const DLC* item) {
+void SearchItemVisitor::visit(DLC* item) {
     bool matches = true;
     if (!this->searchString.isEmpty()) {
         QString lowerSearchString = this->searchString.toLower();
         QString lowerName = item->getName().toLower();
         QString lowerDescription = item->getDescription().toLower();
         QString lowerDeveloper = item->getDeveloper().toLower();
-        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString) || lowerDeveloper.contains(lowerSearchString))) {
+        QString lowerGenre = item->getGenre().toLower();
+        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString) || lowerDeveloper.contains(lowerSearchString) || lowerGenre.contains(lowerSearchString))) {
             matches = false;
         }
     }
@@ -58,19 +60,20 @@ void SearchItemVisitor::visit(const DLC* item) {
         matches = false;
     }
     if (matches) {
-        this->results.push_back(item);
+        results.push_back(item);
     }
 }
 
-void SearchItemVisitor::visit(const Soundtrack* item) {
+void SearchItemVisitor::visit(Soundtrack* item) {
     bool matches = true;
     if (!this->searchString.isEmpty()) {
         QString lowerSearchString = this->searchString.toLower();
         QString lowerName = item->getName().toLower();
         QString lowerDescription = item->getDescription().toLower();
         QString lowerDeveloper = item->getDeveloper().toLower();
+        QString lowerGenre = item->getGenre().toLower();
         QString lowerComposer = item->getComposer().toLower();
-        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString) || lowerDeveloper.contains(lowerSearchString) || lowerComposer.contains(lowerSearchString))) {
+        if (!(lowerName.contains(lowerSearchString) || lowerDescription.contains(lowerSearchString) || lowerDeveloper.contains(lowerSearchString) || lowerGenre.contains(lowerSearchString) || lowerComposer.contains(lowerSearchString))) {
             matches = false;
         }
     }
@@ -78,11 +81,11 @@ void SearchItemVisitor::visit(const Soundtrack* item) {
         matches = false;
     }
     if (matches) {
-        this->results.push_back(item);
+        results.push_back(item);
     }
 }
 
-const QVector<const AbstractItem*>& SearchItemVisitor::getResults() const {
+const QVector<AbstractItem*>& SearchItemVisitor::getResults() const {
     return this->results;
 }
 

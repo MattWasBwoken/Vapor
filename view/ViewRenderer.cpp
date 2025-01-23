@@ -18,7 +18,7 @@ ViewType ViewRenderer::getViewType() const {
     return currentView;
 }
 
-void ViewRenderer::render(const QVector<AbstractItem*>& items) {
+void ViewRenderer::render(QVector<AbstractItem*>& items) {
     QLayout* layout = this->layout();
     if (layout) {
         QLayoutItem* child;
